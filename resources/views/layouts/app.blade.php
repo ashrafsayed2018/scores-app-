@@ -9,8 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +17,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @livewireStyles
 </head>
 <body>
@@ -79,5 +79,45 @@
         </main>
     </div>
     @livewireScripts
+        <!-- Scripts -->
+        {{-- <script language="JavaScript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script> --}}
+        <script src="{{ asset('js/app.js') }}"></script>
+
+        <script>
+
+            window.onload = function() {
+
+
+                        $('#categoryList').on('change', function () {
+                        $("#subcategoryList").attr('disabled', false); //enable subcategory select
+                        $("#subcategoryList").val("");
+                        $(".subcategory").attr('disabled', true); //disable all category option
+                        $(".subcategory").hide(); //hide all subcategory option
+                        $(".parent-" + $(this).val()).attr('disabled', false); //enable subcategory of selected category/parent
+                        $(".parent-" + $(this).val()).show();
+
+
+                    });
+
+
+                    $('#subcategoryList').on('change', function () {
+                        $("#childcategoryList").attr('disabled', false); //enable subcategory select
+                        $("#childcategoryList").val("");
+                        $(".childcategory").attr('disabled', true); //disable all category option
+                        $(".childcategory").hide(); //hide all subcategory option
+                        $(".parent-" + $(this).val()).attr('disabled', false); //enable subcategory of selected category/parent
+                        $(".parent-" + $(this).val()).show();
+
+
+                    });
+                    // var categoryList = document.getElementById('categoryList');
+                    // console.log(categoryList)
+                    // var subcategoryList = document.getElementById('subcategoryList');
+                    // console.log(categoryList)
+                    // categoryList.addEventListener('change' , function () {
+                    //     alert('changed')
+                    // })
+            }
+        </script>
 </body>
 </html>

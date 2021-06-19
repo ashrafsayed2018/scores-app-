@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\ChildCategory;
 use App\Post;
+use App\Comment;
+use App\Category;
 use App\SubCategory;
+use App\ChildCategory;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -18,8 +19,10 @@ class PostController extends Controller
     public function index()
     {
 
+        $posts = Post::withLikes()->get();
 
-        return view('post.index');
+
+        return view('post.index', compact('posts'));
     }
 
     /**
@@ -32,9 +35,9 @@ class PostController extends Controller
 
         $categories = Category::all();
         $subcategories = SubCategory::all();
-        $childcategory = ChildCategory::all();
+        $childcategories = ChildCategory::all();
 
-        return view('post.create', compact(['categories', 'subcategories','childcategory']));
+        return view('post.create', compact(['categories', 'subcategories','childcategories']));
     }
 
     /**
@@ -54,9 +57,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+
+        $comments = Comment::where('commentable_id', $post->id)->where('parent_id', 0)->orderBy('created_at', 'DESC')->get();
+        $title = $post->title;
+        $post = Post::withLikes()->where('title', $title)->first();
+        return view('post.show', compact(['comments','post']));
     }
 
     /**

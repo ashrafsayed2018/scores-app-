@@ -4,12 +4,12 @@
 
     <form wire:submit.prevent="submit" method="POST" class="text-right bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 my-4" enctype="multipart/form-data">
         @csrf
-        @if ($currentPage === 1)
         @if ($success)
-            <div class="mb-4 bg-green-300 text-white p-2">
-                {{ $success }}
-            </div>
+        <div class="mb-4 bg-green-300 text-white p-2">
+            {{ $success }}
+        </div>
         @endif
+        @if ($currentPage === 1)
         <div class="mb-4">
             <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
                 عنوان المقال
@@ -18,7 +18,7 @@
               class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
               id="title"
               type="text"
-              name="title"
+              {{-- name="title" --}}
               value="{{ old('title') }}"
               wire:model="title"
               placeholder="عنوان المقال">
@@ -36,7 +36,6 @@
               class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
               id="description"
               type="text"
-              name="description"
               wire:model="description"
               placeholder="وصف المقال">{{ old('description') }}</textarea>
 
@@ -56,11 +55,11 @@
               class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
               id="images"
               type="file"
-              name="images"
+              {{-- name="images" --}}
               value="{{ old('images') }}"
               wire:model="images"
-              placeholder="صورة  المقال">
-              <img src="{{ asset('storage/post_images', ) }}" alt="">
+              placeholder="صورةالمقال">
+
               @error('images')
 
               <span class="text-red-500">{{ $message }}</span>
@@ -76,7 +75,7 @@
               class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
               type="text"
-              name="phone"
+              {{-- name="phone" --}}
               value="{{ old('phone') }}"
               wire:model="phone"
               placeholder="رقم التليفون">
@@ -96,7 +95,7 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
                     id="category"
                     type="text"
-                    name="category_id"
+                    required
                     wire:model="selectedCategory">
                     <option value=""> اختر التصنيف</option>
                     @foreach ($categories as $category)
@@ -106,14 +105,14 @@
 
                     @endforeach
                 </select>
-                {{ $selectedCategory }}
-                @error('category')
+                @error('selectedCategory')
 
                 <span class="text-red-500">{{ $message }}</span>
 
                 @enderror
             </div>
-                @if(!is_null($subcategories))
+                @if(!empty($subcategories) && $subcategories->count() > 0)
+
                         <div class="mb-4">
                                 <label class="block text-grey-darker text-sm font-bold mb-2" for="subcategory">
                                     التصنينف الفرعي
@@ -122,7 +121,8 @@
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
                                     id="sub_category_id"
                                     type="text"
-                                    name="subcategory"
+                                    {{-- name="subcategory_id" --}}
+                                    required
                                     wire:model="selectedSubCategory">
                                     <option value="">اختر التصنيف الفرعي</option>
                                     @foreach ($subcategories as $subcategory)
@@ -137,11 +137,9 @@
 
                                 @enderror
                         </div>
-                @else
-                 this is null
                 @endif
 
-             @if (!is_null($childcategories))
+             @if (!empty($childcategories) && $childcategories->count() > 0)
              <div class="mb-4">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="childcategory">
                        التصنيف الفرعي الثاني
@@ -150,7 +148,7 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
                     id="childcategory"
                     type="text"
-                    name="child_category_id"
+                    required
                     wire:model="selectedChildCategory">
                     <option value="">اختر التصنيف الفرعي الثاني</option>
                     @foreach ($childcategories as $childcategory)

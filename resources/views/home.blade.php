@@ -13,7 +13,7 @@
                     </button>
                   @else
                   <button class="button button-blue mx-5 focus:outline-none">
-                    <a href="{{ route('profile.edit',[auth()->user()->profile->username]) }}">تحديث الملف </a>
+                    <a href="{{ route('profile.edit',[auth()->user()->profile->user->slug]) }}">تحديث الملف </a>
                  </button>
                  @endif
                  <button class="button button-green mx-5 focus:outline-none">

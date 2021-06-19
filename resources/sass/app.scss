@@ -1,5 +1,14 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import '~jquery-ui/themes/base/all.css';
+
+
+// Font-Awesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
 
 @tailwind base;
 @tailwind components;

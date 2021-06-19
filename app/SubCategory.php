@@ -25,4 +25,10 @@ class SubCategory extends Model
 
         return $this->hasMany(ChildCategory::class);
     }
+
+      // relationship with posts
+
+      public function posts() {
+        return $this->hasMany(Post::class);
+    }
 }

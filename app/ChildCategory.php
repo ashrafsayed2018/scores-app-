@@ -14,4 +14,10 @@ class ChildCategory extends Model
 
         return $this->belongsTo(SubCategory::class);
     }
+
+      // relationship with posts
+
+      public function posts() {
+        return $this->hasMany(Post::class);
+    }
 }
