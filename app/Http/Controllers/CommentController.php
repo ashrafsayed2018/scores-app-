@@ -16,8 +16,6 @@ class CommentController extends Controller
 
             'comment' => 'required|max:255'
         ]);
-        // dd($request->all());
-
 
         $comment->comment = $request->comment;
         $comment->parent_id = 0;

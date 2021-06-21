@@ -55,13 +55,27 @@ trait Likeable {
 
        // get the posts with likes
 
-        public function scopeWithLikes (Builder $query) {
+        public function scopeWithPostLikes (Builder $query) {
 
-            $query->leftJoinSub(
-                'SELECT likeable_id, SUM(liked) as likes , SUM(!liked) as dislikes FROM likes GROUP BY 	likeable_id',
+             $query->leftJoinSub(
+                'SELECT likeable_id ,likeable_type, SUM(liked) as postlikes , SUM(!liked) as postdislikes FROM likes  GROUP BY likeable_id , likeable_type',
                 'likes',
                 'likes.likeable_id',
-                'posts.id'
+                'posts.id',
+            );
+
+
+        }
+
+         // get the comment with likes
+
+         public function scopeWithCommentLikes (Builder $query) {
+
+            $query->leftJoinSub(
+                'SELECT likeable_id , likeable_type, SUM(liked) as commentlikes , SUM(!liked) as commentdislikes FROM likes  GROUP BY likeable_id , likeable_type',
+                'likes',
+                'likes.likeable_id',
+                'comments.id',
             );
         }
 }

@@ -7,8 +7,10 @@ use App\Category;
 use App\SubCategory;
 use App\ChildCategory;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class CreatePostForm extends Component
@@ -76,7 +78,7 @@ class CreatePostForm extends Component
                     'description' => ['required' , 'min:3','max:500'],
                 ],
             3 => [
-                    'images' =>  ['required' , 'image'],
+                    'images' =>  ['required', 'file'],
                 ],
             4 => [
                     'phone' =>  ['required'],
@@ -140,14 +142,19 @@ class CreatePostForm extends Component
 
         // store the image using intervention package
 
-        $img =  Image::make($this->images)->encode('jpg');
+        $img =  ImageManagerStatic::make($this->images)->encode('jpg');
+
+
 
 
         $imageName = time(). 'jpg';
 
+
+
         Storage::disk('public')->put('post_images/'. $imageName, $img);
 
-        return $imageName;
+
+         return $imageName;
     }
 
     public function submit() {
@@ -168,6 +175,7 @@ class CreatePostForm extends Component
         Post::create([
             'user_id'    => auth()->id(),
             'title'       => $this->title,
+            'slug'        => Str::slug($this->title),
             'description' => $this->description,
             'images'      => $images,
             'phone'       => $this->phone,
@@ -179,6 +187,7 @@ class CreatePostForm extends Component
             Post::create([
                 'user_id'    => auth()->id(),
                 'title'       => $this->title,
+                'slug'        => Str::slug($this->title),
                 'description' => $this->description,
                 'images'      => $images,
                 'phone'       => $this->phone,
@@ -190,6 +199,7 @@ class CreatePostForm extends Component
             Post::create([
                         'user_id'    => auth()->id(),
                         'title'       => $this->title,
+                        'slug'        => Str::slug($this->title),
                         'description' => $this->description,
                         'images'      => $images,
                         'phone'       => $this->phone,

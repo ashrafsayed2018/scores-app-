@@ -20,7 +20,7 @@
               type="text"
               {{-- name="title" --}}
               value="{{ old('title') }}"
-              wire:model="title"
+              wire:model.lazy="title"
               placeholder="عنوان المقال">
 
               @error('title')
@@ -36,7 +36,7 @@
               class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
               id="description"
               type="text"
-              wire:model="description"
+              wire:model.lazy="description"
               placeholder="وصف المقال">{{ old('description') }}</textarea>
 
 
@@ -57,8 +57,10 @@
               type="file"
               {{-- name="images" --}}
               value="{{ old('images') }}"
-              wire:model="images"
+              wire:model.lazy="images"
               placeholder="صورةالمقال">
+
+
 
               @error('images')
 
@@ -77,7 +79,7 @@
               type="text"
               {{-- name="phone" --}}
               value="{{ old('phone') }}"
-              wire:model="phone"
+              wire:model.lazy="phone"
               placeholder="رقم التليفون">
               @error('phone')
 
@@ -96,7 +98,7 @@
                     id="category"
                     type="text"
                     required
-                    wire:model="selectedCategory">
+                    wire:model.lazy="selectedCategory">
                     <option value=""> اختر التصنيف</option>
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @if (old('category_id') == $category->id)
@@ -110,6 +112,10 @@
                 <span class="text-red-500">{{ $message }}</span>
 
                 @enderror
+                @if ($images)
+                Photo Preview:
+                <img src="{{ $images->temporaryUrl() }}">
+                @endif
             </div>
                 @if(!empty($subcategories) && $subcategories->count() > 0)
 
@@ -123,7 +129,7 @@
                                     type="text"
                                     {{-- name="subcategory_id" --}}
                                     required
-                                    wire:model="selectedSubCategory">
+                                    wire:model.lazy="selectedSubCategory">
                                     <option value="">اختر التصنيف الفرعي</option>
                                     @foreach ($subcategories as $subcategory)
                                     <option value="{{ $subcategory->id }}" @if (old('subcategory_id') == $subcategory->id)
@@ -149,7 +155,7 @@
                     id="childcategory"
                     type="text"
                     required
-                    wire:model="selectedChildCategory">
+                    wire:model.lazy="selectedChildCategory">
                     <option value="">اختر التصنيف الفرعي الثاني</option>
                     @foreach ($childcategories as $childcategory)
                     <option value="{{ $childcategory->id }}" @if (old('childcategory_id') == $childcategory->id)

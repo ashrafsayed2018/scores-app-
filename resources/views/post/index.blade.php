@@ -12,7 +12,7 @@
         <h2 class="mb-3">{{ $post->title }}</h2>
         <hr>
         <p class="mb-5">{{ $post->description }}</p>
-        <img src="{{ asset('storage/post_images/'. $post->images) }}" alt="{{ $post->title }}" style="width: 100%;height:100px">
+        <img src="{{ asset('storage/post_images/'. $post->images) }}" alt="{{ $post->title }}" style="width: 100%;height:300px">
     </a>
     <div class="flex justify-between mt-6">
         <div> posted since: {{ $post->created_at->diffForHumans(null, true) }}</div>

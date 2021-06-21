@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             ->onDelete('cascade');
 
             $table->string('title');
+            $table->string('slug');
             $table->text('description');
             $table->text('images');
             $table->integer('phone');

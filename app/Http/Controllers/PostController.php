@@ -19,7 +19,8 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::withLikes()->get();
+        $posts = Post::withPostLikes()->get();
+
 
 
         return view('post.index', compact('posts'));
@@ -49,6 +50,11 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        $attributes = $request->all();
+        // dd($attributes);
+        Post::create($attributes);
+
+        // return back();
     }
 
     /**
@@ -60,9 +66,9 @@ class PostController extends Controller
     public function show(Post $post)
     {
 
-        $comments = Comment::where('commentable_id', $post->id)->where('parent_id', 0)->orderBy('created_at', 'DESC')->get();
+        $comments = Comment::where('commentable_id', $post->id)->withCommentLikes()->where('parent_id', 1)->orderBy('created_at', 'DESC')->first();
         $title = $post->title;
-        $post = Post::withLikes()->where('title', $title)->first();
+        $post = Post::where('title', $title)->withPostLikes()->first();
         return view('post.show', compact(['comments','post']));
     }
 

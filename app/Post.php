@@ -42,7 +42,9 @@ class Post extends Model
 
     public function likes()
     {
-        return $this->morphMany('App\Like', 'likeable');
+         return $this->morphMany('App\Like', 'likeable');
+
+
     }
     // relationship with comment
 
@@ -50,9 +52,5 @@ class Post extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
-
-
-
-
 
 }
