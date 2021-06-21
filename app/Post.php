@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Reply;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -46,11 +47,19 @@ class Post extends Model
 
 
     }
+
     // relationship with comment
 
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable')->where('parent_id', 0);
     }
+
+      // relationship with replies
+
+      public function replies()
+      {
+          return $this->morphMany(Reply::class, 'commentable');
+      }
 
 }

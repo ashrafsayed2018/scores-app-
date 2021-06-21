@@ -11,7 +11,6 @@ class CommentLikes extends Component
 
     public $comment;
 
-
     public $count = 0;
 
     protected $listeners = ['updateCommentLikeCount' => 'updateCount'];
@@ -39,7 +38,6 @@ class CommentLikes extends Component
 
 
     public function store(Comment $comment) {
-
 
         $user = auth()->user();
 

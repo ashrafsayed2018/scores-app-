@@ -2,16 +2,35 @@
     <div class="comment-count">{{ $post->comments->count() }} comments</div>
     @foreach($post->comments as $comment)
     <div class="display-comment">
-        <p>{{ $comment->comment }}</p>
+        <p>{{ $comment->body }}</p>
 
         <livewire:comment-likes :comment="$comment" :wire:key="$comment->id">
 
-        <livewire:reply-likes :comment="$comment" :wire:key="$comment->id">
+            <div class="flex items-center">
 
-        <form method="post" action="{{ route('reply.add') }}">
+                <ul class="mr-10">
+                    @foreach ($comment->replies as $reply)
+
+
+                    <li class="">
+                        <span class="ml-5 inline-block">{{ $reply->created_at->diffForHumans(null,true) }}</span>
+
+                         <strong>{{ $reply->user->username }}</strong>
+
+                         <p class="font-semibold text-green-400 mr-6">{{ $reply->body }}</p>
+
+                         <livewire:reply-likes :reply="$reply" :wire:key="$reply->id">
+                    </li>
+                    @endforeach
+
+                </ul>
+            </div>
+
+
+        <form method="post" action="{{ route('reply.store') }}">
             @csrf
             <div class="mr-6">
-                <textarea name="comment" class="w-full border border-red-500" > </textarea>
+                <textarea name="body" class="w-full border border-red-500" > </textarea>
                 <input type="hidden" name="post_id" value="{{ $comment->commentable_id}}" />
                 <input type="hidden" name="comment_id" value="{{ $comment->id }}" />
             </div>

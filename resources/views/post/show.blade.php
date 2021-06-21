@@ -8,17 +8,13 @@
          <p class="mb-5">{{ $post->description }}</p>
          <img src="{{ asset('storage/post_images/'.$post->images) }}" alt="{{ $post->title }}" style="width: 100%;height:300px">
          <div class="flex justify-between mt-6">
-             <div> posted since: {{ $post->created_at->diffForHumans(null, true) }}</div>
+             <div> نشر منذ: {{ $post->created_at->diffForHumans(null, true) }}</div>
              <div class="flex items-center">
-
                 <livewire:post-likes :post="$post" :wire:key="$post->id">
-
              </div>
 
          </div>
-
-     </div>
-
+    </div>
 
      @include('comment.create')
 

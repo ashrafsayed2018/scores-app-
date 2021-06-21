@@ -11,7 +11,6 @@ class CommentLikeController extends Controller
 
         $user = auth()->user();
 
-
         $comment->like($user);
 
          return back();

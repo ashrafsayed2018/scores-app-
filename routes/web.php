@@ -53,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('post/index', 'PostController@index')->name('post.index');
     Route::get('post/create', 'PostController@create')->name('post.create');
     Route::post('post/store', 'PostController@store')->name('post.store');
-    Route::get('post/{post:title}/show', 'PostController@show')->name('post.show');
+    Route::get('post/{post:slug}/show', 'PostController@show')->name('post.show');
 
     Route::get('explore','ExploreController@index')->name('explore.index');
 
@@ -63,7 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('comment/{comment}/like', 'CommentLikeController@store');
     Route::delete('comment/{comment}/dislike', 'CommentLikeController@destroy');
 
-    Route::post('/comment/store', 'CommentController@store')->name('comment.add');
-    Route::post('/reply/store', 'CommentController@replyStore')->name('reply.add');
+    Route::post('/comment/store', 'CommentController@store')->name('comment.store');
+    Route::post('/reply/store', 'ReplyController@store')->name('reply.store');
 
 });

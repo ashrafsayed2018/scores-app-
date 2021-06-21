@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait Likeable {
 
-        // like a post
+        // like a post or comment or reply
 
         public function like($user = null, $liked = true) {
 
@@ -20,7 +20,7 @@ trait Likeable {
         }
 
 
-        // dislike a post
+        // dislike a post or comment or reply
 
         public function dislike($user = null , $liked = false) {
 
@@ -33,7 +33,7 @@ trait Likeable {
               ]);
         }
 
-        // check if post is liked by a user
+        // check if post or comment or reply is liked by a user
 
         public function isLikedBy(User $user , $likeable) {
 
@@ -44,7 +44,7 @@ trait Likeable {
 
         }
 
-        // check if post is disliked by a user
+        // check if post  or comment or reply is disliked by a user
 
         public function isDisLikedBy(User $user) {
 

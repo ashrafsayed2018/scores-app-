@@ -14,10 +14,10 @@ class CommentController extends Controller
         $comment = new Comment;
         $attributes = $request->validate([
 
-            'comment' => 'required|max:255'
+            'body' => 'required|max:255'
         ]);
 
-        $comment->comment = $request->comment;
+        $comment->body = $request->body;
         $comment->parent_id = 0;
 
         $comment->user()->associate($request->user());
@@ -29,26 +29,5 @@ class CommentController extends Controller
         return back();
     }
 
-    public function replyStore(Request $request)
-    {
-        $reply = new Comment();
 
-        $attributes = $request->validate([
-
-            'comment' => 'required|max:255'
-        ]);
-
-        $reply->comment = $request->get('comment');
-
-        $reply->user()->associate($request->user());
-
-        $reply->parent_id = $request->get('comment_id');
-
-        $post = Post::find($request->get('post_id'));
-
-        $post->comments()->save($reply);
-
-        return back();
-
-    }
 }

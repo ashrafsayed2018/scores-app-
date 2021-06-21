@@ -3,13 +3,14 @@
 namespace App\Http\Livewire;
 
 use App\Like;
-use App\Comment;
+use App\Reply;
 use Livewire\Component;
 
 class ReplyLikes extends Component
 {
 
     public $comment;
+    public $reply;
 
 
     public $count = 0;
@@ -32,34 +33,33 @@ class ReplyLikes extends Component
 
     public function getCount()
     {
-        $replyLikeCount = Like::where('likeable_type', 'App\Comment')->where('likeable_id', $this->comment->id)->where('liked', 1)->get()->count();
+        $replyLikeCount = Like::where('likeable_type', 'App\Reply')->where('likeable_id', $this->reply->id)->where('liked', 1)->get()->count();
+
         return $replyLikeCount;
     }
 
 
 
-    public function store(Comment $comment) {
-
+    public function store(Reply $reply) {
 
         $user = auth()->user();
 
-        $this->comment->like($user);
-
-
+        $this->reply->like($user);
 
         return back();
     }
 
-    public function destroy(Comment $comment)
+    public function destroy(Reply $reply)
     {
         $user = auth()->user();
 
-        $this->comment->dislike($user);
+        $this->reply->dislike($user);
 
         return back();
     }
     public function render()
     {
+
         return view('livewire.reply-likes');
     }
 }
