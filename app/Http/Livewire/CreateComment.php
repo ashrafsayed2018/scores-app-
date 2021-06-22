@@ -13,20 +13,19 @@ class CreateComment extends Component
     public $post;
     public $body;
     public $post_id;
+    public $comment;
 
     protected $rules = [
         'body' => 'required|min:6|max:255',
-        'post_id' => 'required',
     ];
 
     public function mount($post) {
 
-
         $this->post_id = $post->id;
+
     }
 
-    public function store()
-    {
+    public function store() {
 
         $user = auth()->user();
 
@@ -42,13 +41,13 @@ class CreateComment extends Component
             'commentable_type' => 'App\Post'
         ]);
 
+
         $this->reset();
 
         return back();
     }
 
-    public function render()
-    {
+    public function render() {
         return view('livewire.create-comment');
     }
 }

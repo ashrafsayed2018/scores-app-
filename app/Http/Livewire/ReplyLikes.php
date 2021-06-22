@@ -15,21 +15,13 @@ class ReplyLikes extends Component
 
     public $count = 0;
 
-    protected $listeners = ['updateReplyLikeCount' => 'updateCount'];
 
     public function mount()
     {
-        $this->updateCount();
+        $this->count= $this->getCount();
 
     }
 
-    public function updateCount()
-    {
-        $this->count = $this->getCount();
-
-        return $this->count;
-
-    }
 
     public function getCount()
     {
@@ -46,6 +38,8 @@ class ReplyLikes extends Component
 
         $this->reply->like($user);
 
+        $this->count= $this->getCount();
+
         return back();
     }
 
@@ -54,6 +48,8 @@ class ReplyLikes extends Component
         $user = auth()->user();
 
         $this->reply->dislike($user);
+
+        $this->count= $this->getCount();
 
         return back();
     }

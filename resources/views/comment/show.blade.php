@@ -27,17 +27,7 @@
             </div>
 
 
-        <form method="post" action="{{ route('reply.store') }}">
-            @csrf
-            <div class="mr-6">
-                <textarea name="body" class="w-full border border-red-500" > </textarea>
-                <input type="hidden" name="post_id" value="{{ $comment->commentable_id}}" />
-                <input type="hidden" name="comment_id" value="{{ $comment->id }}" />
-            </div>
-            <div class="form-group">
-                <input type="submit" class="button button-green text-sm" style="font-size: 0.8em;" value="Reply" />
-            </div>
-        </form>
+        <livewire:create-reply :comment="$comment" :post="$post" wire:key="$comment->id"/>
 
     </div>
     @endforeach

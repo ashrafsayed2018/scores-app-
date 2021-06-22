@@ -1,7 +1,7 @@
 <div class="flex items-center">
 
     @if ($comment->isLikedBy(auth()->user(),"App\Comment") )
-    <form wire:submit.prevent="destroy" wire:model="comment" wire:click="$emit('updateCommentLikeCount')">
+    <form wire:submit.prevent="destroy" wire:model="comment">
         @method('DELETE')
         @csrf
         <button type="submit" class="focus:outline-none">
@@ -9,7 +9,7 @@
         </button>
     </form>
     @else
-    <form  wire:submit.prevent="store" wire:model="comment" wire:click="$emit('updateCommentLikeCount')">
+    <form  wire:submit.prevent="store" wire:model="comment">
         @csrf
         <button type="submit" class="focus:outline-none">
             <i class="far fa-heart"></i>
@@ -20,4 +20,9 @@
         {{ $count }}
     </span>
 
+
  </div>
+
+ {{-- wire:click="$emit('updateCommentLikeCount')"
+wire:click="$emit('updateCommentLikeCount')" --}}
+

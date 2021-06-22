@@ -13,21 +13,13 @@ class CommentLikes extends Component
 
     public $count = 0;
 
-    protected $listeners = ['updateCommentLikeCount' => 'updateCount'];
 
     public function mount()
     {
-        $this->updateCount();
 
+       $this->count =  $this->getCount();
     }
 
-    public function updateCount()
-    {
-        $this->count = $this->getCount();
-
-        return $this->count;
-
-    }
 
     public function getCount()
     {
@@ -43,6 +35,7 @@ class CommentLikes extends Component
 
         $this->comment->like($user);
 
+        $this->count = $this->getCount();
 
 
         return back();
@@ -53,6 +46,7 @@ class CommentLikes extends Component
         $user = auth()->user();
 
         $this->comment->dislike($user);
+        $this->count = $this->getCount();
         return back();
     }
     public function render()

@@ -1,9 +1,11 @@
 <div class="card mb-6">
     <h5>Leave a comment</h5>
+
+
     <form wire:submit.prevent="store()">
         @csrf
         <div class="form-group">
-            <textarea type="text" wire:model="body" class="w-full border border-gray-500" ></textarea>
+            <textarea type="text" wire:model.lazy="body" class="w-full border border-gray-500" ></textarea>
             <input type="hidden" wire:model="post_id"  />
 
 
@@ -15,4 +17,6 @@
      @error('body')
         <span class="text-red-600">{{ $message }}</span>
      @enderror
+
+
 </div>
