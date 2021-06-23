@@ -15,6 +15,9 @@ module.exports = {
         colors: {
             "awesome-color": "#56b890",
           },
+        backgroundImage: theme => ({
+            'hero-lg': "url('/storage/images/header_bg.webp')",
+           })
     },
   },
   variants: {

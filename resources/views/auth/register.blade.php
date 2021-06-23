@@ -68,6 +68,9 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="w-full mt-5">
+                            <a href="{{ route('login') }}">  تسجيل الدخول لديك حساب بالفعل</a>
+                        </div>
                     </form>
                 </div>
             </div>

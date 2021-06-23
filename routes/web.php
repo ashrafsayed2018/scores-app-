@@ -48,20 +48,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('profile/{user:slug}/store', 'ProfileController@store')->name('profile.store');
     Route::put('profile/{user:username}/update', 'ProfileController@update')->name('profile.update');
 
-    Route::post('profile/{user:username}/follow', 'FollowController@store');
-
     Route::get('post/index', 'PostController@index')->name('post.index');
     Route::get('post/create', 'PostController@create')->name('post.create');
     Route::post('post/store', 'PostController@store')->name('post.store');
     Route::get('post/{post:slug}/show', 'PostController@show')->name('post.show');
 
     Route::get('explore','ExploreController@index')->name('explore.index');
-
-    Route::post('post/{post}/like', 'PostLikeController@store');
-    Route::delete('post/{post}/dislike', 'PostLikeController@destroy');
-
-    Route::post('comment/{comment}/like', 'CommentLikeController@store');
-    Route::delete('comment/{comment}/dislike', 'CommentLikeController@destroy');
 
     Route::post('/comment/store', 'CommentController@store')->name('comment.store');
     Route::post('/reply/store', 'ReplyController@store')->name('reply.store');

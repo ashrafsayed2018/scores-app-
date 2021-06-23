@@ -16,15 +16,24 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+
+        <!-- Scripts -->
+        <script src="{{ asset(mix('js/app.js')) }}" defer data-turbolinks-track="reload"></script>
+        <livewire:scripts/>
+        @stack('scripts')
+
+        <!-- Styles -->
+        <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet" data-turbolinks-track="reload">
+        <livewire:styles/>
+        @stack('styles')
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    @livewireStyles
 </head>
 <body>
     <div id="app">
-        <nav class="bg-white shadow border border-gray-300 py-3">
+        <nav class="bg-white lg:bg-transparent lg:text-white shadow border lg:shadow-none relative border-gray-300 lg:border-none py-3 z-10">
             <div class="container mx-auto flex justify-between">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
 
@@ -35,29 +44,31 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                           @if (request()->is('login'))
+                           <li class="nav-item">
+                                <a class="nav-link button button-blue" href="{{ route('register') }}">{{ __('Register') }}</a>
+                           </li>
+                            @elseif (request()->is('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link button button-green" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+
                             @endif
                         @else
                             <li class="flex justify-between">
                                 <a href="{{ route('profile.show',current_user()->username) }}"
                                     id="navbarDropdown"
-                                    class="block mx-4 flex justify-between items-center"
+                                    class="mx-2 flex justify-between items-center"
                                     role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    <span class="ml-3"> {{ current_user()->username }}</span>
-                                    {{-- <img src="{{ asset('storage/images/'. auth()->user()->profile->image) }}"
-                                    alt="profile image"
-                                    style="width:20px;height:20px;border-radius:50%"> --}}
+                                    <span> {{ current_user()->username }}</span>
                                 </a>
-
-                                <div>
-                                    <a class="block" href="{{ route('logout') }}"
+                                <div class="flex">
+                                    <a class="nav-link mx-2 button button-blue" href="{{ route('post.create') }}">
+                                      <i class="fas fa-plus text-sm  text-white"></i>
+                                        ارفع اعلان
+                                    </a>
+                                    <a class="block button button-red" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -74,14 +85,12 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
     </div>
-    @livewireScripts
         <!-- Scripts -->
         {{-- <script language="JavaScript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script> --}}
-        <script src="{{ asset('js/app.js') }}"></script>
 
         <script>
 

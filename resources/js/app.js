@@ -34,3 +34,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+
+// document.addEventListener("turbolinks:load", function(event) {
+//     window.livewire.restart();
+// });

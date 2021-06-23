@@ -59,7 +59,7 @@
                   <span class="text-red-500">{{ $message }}</span>
 
                   @enderror
-                  <img src="{{ asset('storage/images/'.$profile->image) }}" alt="profile image" style="width:80px;height:80px">
+                  <img src="{{ asset('storage/users_images/'.$profile->image) }}" alt="profile image" style="width:80px;height:80px">
             </div>
             <div class="mb-4">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="age">

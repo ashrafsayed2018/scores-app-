@@ -4,8 +4,8 @@
         @forelse ($user->follows as $user)
          <li>
              <div>
-                 <a href="{{ route('profile.show', $user->profile->username) }}" class="flex text-xl items-center justify-between mb-2">
-                    <img src="{{ asset('storage\images/'. $user->profile->image) }}" alt="profile image" class="rounded-full p-1 shadow border border-blue-300" style="width: 40px;height:40px">
+                 <a href="{{ route('profile.show', $user->slug) }}" class="flex text-xl items-center justify-between mb-2">
+                    <img src="{{ asset('storage\users_images/'. $user->profile->image) }}" alt="profile image" class="rounded-full p-1 shadow border border-blue-300" style="width: 40px;height:40px">
                     {{ $user->profile->username }}
                  </a>
              </div>

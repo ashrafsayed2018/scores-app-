@@ -4,8 +4,8 @@
 <div class="container mx-auto">
     <div class="items-center mb-6">
 
-        <img src="{{ asset('storage/images/'. $user->profile->image) }}" alt="" class="block mx-auto rounded-full p-1 border shadow-md border-blue-300" style="width: 100px;height:100px">
-        @if(current_user()->id != $user->profile->user_id)
+        <img src="{{ asset('storage/users_images/'. $user->profile->image) }}" alt="" class="block mx-auto rounded-full p-1 border shadow-md border-blue-300" style="width: 100px;height:100px">
+        {{-- @if(current_user()->id != $user->profile->user_id)
           <form action="/profile/{{ $user->username }}/follow" method="POST">
             @csrf
             <button type="submit" class="button {{ !current_user()->following($user) ? 'button-green' : 'button-blue'}}">
@@ -13,7 +13,9 @@
 
             </button>
           </form>
-        @endif
+        @endif --}}
+
+        <livewire:follow :profile="$profile" :user="$user" />
         @can('edit', $user)
         <button class="button button-blue focus:outline-none">
             <a href="{{ route('profile.edit',[current_user()->slug]) }}">

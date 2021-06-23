@@ -26,7 +26,7 @@ class UpdateProfileRequest extends FormRequest
     public function rules(User $user)
     {
         return [
-            'username' => 'sometimes', Rule::unique('profiles')->ignore($user),
+            'username' => 'sometimes|required', Rule::unique('profiles')->ignore($user),
             'about'    => 'sometimes|required|string|min:5|max:255',
             'image'    => 'sometimes|image|mimes:png,jpg,jpeg',
             'age'      => 'sometimes|numeric|min:18|max:65',

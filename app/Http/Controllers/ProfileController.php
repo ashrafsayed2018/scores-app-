@@ -53,7 +53,7 @@ class ProfileController extends Controller
 
         if($request->hasFile('image')) {
 
-            $image = rand(1, 1000000000). $file->extension();
+            $image = rand(1, 1000000000).'.' .  $file->extension();
 
             $request->image->storeAs('users_images',$image,'public');
 
@@ -118,12 +118,13 @@ class ProfileController extends Controller
 
             if (current_user()->profile->image) {
 
-                Storage::delete('public/images/'. current_user()->profile->image);
+                Storage::delete('public/users_images/'. current_user()->profile->image);
             }
 
-            $image = rand(1, 1000000000). $file->extension();
+            $image = rand(1, 1000000000). '.'. $file->extension();
 
-            $request->image->storeAs('images',$image,'public');
+
+            $request->image->storeAs('users_images',$image,'public');
 
             $validtated['image'] = $image;
         }

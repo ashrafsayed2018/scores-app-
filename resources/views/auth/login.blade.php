@@ -71,6 +71,9 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="w-full mt-5">
+                            <a href="{{ route('register') }}"> ليس لديك حساب تسجيل حساب جديد</a>
+                        </div>
                     </form>
                 </div>
             </div>

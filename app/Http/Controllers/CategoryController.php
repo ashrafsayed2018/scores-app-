@@ -46,7 +46,7 @@ class CategoryController extends Controller
 
             $file = $request->image;
 
-            $image = rand(1, 1000000000). $file->extension();
+            $image = rand(1, 1000000000). '.'. $file->extension();
 
             $request->image->storeAs('category_images',$image,'public');
             $attributes['image'] = $image;
