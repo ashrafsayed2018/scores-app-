@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -50,7 +51,11 @@ class CategoryController extends Controller
 
             $request->image->storeAs('category_images',$image,'public');
             $attributes['image'] = $image;
+
         }
+        $attributes['slug'] = Str::slug($request->name);
+
+
 
 
         Category::create($attributes);
@@ -64,9 +69,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+
+       $category = Category::where('slug', $slug)->first();
+
+        return view('category.show', compact('category'));
     }
 
     /**

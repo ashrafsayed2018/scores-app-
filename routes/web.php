@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('category/create', "CategoryController@create")->name('category.create');
     Route::post('category/store', "CategoryController@store")->name('category.store');
+    Route::get('category/{category:slug}/show', "CategoryController@show")->name('category.show');
 
     Route::get('subcategory/create', "SubCategoryController@create")->name('subcategory.create');
     Route::post('subcategory/store', "SubCategoryController@store")->name('subcategory.store');

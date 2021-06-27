@@ -1,3 +1,57 @@
 .liked {
     color: #ff2828;
 }
+
+/* cateogry accordion */
+
+
+.accordion__content {
+  display: none;
+  background: white;
+  font-size: .85em;
+  transition: all 1s ease-in-out;
+}
+.accordion__input {
+    display: none;
+
+}
+.accordion__input:checked ~ .accordion__content {
+   display: block;
+}
+
+.accordion__input:checked ~ .accordion__label i {
+    transform : translateY(-50%) rotate(.5turn)
+ }
+ .owl-carousel {
+     width: 300px;
+ }
+ .owl-next {
+    background-image: linear-gradient(to left,#fcfcfc 50%,#f8f8f8 17%,#f8f8f8 14%)!important;
+    left: 0;
+}
+.owl-next span{
+    FONT-WEIGHT: 100;
+    position: absolute;
+    width: 10px;
+    /* background: red; */
+    font-size: 4rem;
+    color: black;
+    font-weight: 400;
+    left: -12px;
+    top: -2.75rem
+}
+
+.owl-prev  span{
+    FONT-WEIGHT: 100;
+    position: absolute;
+    width: 10px;
+    /* background: red; */
+    font-size: 4rem;
+    color: black;
+    font-weight: 400;
+    right: -12px;
+    top: -2.75rem
+}
+.owl-dots {
+    display: none;
+}

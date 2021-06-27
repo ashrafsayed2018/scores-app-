@@ -1,35 +1,5 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@include('includes._header')
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-
-        <!-- Scripts -->
-        <script src="{{ asset(mix('js/app.js')) }}" defer data-turbolinks-track="reload"></script>
-        <livewire:scripts/>
-        @stack('scripts')
-
-        <!-- Styles -->
-        <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet" data-turbolinks-track="reload">
-        <livewire:styles/>
-        @stack('styles')
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-</head>
-<body>
     <div id="app">
         <nav class="bg-white lg:bg-transparent lg:text-white shadow border lg:shadow-none relative border-gray-300 lg:border-none py-3 z-10">
             <div class="container mx-auto flex justify-between">
@@ -108,7 +78,6 @@
 
                     });
 
-
                     $('#subcategoryList').on('change', function () {
                         $("#childcategoryList").attr('disabled', false); //enable subcategory select
                         $("#childcategoryList").val("");
@@ -128,5 +97,4 @@
                     // })
             }
         </script>
-</body>
-</html>
+@include('includes._footer')
