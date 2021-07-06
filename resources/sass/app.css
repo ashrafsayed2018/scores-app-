@@ -8,7 +8,7 @@ body {
 }
 
 .button {
-  @apply shadow-lg rounded-lg px-4 py-2;
+  @apply shadow-lg rounded-lg px-4 py-2 text-white;
 }
 
 .button-green {
@@ -18,5 +18,6 @@ body {
 .button-blue {
   @apply bg-blue-400;
 }
+
 
 /*# sourceMappingURL=app.css.map */

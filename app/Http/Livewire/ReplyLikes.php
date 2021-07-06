@@ -11,8 +11,6 @@ class ReplyLikes extends Component
 
     public $comment;
     public $reply;
-
-
     public $count = 0;
 
 

@@ -54,7 +54,11 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+    // image path
 
+    public function imagePath() {
 
+       return $this->profile ? '/storage/users_images/'.  $this->profile->image : '/storage/images/avatar.jpg';
+    }
 
 }

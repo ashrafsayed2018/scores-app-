@@ -35,7 +35,13 @@ class PostController extends Controller
         $subcategories = SubCategory::all();
         $childcategories = ChildCategory::all();
 
-        return view('post.create', compact(['categories', 'subcategories','childcategories']));
+        if(auth()->user()->profile) {
+
+            return view('post.create', compact(['categories', 'subcategories','childcategories']));
+        } else {
+            return redirect('profile/create');
+        }
+
     }
 
 

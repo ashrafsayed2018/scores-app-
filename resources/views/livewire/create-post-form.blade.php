@@ -2,7 +2,7 @@
     <h2>{{ $pages[$currentPage]['heading']}}</h2>
     <p>{{ $pages[$currentPage]['subheading'] }}</p>
 
-    <form wire:submit.prevent="submit" method="POST" class="text-right bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 my-4" enctype="multipart/form-data">
+    <form wire:submit.prevent="submit" method="POST" class="text-right bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 my-4" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
         @csrf
         @if ($success)
         <div class="mb-4 bg-green-300 text-white p-2">
@@ -113,8 +113,8 @@
 
                 @enderror
                 @if ($images)
-                Photo Preview:
-                <img src="{{ $images->temporaryUrl() }}">
+                {{-- Photo Preview: --}}
+                {{-- <img src="{{ $images->temporaryUrl() }}"> --}}
                 @endif
             </div>
                 @if(!empty($subcategories) && $subcategories->count() > 0)

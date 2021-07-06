@@ -2,28 +2,35 @@
 
 @section('content')
 <div class="container lg:w-2/3 mx-auto">
-    <div class="card bg-white lg:w-full mb-5 shadow-lg border border-gray-400 p-5">
-         <h2 class="mb-3">{{ $post->title }}</h2>
-         <hr>
-         <p class="mb-5">{{ $post->description }}</p>
-         <img src="{{ asset('storage/post_images/'.$post->images) }}" alt="{{ $post->title }}" style="width: 100%;height:300px">
-         <div class="flex justify-between mt-6">
-             <div> نشر منذ: {{ $post->created_at->diffForHumans(null, true) }}</div>
-             <div class="flex items-center">
-                <livewire:post-likes :post="$post" :wire:key="$post->id">
-             </div>
 
-         </div>
-    </div>
+    <livewire:post-card :post="$post"/>
 
-     @include('comment.create')
-
-     @include('comment.show')
-
+    <livewire:create-comment :post="$post"/>
+    <livewire:show-comments :post="$post" :key="time().$post->id"/>
 
     <a href="/home" class="button button-green">رجوع</a>
 
 
 </div>
 
+@endsection
+@section('scripts')
+<script>
+
+  $(document).ready(function () {
+      $('.make_reply').on('click', function () {
+         // find the id of make reply button
+        var id = $(this).attr('id');
+
+     $(`textarea[data-textarea='${id}']`).focus()
+
+        // hid all reply class which not the same data id of the make reply id
+        $(`.reply:not([data-id=${id}])`).addClass('hidden');
+        // show the reply class which match the data id and the make reply id
+        $(`.reply[data-id='${id}']`).toggleClass('hidden');
+
+      })
+  })
+
+</script>
 @endsection

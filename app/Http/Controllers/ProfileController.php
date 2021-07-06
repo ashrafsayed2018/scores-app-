@@ -18,11 +18,11 @@ class ProfileController extends Controller
      */
     public function index()
     {
-       $profiles = Profile::all();
 
-       $user = new User();
+    //    $profile = Profile::where('user_id', auth()->id())->first();
 
-       return view('profile.index',compact(['profiles','user']));
+    //    return view('profile.index',compact('profile'));
+
     }
 
     /**

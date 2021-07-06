@@ -13,7 +13,6 @@ class CommentLikes extends Component
 
     public $count = 0;
 
-
     public function mount()
     {
 

@@ -10,18 +10,25 @@
                             <a href="{{ route('category.show',$category->slug) }}">{{ $category->name }}</a>
                           </li>
                           @endforeach
-
-                          {{-- <li>عقارات</li>
-                          <li>خدمات</li>
-                          <li>بيع وشراء</li>
-                          <li>حيوانات</li>
-                          <li>وظائف</li> --}}
                       </ul>
                   </div>
                   <div class="">
                     <h3>حسابي</h3>
                     <ul class="text-gray-500">
-                        <li>معلومات حسابي</li>
+                        <li>
+                          @auth
+                             <a href="{{ route('profile.show', auth()->user()->slug) }}">الملف الشخصي</a>
+                          @else
+                             <a href="{{ route('login') }}">الملف الشخصي</a>
+                          @endauth
+                        </li>
+                        <li>
+                          @auth
+                            <a href="{{ route('profile.show', auth()->user()->slug) }}">الملف الشخصي</a>
+                          @else
+                            <a href="{{ route('login') }}"> معلومات حسابي</a>
+                          @endauth
+                        </li>
                         <li>قائمتي</li>
                         <li>مفضلتي</li>
                         <li> المتابعون </li>

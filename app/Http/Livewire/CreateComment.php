@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Post;
 use App\Comment;
 use Livewire\Component;
 use Illuminate\Http\Request;
@@ -14,6 +13,7 @@ class CreateComment extends Component
     public $body;
     public $post_id;
     public $comment;
+    public $count;
 
     protected $rules = [
         'body' => 'required|min:6|max:255',
@@ -22,6 +22,7 @@ class CreateComment extends Component
     public function mount($post) {
 
         $this->post_id = $post->id;
+        $this->count = $this->post->comments->count();
 
     }
 
@@ -41,8 +42,9 @@ class CreateComment extends Component
             'commentable_type' => 'App\Post'
         ]);
 
-
-        $this->reset();
+        $this->reset('body');
+        $this->emit('commentAdded');
+        $this->emit('allComments');
 
         return back();
     }

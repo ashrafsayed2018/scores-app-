@@ -1,5 +1,5 @@
 <div class="flex items-center">
-
+    @auth
     @if ($comment->isLikedBy(auth()->user(),"App\Comment") )
     <form wire:submit.prevent="destroy" wire:model="comment">
         @method('DELETE')
@@ -19,10 +19,8 @@
     <span class="likes text-xs text-gray-500 mr-3">
         {{ $count }}
     </span>
-
-
+    @endauth
  </div>
 
- {{-- wire:click="$emit('updateCommentLikeCount')"
-wire:click="$emit('updateCommentLikeCount')" --}}
+
 

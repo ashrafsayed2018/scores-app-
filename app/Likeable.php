@@ -1,6 +1,8 @@
 <?php
 
 namespace App;
+
+use App\Notifications\newLikeAdded;
 use Illuminate\Database\Eloquent\Builder;
 
 
@@ -17,6 +19,10 @@ trait Likeable {
             ], [
                 'liked'   => true,
             ]);
+
+            $this->user->notify(new NewLikeAdded($this,auth()->user()));
+
+
         }
 
 
@@ -31,6 +37,7 @@ trait Likeable {
               ], [
                   'liked'   => false,
               ]);
+
         }
 
         // check if post or comment or reply is liked by a user

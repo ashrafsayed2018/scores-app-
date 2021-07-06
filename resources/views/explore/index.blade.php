@@ -3,6 +3,7 @@
 @section('content')
 <div class="container lg:w-2/3 mx-auto">
     <h1 class="text-xl mx-auto font-bold mb-3 text-center">صفحة الاعضاء </h1>
+    @if ($profiles->count() > 0)
     <ul class="bg-white shadow-lg px-3 py-3">
         @forelse ($profiles as $profile)
 
@@ -19,8 +20,9 @@
                </div>
             </li>
         @empty
-
         @endforelse
     </ul>
+    @endif
+
 </div>
 @endsection

@@ -15,21 +15,21 @@ class PostLikes extends Component
     public $post;
     public $count = 0;
 
-    protected $listeners = ['updatePostLikeCount' => 'updateCount'];
+    // protected $listeners = ['updatePostLikeCount' => 'updateCount'];
 
     public function mount()
     {
-        $this->updateCount();
-
-    }
-
-    public function updateCount()
-    {
         $this->count = $this->getCount();
 
-        return $this->count;
-
     }
+
+    // public function updateCount()
+    // {
+    //     $this->count = $this->getCount();
+
+    //     return $this->count;
+
+    // }
 
     public function getCount()
     {
@@ -45,6 +45,7 @@ class PostLikes extends Component
         $user = auth()->user();
 
         $this->post->like($user);
+        $this->count= $this->getCount();
 
         return back();
     }
@@ -54,6 +55,7 @@ class PostLikes extends Component
         $user = auth()->user();
 
         $this->post->dislike($user);
+        $this->count= $this->getCount();
         return back();
     }
 

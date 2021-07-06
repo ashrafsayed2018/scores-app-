@@ -18,7 +18,6 @@ class CreateReply extends Component
         'body' => 'required|min:6|max:255',
     ];
 
-
     public function mount($comment, $post) {
 
         $this->comment_id = $comment->id;
@@ -47,8 +46,9 @@ class CreateReply extends Component
             'commentable_type' => 'App\Post'
         ]);
 
-        $this->reset();
-
+        $this->reset('body');
+        $this->emit('commentAdded');
+        $this->emit('allComments');
         return back();
 
     }

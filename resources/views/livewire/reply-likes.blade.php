@@ -1,5 +1,6 @@
 
 <div class="flex items-center">
+    @auth
     @if ($reply->isLikedBy(auth()->user(),"App\Reply") )
     <form wire:submit.prevent="destroy" wire:model="reply">
 
@@ -18,4 +19,6 @@
     <span class="likes text-xs text-gray-500 mr-3">
         {{ $count }}
     </span>
+    @endauth
+
 </div>

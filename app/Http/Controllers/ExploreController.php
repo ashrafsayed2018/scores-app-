@@ -16,7 +16,7 @@ class ExploreController extends Controller
     public function index()
     {
 
-        $Profiles = Profile::paginate(3);
+        $Profiles = Profile::where('user_id', '!=', auth()->id())->paginate(3);
 
         return view('explore.index',[
             'profiles' => $Profiles

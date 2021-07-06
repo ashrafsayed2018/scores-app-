@@ -1,11 +1,17 @@
 @include('includes._header')
 
     <div id="app">
-        <nav class="bg-white lg:bg-transparent lg:text-white shadow border lg:shadow-none relative border-gray-300 lg:border-none py-3 z-10">
+        <nav class="bg-white lg:text-gray-900 shadow border lg:shadow-none relative border-gray-300 lg:border-none py-3 z-10">
             <div class="container mx-auto flex justify-between">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                <div class="flex w-1/4 items-center justify-between">
+                    <a class="navbar-brand inline-block" href="{{ url('/home') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                    <a href="/notifications" class="relative">
+                        <span class="notification_count absolute -top-2 left-3">{{ auth()->user()->unreadNotifications->count() }}</span>
+                        <i class="fa fa-bell text-red-500"></i>
+                    </a>
+                </div>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -34,11 +40,11 @@
                                     <span> {{ current_user()->username }}</span>
                                 </a>
                                 <div class="flex">
-                                    <a class="nav-link mx-2 button button-blue" href="{{ route('post.create') }}">
-                                      <i class="fas fa-plus text-sm  text-white"></i>
+                                    <a class="nav-link mx-2 lg:button lg:button-blue" href="{{ route('post.create') }}">
+                                      <i class="fas fa-plus text-xs lg:text-sm text-white"></i>
                                         ارفع اعلان
                                     </a>
-                                    <a class="block button button-red" href="{{ route('logout') }}"
+                                    <a class="block sm-button lg:button button-red text-xs text-white" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
