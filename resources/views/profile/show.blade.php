@@ -4,7 +4,7 @@
 <div class="container mx-auto">
     <div class="items-center mb-6">
 
-        <img src="{{$user->imagePath()}}" alt="" class="block mx-auto rounded-full p-1 border shadow-md border-blue-300" style="width: 100px;height:100px">
+        <img src="{{asset($user->imagePath())}}" alt="" class="block mx-auto rounded-full p-1 border shadow-md border-blue-300" style="width: 100px;height:100px">
 
         <livewire:follow :profile="$profile" :user="$user" />
         @can('edit', $user)

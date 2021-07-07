@@ -5,8 +5,8 @@
          <li>
              <div>
                  <a href="{{ route('profile.show', $user->slug) }}" class="flex text-xl items-center justify-between mb-2">
-                    <img src="{{ asset('storage\users_images/'. $user->profile->image) }}" alt="profile image" class="rounded-full p-1 shadow border border-blue-300" style="width: 40px;height:40px">
-                    {{ $user->profile->username }}
+                    <img src="{{ asset($user->imagePath()) }}" alt="profile image" class="rounded-full p-1 shadow border border-blue-300" style="width: 40px;height:40px">
+                    {{ $user->username }}
                  </a>
              </div>
 

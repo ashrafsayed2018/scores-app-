@@ -1,10 +1,16 @@
 <div class="sticky bg-white">
     <div class="pt-3 lg:grid lg:grid-cols-4 shadow-lg">
-        <div class="right col-span-1 flex items-start justify-between mb-3 px-3">
-            <div class="logo">
+        <div class="right col-span-1 flex items-baseline justify-between mb-3 px-3">
+            <div class="logo flex justify-around items-end flex-1">
                 <img src="{{ asset('storage/images/header_bg.webp') }}"
                  alt="log"
-                 class="block w-10 h-10 rounded-full">
+                 class="block w-10 h-10 rounded-full absolute right-3 top-2">
+                 @auth
+                 <a href="/notifications" class="relative">
+                     <span class="notification_count absolute -top-2 left-3">{{ auth()->user()->unreadNotifications->count() }}</span>
+                     <i class="fa fa-bell text-red-500"></i>
+                 </a>
+                 @endauth
             </div>
             <div class="ad-button">
                 <a href="{{ route('post.create') }}" class="button button-blue">

@@ -7,10 +7,12 @@
                     <a class="navbar-brand inline-block" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
-                    <a href="/notifications" class="relative">
-                        <span class="notification_count absolute -top-2 left-3">{{ auth()->user()->unreadNotifications->count() }}</span>
+                    @auth
+                    <a href="/notifications" class="relative {{ (current_user()->unreadNotifications->count() > 0 ) ? 'animate-bounce' : '' }}">
+                        <span class="notification_count absolute -top-2 left-3">{{ current_user()->unreadNotifications->count() }}</span>
                         <i class="fa fa-bell text-red-500"></i>
                     </a>
+                    @endauth
                 </div>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">

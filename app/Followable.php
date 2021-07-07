@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\NewFollower;
 
 trait Followable
 {
@@ -13,7 +14,9 @@ trait Followable
 
     public function follow(User $user) {
 
+        $user->notify(new NewFollower(auth()->user()));
         return $this->follows()->save($user);
+
     }
 
     public function unfollow(User $user) {

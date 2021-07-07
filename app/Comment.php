@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Like;
+use App\Post;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -21,6 +23,12 @@ class Comment extends Model
 
     public function likes()
     {
-        return $this->morphMany('App\Like', 'likeable');
+        return $this->morphMany(Like::class, 'likeable');
     }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
 }

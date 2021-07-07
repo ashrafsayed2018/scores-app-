@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Post;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
@@ -15,6 +16,12 @@ class Reply extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
 
     public function likes()
     {

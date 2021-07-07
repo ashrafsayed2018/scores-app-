@@ -6,7 +6,7 @@
             <div class="comment bg-white p-3 shadow-lg border border-b-2 border-gray-200">
                 <div class="flex">
                     <div class="image ml-2">
-                        <img src="{{ $comment->user->profile ? asset('storage/users_images/'.   $comment->user->profile->image ) : asset('storage/images/avatar.jpg')}}" alt="" class="rounded-full w-8 h-8">
+                        <img src="{{ url($comment->user->imagePath()) }}" alt="" class="rounded-full w-8 h-8">
                     </div>
                     <div class="info">
                         <p>{{ $comment->user->username }}</p>
@@ -46,11 +46,10 @@
                           <div class="border border-b-2 border-gray-200 p-3">
                               <div class="flex">
                                   <div class="image ml-2">
-                                      {{-- <img src="{{ $comment->user->profile ? asset('storage/users_images/'.  $comment->user->profile->image ) : asset('storage/images/avatar.jpg')}}" alt="" class="rounded-full w-8 h-8"> --}}
-                                      <img src="{{ route($comment->user->imagePath()) }}" alt="" class="rounded-full w-8 h-8">
+                                      <img src="{{ url($reply->user->imagePath()) }}" alt="" class="rounded-full w-8 h-8">
                                   </div>
                                   <div class="info">
-                                      <p>{{ $comment->user->username }}</p>
+                                      <p>{{ $reply->user->username }}</p>
                                       <span class="ml-5 inline-block">{{ $reply->created_at->diffForHumans(null,true) }}</span>
                                   </div>
                               </div>

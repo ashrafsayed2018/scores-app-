@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Comment;
+use App\Notifications\NewCommentAdded;
 use Livewire\Component;
 use Illuminate\Http\Request;
 
@@ -41,6 +42,8 @@ class CreateComment extends Component
             'commentable_id' => $this->post_id,
             'commentable_type' => 'App\Post'
         ]);
+
+        $this->post->user->notify(new NewCommentAdded($this->post,auth()->user()));
 
         $this->reset('body');
         $this->emit('commentAdded');

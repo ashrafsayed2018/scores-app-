@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Reply;
 use Livewire\Component;
+use App\Notifications\NewReplyAdded;
 
 class CreateReply extends Component
 {
@@ -45,6 +46,9 @@ class CreateReply extends Component
             'commentable_id' => $this->post_id,
             'commentable_type' => 'App\Post'
         ]);
+
+        // $this->post->user->notify(new NewReplyAdded($this->post,auth()->user(), $this->comment));
+        $this->comment->user->notify(new NewReplyAdded($this->post,auth()->user(), $this->comment));
 
         $this->reset('body');
         $this->emit('commentAdded');

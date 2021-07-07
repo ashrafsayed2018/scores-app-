@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Comment;
 use App\Category;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->share('categories', Category::all());
+        view()->share('comments', Comment::all());
     }
 }
