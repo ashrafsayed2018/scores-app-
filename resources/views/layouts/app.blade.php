@@ -34,22 +34,22 @@
                             @endif
                         @else
                             <li class="flex justify-between">
-                                <a href="{{ route('profile.show',current_user()->username) }}"
+                                <a href="{{ route('profile.show',current_user()->name) }}"
                                     id="navbarDropdown"
                                     class="mx-2 flex justify-between items-center"
                                     role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    <span> {{ current_user()->username }}</span>
+                                    <span> {{ current_user()->name }}</span>
                                 </a>
                                 <div class="flex">
-                                    <a class="nav-link mx-2 lg:button lg:button-blue" href="{{ route('post.create') }}">
+                                    <a class="nav-link mx-2 button button-blue" href="{{ route('post.create') }}">
                                       <i class="fas fa-plus text-xs lg:text-sm text-white"></i>
                                         ارفع اعلان
                                     </a>
-                                    <a class="block sm-button lg:button button-red text-xs text-white" href="{{ route('logout') }}"
+                                    <a class="block text-3xl text-gray-700 ml-5" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                      <i class="fas fa-sign-out-alt transform rotate-180"></i>
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -93,16 +93,8 @@
                         $(".childcategory").hide(); //hide all subcategory option
                         $(".parent-" + $(this).val()).attr('disabled', false); //enable subcategory of selected category/parent
                         $(".parent-" + $(this).val()).show();
-
-
                     });
-                    // var categoryList = document.getElementById('categoryList');
-                    // console.log(categoryList)
-                    // var subcategoryList = document.getElementById('subcategoryList');
-                    // console.log(categoryList)
-                    // categoryList.addEventListener('change' , function () {
-                    //     alert('changed')
-                    // })
+
             }
         </script>
 @include('includes._footer')

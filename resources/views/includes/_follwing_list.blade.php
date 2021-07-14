@@ -4,12 +4,11 @@
         @forelse ($user->follows as $user)
          <li>
              <div>
-                 <a href="{{ route('profile.show', $user->slug) }}" class="flex text-xl items-center justify-between mb-2">
-                    <img src="{{ asset($user->imagePath()) }}" alt="profile image" class="rounded-full p-1 shadow border border-blue-300" style="width: 40px;height:40px">
-                    {{ $user->username }}
+                 <a href="{{ route('profile.show', $user->slug) }}" class="flex text-xl mb-2">
+                    <img src="{{ asset($user->imagePath()) }}" alt="profile image" class="rounded-full p-1 ml-5 shadow border border-blue-300" style="width: 40px;height:40px">
+                    <small>{{ $user->name }}</small>
                  </a>
              </div>
-
          </li>
         @empty
             <p>لا تتابع احد حتي الان </p>

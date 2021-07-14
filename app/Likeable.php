@@ -22,7 +22,6 @@ trait Likeable {
 
 
         $post = Post::where('id', $this->commentable_id)->first();
-        // dd($post);
 
         $this->user->notify(new NewLikeAdded($this,auth()->user(), $post));
 

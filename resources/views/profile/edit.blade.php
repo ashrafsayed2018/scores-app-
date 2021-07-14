@@ -7,21 +7,21 @@
 
      <div class="lg:w-2/3 mx-auto">
 
-        <form action="{{ route('profile.update', $profile->username) }}" method="POST" class="text-right bg-white shadow-lg rounded px-8 py-8 my-4" enctype="multipart/form-data">
+        <form action="{{ route('profile.update', $profile->name) }}" method="POST" class="text-right bg-white shadow-lg rounded px-8 py-8 my-4" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-4">
-                <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="name">
                     اسم المستخدم
                   </label>
                   <input
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
-                  id="username"
+                  id="name"
                   type="text"
-                  name="username"
-                  value="{{$profile->username}}"
+                  name="name"
+                  value="{{$profile->name}}"
                   placeholder="الاسم">
-                  @error('username')
+                  @error('name')
 
                   <span class="text-red-500 ">{{ $message }}</span>
 

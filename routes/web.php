@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\Facades\DB;
 
+use Carbon\Carbon;
+
 // DB::listen(function($query) {
 //     var_dump($query->sql);
 // });
@@ -17,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/test', function () {
+    $new = new Carbon('first day of feb');
+    dd($new);
+});
 
 Route::get('/', function () {
     return view('index');
@@ -43,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/show/{user:slug}', 'ProfileController@show')->name('profile.show');
     Route::get('profile/{user:slug}/edit', 'ProfileController@edit')->name('profile.edit')->middleware('can:edit,user');
     Route::post('profile/{user:slug}/store', 'ProfileController@store')->name('profile.store');
-    Route::put('profile/{user:username}/update', 'ProfileController@update')->name('profile.update');
+    Route::put('profile/{user:name}/update', 'ProfileController@update')->name('profile.update');
 
     Route::get('post', 'PostController@index')->name('post.index');
     Route::get('post/create', 'PostController@create')->name('post.create');

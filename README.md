@@ -59,3 +59,35 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+<!-- my packages -->
+## chatify package
+- ChFavorite class
+- ChMessage class
+- config / chatify.php
+-- migrations 
+  - messages table
+  - favorites table
+  - add avatar to users
+  - add messenger color to users
+  - add dark mode to users
+  - add active status to users
+-- css styles
+  - chatify / dark.mode.css
+  - chatify / light.mode.css
+  - chatify / style.css
+-- view 
+  - vendor/chatify/layouts
+    - favorite
+    - footerlinks
+    - headlinks 
+    - info
+    - listitem
+    - messagecard
+    - messenger color
+    - modals
+    - sendform
+  - vendor/chatify/layouts
+    - pages/ app.blade.php
+
+## ChristianKuri / laravel-favorite

@@ -12,12 +12,12 @@
                         @csrf
 
                         <div class="w-full">
-                            <label for="username" class="block font-bold mb-2">اسم المستخدم</label>
+                            <label for="name" class="block font-bold mb-2">اسم المستخدم</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="text" class="block w-full @error('username') is-invalid @enderror border border-gray-500 hover:border-none hover:outline-none focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded-md px-2 py-2" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                <input id="name" type="text" class="block w-full @error('name') is-invalid @enderror border border-gray-500 hover:border-none hover:outline-none focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded-md px-2 py-2" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                @error('username')
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

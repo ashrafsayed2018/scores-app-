@@ -55,9 +55,9 @@
               class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
               id="images"
               type="file"
-              {{-- name="images" --}}
+              multiple
               value="{{ old('images') }}"
-              wire:model.lazy="images"
+              wire:model="images"
               placeholder="صورةالمقال">
 
 

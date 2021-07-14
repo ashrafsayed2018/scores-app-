@@ -8,17 +8,17 @@
         <form action="{{ route('profile.store', $user->slug) }}" method="POST" class="text-right bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 my-4" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
-                <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="name">
                     اسم المستخدم
                   </label>
                   <input
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
-                  id="username"
+                  id="name"
                   type="text"
-                  name="username"
-                  value="{{ old('username') }}"
+                  name="name"
+                  value="{{ old('name') }}"
                   placeholder="الاسم">
-                  @error('username')
+                  @error('name')
 
                   <span class="text-red-500 ">{{ $message }}</span>
 

@@ -1,4 +1,4 @@
-<div class="accordion max-w-sm shadow-lg h-80 rounded-sm overflow-hidden mt-5 bg-gray-100 flex-1">
+<div class="accordion hidden xl:block max-w-sm shadow-lg h-80 rounded-sm overflow-hidden mt-5 bg-gray-100 flex-1">
     @foreach ($categories as $category)
     <div class="category">
         <input type="radio" name="category_accordion" id="{{ $category->slug }}" class="accordion__input">
@@ -30,3 +30,4 @@
     @endforeach
 
 </div>
+

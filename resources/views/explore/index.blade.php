@@ -11,7 +11,7 @@
                <div class="flex mb-3 items-center">
                    <img src="{{ asset('storage/users_images/' .  $profile->image) }}" alt="user image" class="bloci rounded-full" style="width: 40px;height:40px">
                     <a href="{{ route('profile.show',[$profile->user->slug]) }}" class="mr-4">
-                        {{ $profile->username }}
+                        {{ $profile->name }}
                     </a>
                </div>
                <div>

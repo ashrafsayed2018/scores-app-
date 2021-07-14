@@ -22,7 +22,6 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description');
-            $table->text('images');
             $table->integer('phone');
             $table->foreignId('category_id')
             ->constrained()

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Comment;
 use App\Category;
+use App\PostImage;
 use App\SubCategory;
 use App\ChildCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -55,7 +57,10 @@ class PostController extends Controller
     {
 
         $title = $post->title;
-        $post = Post::where('title', $title)->withPostLikes()->first();
+
+        $post = Post::where('title', $title)->withPostLikes()->with('firstPostImage')->first();
+
+        //  note from the helpers.php recommenedPosts method we get all recommended posts
         return view('post.show', compact(['post']));
     }
 

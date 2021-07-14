@@ -42,9 +42,8 @@
           </div>
           {{-- posts grid --}}
           <div class="lg:grid lg:grid-cols-12 lg:gap-5">
-
               @foreach ($category->posts as $post)
-               <livewire:post-card :post="$post" wire:key="$post->id" />
+               <livewire:post-card :post="$post"  wire:key="$post->id" />
               @endforeach
           </div>
         </div>

@@ -3,12 +3,14 @@
 namespace App;
 
 use App\Reply;
+use App\PostImage;
 use Illuminate\Database\Eloquent\Model;
+use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 
 class Post extends Model
 {
 
-    use Likeable;
+    use Likeable, Favoriteable;
     protected $guarded = [];
 
     // relationship with user
@@ -61,5 +63,16 @@ class Post extends Model
       {
           return $this->morphMany(Reply::class, 'commentable');
       }
+
+      // relationship with images
+      public function images() {
+          return $this->hasMany(PostImage::class);
+      }
+
+      public function firstPostImage()
+      {
+          return $this->hasOne(PostImage::class)->orderBy('id');
+      }
+
 
 }

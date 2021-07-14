@@ -24,7 +24,7 @@ class StoreProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|unique:profiles',
+            'name' => 'required|unique:profiles',
             'about'    => 'required|max:255',
             'image'    => 'required',
             'age'      => 'required|numeric|min:18|max:65',
@@ -40,7 +40,7 @@ class StoreProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => 'هذا الحقل مطلوب',
+            'name.required' => 'هذا الحقل مطلوب',
         ];
     }
 

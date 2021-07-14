@@ -6,6 +6,7 @@ use App\Post;
 use App\Category;
 use App\SubCategory;
 use App\ChildCategory;
+use App\PostImage;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
@@ -33,7 +34,7 @@ class CreatePostForm extends Component
 
     public $title;
     public $description;
-    public $images;
+    public $images = [];
     public $phone;
     public $category_id;
     public $subcategory_id;
@@ -78,7 +79,7 @@ class CreatePostForm extends Component
                     'description' => ['required' , 'min:3','max:500'],
                 ],
             3 => [
-                    'images' =>  ['required', 'file'],
+                    'images' =>  ['required'],
                 ],
             4 => [
                     'phone' =>  ['required'],
@@ -136,25 +137,20 @@ class CreatePostForm extends Component
 
     public function storeImages () {
 
+        $iamgeArray = [];
+
         if(!$this->images) {
             return;
         }
 
-        // store the image using intervention package
+        foreach ($this->images as $image) {
 
-        $img =  ImageManagerStatic::make($this->images)->encode('jpg');
-
-
-
-
-        $imageName = time(). 'jpg';
-
-
-
-        Storage::disk('public')->put('post_images/'. $imageName, $img);
-
-
-         return $imageName;
+         $imageName = time() . $image->getClientOriginalName();
+         $imageName = str_replace(' ', '-',$imageName);
+         $image->storeAs('public/post_images',$imageName);
+         $imageArray[] = $imageName;
+        }
+        return $imageArray;
     }
 
     public function submit() {
@@ -168,40 +164,40 @@ class CreatePostForm extends Component
 
         $childcategories = ChildCategory::where('subcategory_id', $this->selectedSubCategory)->get();
 
-
+       $post = new Post();
 
        if($subcategories->count() == 0) {
 
-        Post::create([
+        $post->create([
             'user_id'    => auth()->id(),
             'title'       => $this->title,
-            'slug'        => Str::slug($this->title),
+            'slug'        => make_slug($this->title, '-'),
             'description' => $this->description,
-            'images'      => $images,
+            // 'images'      => $images,
             'phone'       => $this->phone,
             'category_id'    => $this->selectedCategory,
           ]);
 
        } elseif ($childcategories->count() == 0) {
 
-            Post::create([
+            $post->create([
                 'user_id'    => auth()->id(),
                 'title'       => $this->title,
-                'slug'        => Str::slug($this->title),
+                'slug'        => make_slug($this->title, '-'),
                 'description' => $this->description,
-                'images'      => $images,
+                // 'images'      => $images,
                 'phone'       => $this->phone,
                 'category_id'    => $this->selectedCategory,
                 'sub_category_id' => $this->selectedSubCategory
               ]);
 
         } else {
-            Post::create([
+            $post->create([
                         'user_id'    => auth()->id(),
                         'title'       => $this->title,
-                        'slug'        => Str::slug($this->title),
+                        'slug'        =>  make_slug($this->title, '-'),
                         'description' => $this->description,
-                        'images'      => $images,
+                        // 'images'      => $images,
                         'phone'       => $this->phone,
                         'category_id'    => $this->selectedCategory,
                         'sub_category_id' => $this->selectedSubCategory,
@@ -209,8 +205,15 @@ class CreatePostForm extends Component
                     ]);
         }
 
-
-
+        $post = Post::latest('id')->first();
+        $post_id = $post->id;
+    //    dd($images);
+        PostImage::create(
+            [
+            'post_id' => $post_id,
+            'image' => $images
+            ]
+        );
          // reset the inputs
          $this->reset();
          $this->success = 'تمت اضافة المقال بنجاح !';
