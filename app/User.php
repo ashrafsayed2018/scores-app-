@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Score;
 use App\Profile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -37,6 +38,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function($user)
+        {
+            //$user->name is available
+            //$user->email is available
+            //Do now what you want with them
+            Score::create([
+                'user_id' => $user->id,
+                 "score_type" => "registration",
+                 "scores"     => 5,
+              ]);
+        });
+    }
+
     public function profile() {
 
         return $this->hasOne(Profile::class,"user_id","id");
@@ -55,11 +73,20 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+    // relationship with scores
+
+    public function scores() {
+
+        return $this->hasMany(Score::class);
+    }
+
     // image path
 
     public function imagePath() {
 
        return $this->profile ? '/storage/users_images/'.  $this->profile->image : 'storage/images/avatar.jpg';
     }
+
+
 
 }

@@ -30,8 +30,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request ,Post $post)
     {
+
+        $this->authorize('create', $post);
+
 
         $categories = Category::all();
         $subcategories = SubCategory::all();

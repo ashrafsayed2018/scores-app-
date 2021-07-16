@@ -1,7 +1,7 @@
 @include('includes._header')
 
     <div id="app">
-        <nav class="bg-white lg:text-gray-900 shadow border lg:shadow-none relative border-gray-300 lg:border-none py-3 z-10">
+        <nav class="bg-white hidden md:block lg:text-gray-900 shadow border lg:shadow-none relative border-gray-300 lg:border-none py-3 z-10">
             <div class="container mx-auto flex justify-between">
                 <div class="flex w-1/4 items-center justify-between">
                     <a class="navbar-brand inline-block" href="{{ url('/home') }}">
@@ -33,13 +33,9 @@
 
                             @endif
                         @else
-                            <li class="flex justify-between">
-                                <a href="{{ route('profile.show',current_user()->name) }}"
-                                    id="navbarDropdown"
-                                    class="mx-2 flex justify-between items-center"
-                                    role="button" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    <span> {{ current_user()->name }}</span>
+                            <li class="flex justify-between items-center">
+                                <a href="{{ route('profile.show',[current_user()->slug]) }}">
+                                    {{ current_user()->name }}
                                 </a>
                                 <div class="flex">
                                     <a class="nav-link mx-2 button button-blue" href="{{ route('post.create') }}">

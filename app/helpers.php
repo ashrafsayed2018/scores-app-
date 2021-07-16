@@ -1,12 +1,14 @@
 <?php
 
 use App\Post;
+use App\Score;
 
 function current_user() {
 
     return auth()->user();
 }
 
+// arabic slug
 function make_slug($string = null, $separator = "-") {
     if (is_null($string)) {
         return "";
@@ -33,18 +35,21 @@ function make_slug($string = null, $separator = "-") {
     return $string;
 }
 
+// the first image of the post
 function firstPostImage ($post) {
     $allImages =  $post->firstPostImage->image;
     $firstImage = $allImages[0];
     return 'storage/post_images/'. $firstImage;
 }
 
+// post all images
 function allPostImages ($post) {
     $allImages =  $post->firstPostImage->image;
     return $allImages;
 
 }
 
+// arbic date method
 function ArabicDate() {
     $months = array("Jan" => "يناير", "Feb" => "فبراير", "Mar" => "مارس", "Apr" => "أبريل", "May" => "مايو", "Jun" => "يونيو", "Jul" => "يوليو", "Aug" => "أغسطس", "Sep" => "سبتمبر", "Oct" => "أكتوبر", "Nov" => "نوفمبر", "Dec" => "ديسمبر");
     $your_date = date('y-m-d'); // The Current Date
@@ -67,6 +72,7 @@ function ArabicDate() {
     return $arabic_date;
 }
 
+// show all the recommended posts
 function recommendedPosts($post) {
 
     if($post->child_category_id) {
@@ -86,3 +92,27 @@ function recommendedPosts($post) {
     return $recommended;
 }
 
+// get the scores of the user
+function getUserScore($user_id) {
+
+    return  Score::where('user_id', $user_id)->sum('scores');
+}
+
+// the user can post
+
+function UserCanPost($user_id) {
+
+    // check if the user has points to submit post
+    $postsCount = Post::where('user_id', $user_id)->count();
+    $userScore =  getUserScore($user_id); // user scores
+    $limit = 5;  // the limit per post
+    // get the used pointz
+    $usedPoints = $limit * $postsCount;
+    $theReminderScores =  $userScore - $usedPoints;  // the reminder points
+
+    if($theReminderScores >= 5) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -1,4 +1,4 @@
-<div class="footer">
+<div class="footer mt-8">
     <div class="container mx-auto">
          <div class="lg:flex flex-row-reverse">
              <div class="left flex-1 grid grid-cols-3 gap-4">
@@ -70,5 +70,4 @@
             </div>
          </div>
     </div>
-
 </div>

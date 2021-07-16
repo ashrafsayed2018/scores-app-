@@ -43,6 +43,16 @@ class CreateComment extends Component
             'commentable_type' => 'App\Post'
         ]);
 
+             // add scores to the user
+             $user->scores()->updateOrCreate([
+                'user_id' => $user->id,
+                'post_id' => $this->post->id,
+                'score_type' => 'comment',
+                'scores'     => 1,
+                'used'       => 0,
+              ]);
+
+
         $this->post->user->notify(new NewCommentAdded($this->post,auth()->user()));
 
         $this->reset('body');

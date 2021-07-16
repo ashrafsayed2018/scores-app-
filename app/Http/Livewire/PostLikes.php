@@ -41,11 +41,21 @@ class PostLikes extends Component
 
     public function store(Post $post) {
 
-
         $user = auth()->user();
-
         $this->post->like($user);
         $this->count= $this->getCount();
+        // add scores to the user
+        $user->scores()->updateOrCreate(
+            [
+          'post_id' => $this->post->id,
+
+            ],
+            [
+                'score_type' => 'post_like',
+                'scores'     => 1,
+                'used'       => 0,
+            ]
+        );
 
         return back();
     }
@@ -56,6 +66,12 @@ class PostLikes extends Component
 
         $this->post->dislike($user);
         $this->count= $this->getCount();
+
+        // decrease the scores
+        $user->scores()->update([
+            'post_id' => $this->post->id,
+            'scores'     => 0,
+          ]);
         return back();
     }
 

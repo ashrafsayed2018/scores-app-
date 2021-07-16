@@ -156,29 +156,28 @@ class CreatePostForm extends Component
     public function submit() {
 
 
-        $images = $this->storeImages();
+        $user_id = auth()->id();
+       if(UserCanPost($user_id)) {
 
-        $rules = collect($this->validationRules)->collapse()->toArray();
+            $images = $this->storeImages();
+            $rules = collect($this->validationRules)->collapse()->toArray();
+            $subcategories = SubCategory::where('category_id', $this->selectedCategory)->get();
+            $childcategories = ChildCategory::where('subcategory_id', $this->selectedSubCategory)->get();
+            $post = new Post();
 
-        $subcategories = SubCategory::where('category_id', $this->selectedCategory)->get();
+            if($subcategories->count() == 0) {
 
-        $childcategories = ChildCategory::where('subcategory_id', $this->selectedSubCategory)->get();
+                $post->create([
+                    'user_id'    => $user_id,
+                    'title'       => $this->title,
+                    'slug'        => make_slug($this->title, '-'),
+                    'description' => $this->description,
+                    // 'images'      => $images,
+                    'phone'       => $this->phone,
+                    'category_id'    => $this->selectedCategory,
+                ]);
 
-       $post = new Post();
-
-       if($subcategories->count() == 0) {
-
-        $post->create([
-            'user_id'    => auth()->id(),
-            'title'       => $this->title,
-            'slug'        => make_slug($this->title, '-'),
-            'description' => $this->description,
-            // 'images'      => $images,
-            'phone'       => $this->phone,
-            'category_id'    => $this->selectedCategory,
-          ]);
-
-       } elseif ($childcategories->count() == 0) {
+            } elseif ($childcategories->count() == 0) {
 
             $post->create([
                 'user_id'    => auth()->id(),
@@ -191,7 +190,7 @@ class CreatePostForm extends Component
                 'sub_category_id' => $this->selectedSubCategory
               ]);
 
-        } else {
+             } else {
             $post->create([
                         'user_id'    => auth()->id(),
                         'title'       => $this->title,
@@ -207,16 +206,19 @@ class CreatePostForm extends Component
 
         $post = Post::latest('id')->first();
         $post_id = $post->id;
-    //    dd($images);
         PostImage::create(
-            [
-            'post_id' => $post_id,
-            'image' => $images
-            ]
+                [
+                'post_id' => $post_id,
+                'image' => $images
+                ]
         );
-         // reset the inputs
-         $this->reset();
-         $this->success = 'تمت اضافة المقال بنجاح !';
+        // reset the inputs
+        $this->reset();
+        $this->success = 'تمت اضافة المقال بنجاح !';
+       } else {
+
+       }
+
 
     }
 
