@@ -20,7 +20,6 @@ class PostLikes extends Component
     public function mount()
     {
         $this->count = $this->getCount();
-
     }
 
     // public function updateCount()
@@ -39,15 +38,17 @@ class PostLikes extends Component
 
 
 
-    public function store(Post $post) {
+    public function store(Post $post)
+    {
 
         $user = auth()->user();
         $this->post->like($user);
-        $this->count= $this->getCount();
+        $this->count = $this->getCount();
         // add scores to the user
-        $user->scores()->updateOrCreate(
+        $this->post->user->scores()->updateOrCreate(
             [
-          'post_id' => $this->post->id,
+                'user_id' =>  $this->post->user->id,
+                'post_id' => $this->post->id,
 
             ],
             [
@@ -65,13 +66,12 @@ class PostLikes extends Component
         $user = auth()->user();
 
         $this->post->dislike($user);
-        $this->count= $this->getCount();
+        $this->count = $this->getCount();
 
         // decrease the scores
-        $user->scores()->update([
-            'post_id' => $this->post->id,
+        $this->post->user->scores()->update([
             'scores'     => 0,
-          ]);
+        ]);
         return back();
     }
 

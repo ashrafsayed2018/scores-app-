@@ -4,7 +4,7 @@
          <div class="views_count_and_publish_date flex jsutify-between align-center">
              <div class="views_count w-1/2 flex items-start">
                 <i class="far fa-eye text-gray-400 text-2xl ml-4"></i>
-                <span class="count">10 مشاهدات</span>
+                <span class="count">{{ $post->view_count }} مشاهدات</span>
              </div>
              <div class="publish_date flex items-start">
                 <i class="far fa-clock text-gray-400 text-2xl ml-4"></i>
@@ -16,11 +16,12 @@
     <div class="middel_info mt-5">
        <div class="mid_info flex justify-between">
             <p class="info">معلومات</p>
+
             <div>
                 <div class="translate_info border-2 border-blue-500 text-blue-500 font-normal hover:bg-blue-500 hover:text-white transition-all px-3 pb-1 cursor-pointer rounded-xl">ترجمه</div>
             </div>
        </div>
-       <p class="post_description text-gray-600 mt-5">{{ $post->description }}</p>
+       <p class="post_description text-gray-600 mt-5">{{ Str::limit($post->description, $limit = 200, '...') }}</p>
     </div>
     <div class="user_info flex justify-between mt-5 bg-gray-100 p-5 -mx-5">
         <div class="user_details flex">
@@ -42,7 +43,7 @@
         </div>
 
     </div>
-    <div class="contact_info mt-10 flex justify-around lg:justify-between">
+    <div class="contact_info mt-5 flex justify-around lg:justify-between">
         <div class="call_button">
             <div class="profile-card__button button--green js-call-btn cursor-pointer">
                 <span>اتصل الان </span>

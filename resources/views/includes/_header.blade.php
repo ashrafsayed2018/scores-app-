@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl" >
+<?xml version="1.0" encoding="UTF-8"?>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

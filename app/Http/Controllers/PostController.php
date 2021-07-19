@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use App\Comment;
 use App\Category;
-use App\PostImage;
 use App\SubCategory;
 use App\ChildCategory;
 use Illuminate\Http\Request;
@@ -30,7 +28,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request ,Post $post)
+    public function create(Request $request, Post $post)
     {
 
         $this->authorize('create', $post);
@@ -40,13 +38,12 @@ class PostController extends Controller
         $subcategories = SubCategory::all();
         $childcategories = ChildCategory::all();
 
-        if(auth()->user()->profile) {
+        if (auth()->user()->profile) {
 
-            return view('post.create', compact(['categories', 'subcategories','childcategories']));
+            return view('post.create', compact(['categories', 'subcategories', 'childcategories', 'countryName']));
         } else {
             return redirect('profile/create');
         }
-
     }
 
 
@@ -63,9 +60,13 @@ class PostController extends Controller
 
         $post = Post::where('title', $title)->withPostLikes()->with('firstPostImage')->first();
 
+        // increament the view count
+        DB::table('posts')
+            ->where('id', $post->id)
+            ->increment('view_count', 1);
+
+
         //  note from the helpers.php recommenedPosts method we get all recommended posts
         return view('post.show', compact(['post']));
     }
-
-
 }

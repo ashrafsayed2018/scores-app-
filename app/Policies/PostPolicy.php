@@ -44,7 +44,6 @@ class PostPolicy
         $user_id = $user->id;
 
         return UserCanPost($user_id);
-
     }
 
     /**

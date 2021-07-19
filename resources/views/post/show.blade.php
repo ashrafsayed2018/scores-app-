@@ -3,9 +3,10 @@
 @section('content')
 
 <div class="xl:mx-8">
-    <div class="block post_detail py-6 font-bold text-centers  2xl:grid gap-8 grid-cols-5">
+    <div class="block post_detail py-6 font-bold text-centers 2xl:grid gap-8 grid-cols-5">
         <x-show-post-card :post="$post" />
         <x-post-info-card :post="$post" />
+
     </div>
     <div class="block all_comments lg:w-full lg:mt-10">
         <livewire:create-comment :post="$post"/>

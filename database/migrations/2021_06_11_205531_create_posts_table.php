@@ -16,26 +16,25 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-            ->constrained()
-            ->onDelete('cascade');
+                ->constrained()
+                ->onDelete('cascade');
 
             $table->string('title');
             $table->string('slug');
             $table->text('description');
             $table->integer('phone');
             $table->foreignId('category_id')
-            ->constrained()
-            ->onDelete('cascade');
+                ->constrained()
+                ->onDelete('cascade');
             $table->foreignId('sub_category_id')->nullable()
-            ->constrained()
-            ->onDelete('cascade');
+                ->constrained()
+                ->onDelete('cascade');
             $table->foreignId('child_category_id')->nullable()
-            ->constrained()
-            ->onDelete('cascade');
+                ->constrained()
+                ->onDelete('cascade');
+            $table->integer('view_count')->unsigned()->default(0);
 
             $table->timestamps();
-
-
         });
     }
 

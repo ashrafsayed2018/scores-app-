@@ -40,18 +40,17 @@ class CategoryController extends Controller
     {
         $attributes = $request->validate([
             'name' => 'required|unique:categories|min:3|string',
-            'image'=> 'required'
+            'image' => 'required'
         ]);
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
 
             $file = $request->image;
 
-            $image = rand(1, 1000000000). '.'. $file->extension();
+            $image = rand(1, 1000000000) . '.' . $file->extension();
 
-            $request->image->storeAs('category_images',$image,'public');
+            $request->image->storeAs('category_images', $image, 'public');
             $attributes['image'] = $image;
-
         }
         $attributes['slug'] = Str::slug($request->name);
 
@@ -72,7 +71,7 @@ class CategoryController extends Controller
     public function show($slug)
     {
 
-       $category = Category::where('slug', $slug)->first();
+        $category = Category::where('slug', $slug)->first();
 
         return view('category.show', compact('category'));
     }

@@ -14,14 +14,15 @@ class PostFavourite extends Component
         $this->post = $post;
     }
 
-    public function store() {
+    public function store()
+    {
 
         $this->post->addFavorite();
-        $this->post->user->notify(new NewFavouriteAdded($this->post,auth()->user(), $this->post));
-
+        $this->post->user->notify(new NewFavouriteAdded($this->post, auth()->user(), $this->post));
     }
 
-    public function destroy() {
+    public function destroy()
+    {
         $this->post->removeFavorite();
     }
 

@@ -1,12 +1,14 @@
 <div class="post-card col-span-6 lg:col-span-4 mx-auto">
-    <div class="card bg-white mb-5 lg:mb-0 w-full shadow-lg border border-gray-400" style="height: 500px">
+    <div class="card bg-white mb-5 lg:mb-0 w-full shadow-lg border border-gray-400" style="height: 410px">
         <a href="{{ route('post.show',$post->slug) }}">
 
-            <img src="{{ asset(firstPostImage($post)) }}" alt="{{ $post->title }}" style="width: 100%;height:250px">
-            <div class="post-details px-5" style="height: 200px">
-                <h2 class="mb-2 font-bold">{{ $post->title }}</h2>
+            <img src="{{ asset(firstPostImage($post)) }}" alt="{{ $post->title }}" style="width: 100%;height:220px">
+            <div class="post-details px-5" style="height: 120px">
+                <h2 class="mb-2 font-bold mt-3">{{ $post->title }}</h2>
                 <hr>
-                <p class="mb-2 break-all">{{ $post->description }}</p>
+                <p class="mb-2 break-word">
+                    {{ Str::limit($post->description, $limit = 100, $end = '...') }}
+                </p>
             </div>
         </a>
         <div class="flex justify-between p-5">

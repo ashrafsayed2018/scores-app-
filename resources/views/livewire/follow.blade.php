@@ -8,7 +8,7 @@
         </form>
     @endif
     @else
-     <a href="{{ route('login') }}" class="button button-blue">متابعه</a>
+     <a href="{{ route('login') }}" class="'profile-card__button button--orange">متابعه</a>
     @endauth
 
 </div>
