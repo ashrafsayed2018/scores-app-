@@ -10,7 +10,7 @@ class UserNotificationController extends Controller
     public function show()
     {
         $notifications = auth()->user()->unreadNotifications;
-        $notifications->markAsRead();
-        return view('notifications.show',compact('notifications'));
+        // $notifications->markAsRead();
+        return view('notifications.show', compact('notifications'));
     }
 }
