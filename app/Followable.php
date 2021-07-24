@@ -54,6 +54,8 @@ trait Followable
 
             return $this->unfollow($user);
         } else {
+
+            $this->follow($user);
             // add scores to the user
             $this->scores()->updateOrCreate(
                 [
@@ -66,8 +68,6 @@ trait Followable
                     'used'       => 0,
                 ]
             );
-
-            return $this->follow($user);
         }
     }
 

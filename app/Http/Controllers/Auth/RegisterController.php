@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Services\ActivityService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -30,14 +31,17 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    protected $activityService;
+
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ActivityService $activityService)
     {
+        $this->activityService = $activityService;
         $this->middleware('guest');
     }
 
@@ -64,11 +68,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+
+        $user =  User::create([
             'name' => $data['name'],
             'slug' =>  make_slug($data['name'], '-'),
             'email' => $data['email'],
+            'avatar' => '/storage/images/avatar.jpg',
             'password' => Hash::make($data['password']),
         ]);
+
+        // create user activity in activitiy log table
+
+        $user_activity = 'user attempted to login';
+        $email = $data['email'];
+        $user_id = $user->id;
+        $this->activityService->enterActivity($user_activity, $email, $user_id);
+        return $user;
     }
 }

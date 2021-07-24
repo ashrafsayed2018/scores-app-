@@ -128,6 +128,7 @@ class User extends Authenticatable
     public function imagePath()
     {
 
-        return $this->profile ? '/storage/users_images/' .  $this->profile->image : 'storage/images/avatar.jpg';
+        return $this->profile ? '/storage/users_images/' .  $this->profile->image : $this->avatar;
+        //'storage/images/avatar.jpg'
     }
 }

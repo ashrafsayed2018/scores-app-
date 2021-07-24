@@ -1,63 +1,7 @@
 @include('includes._header')
 
     <div id="app">
-        <nav class="bg-white hidden md:block lg:text-gray-900 shadow border lg:shadow-none relative border-gray-300 lg:border-none py-3 z-10">
-            <div class="container mx-auto flex justify-between">
-                <div class="flex w-1/4 items-center justify-between">
-                    <a class="navbar-brand inline-block" href="{{ url('/home') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                    @auth
-                    <a href="/notifications" class="relative {{ (current_user()->unreadNotifications->count() > 0 ) ? 'animate-bounce' : '' }}">
-                        <span class="notification_count absolute -top-2 left-3">{{ current_user()->unreadNotifications->count() }}</span>
-                        <i class="fa fa-bell text-red-500"></i>
-                    </a>
-                    @endauth
-                </div>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                           @if (request()->is('login'))
-                           <li class="nav-item">
-                                <a class="nav-link button button-blue" href="{{ route('register') }}">{{ __('Register') }}</a>
-                           </li>
-                            @elseif (request()->is('register'))
-                            <li class="nav-item">
-                                <a class="nav-link button button-green" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-
-                            @endif
-                        @else
-                            <li class="flex justify-between items-center">
-                                <a href="{{ route('profile.show',[current_user()->slug]) }}">
-                                    {{ current_user()->name }}
-                                </a>
-                                <div class="flex">
-                                    <a class="nav-link mx-2 button button-blue" href="{{ route('post.create') }}">
-                                      <i class="fas fa-plus text-xs lg:text-sm text-white"></i>
-                                        ارفع اعلان
-                                    </a>
-                                    <a class="block text-3xl text-gray-700 ml-5" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                      <i class="fas fa-sign-out-alt transform rotate-180"></i>
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <x-utilities.navbar />
 
         <main class="">
             @yield('content')

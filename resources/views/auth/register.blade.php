@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="bg-white mx-auto shadow-lg lg:w-1/3 p-5  rounded-lg">
+<div class="container mt-12">
+    <div class="bg-white mx-auto shadow-lg lg:w-1/3 p-5 rounded-lg">
         <div class="col-md-8">
             <div class="card">
                 <div class="text-lg font-bold text-center">تسجيل الدخول للموقع</div>
-
+                <a href="{{ url('auth/google') }}"  class="flex justify-between  items-center w-1/2 my-1 mx-auto py-2 px-4 text-white rounded-md mb-3 transition-all hover:shadow-md bg-red-600 text-center">
+                    <strong>دخول بحساب جوجل</strong>
+                    <i class="fab fa-google text-white mt-1"></i>
+                </a>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf

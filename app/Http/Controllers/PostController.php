@@ -6,6 +6,7 @@ use App\Post;
 use App\Category;
 use App\SubCategory;
 use App\ChildCategory;
+use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,7 +41,7 @@ class PostController extends Controller
 
         if (auth()->user()->profile) {
 
-            return view('post.create', compact(['categories', 'subcategories', 'childcategories', 'countryName']));
+            return view('post.create', compact(['categories', 'subcategories', 'childcategories']));
         } else {
             return redirect('profile/create');
         }

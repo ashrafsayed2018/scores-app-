@@ -3,6 +3,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.7.5/swiper-bundle.min.js"></script>
     <script src="{{ asset(mix('js/app.js')) }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/fingerprint/finger.js') }}"></script>
+    <script src="{{ asset('js/fingerprint/script.js') }}"></script>
 
     <livewire:scripts/>
 

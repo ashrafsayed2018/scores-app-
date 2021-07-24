@@ -177,7 +177,10 @@ return [
 
         // intervention image
 
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+
+        // socialite
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -231,7 +234,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // intervention image
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        // socialite
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

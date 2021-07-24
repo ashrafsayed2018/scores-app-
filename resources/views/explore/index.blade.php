@@ -7,7 +7,7 @@
     <ul class="bg-white shadow-lg px-3 py-3">
         @forelse ($profiles as $profile)
 
-            <li class="flex justify-between items-center">
+            <li class="flex justify-between items-center  mb-3">
                <div class="flex mb-3 items-center">
                    <img src="{{ asset('storage/users_images/' .  $profile->image) }}" alt="user image" class="bloci rounded-full" style="width: 40px;height:40px">
                     <a href="{{ route('profile.show',[$profile->user->slug]) }}" class="mr-4">
@@ -15,10 +15,10 @@
                     </a>
                </div>
                <div>
-
                  <livewire:follow :profile="$profile" :user="$profile->user" />
                </div>
             </li>
+
         @empty
         @endforelse
     </ul>

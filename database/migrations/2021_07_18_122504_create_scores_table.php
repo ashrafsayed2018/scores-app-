@@ -15,7 +15,7 @@ class CreateScoresTable extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable()->unsigned();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('post_id')->nullable();
             $table->bigInteger('followed_id')->unsigned()->nullable();
             $table->string('score_type');
@@ -23,10 +23,10 @@ class CreateScoresTable extends Migration
             $table->integer('used')->default(0);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->foreign('post_id')->references('id')->on('posts');
-            $table->foreign('followed_id')->references('following_user_id')->on('follows');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('followed_id')->references('following_user_id')->on('follows')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

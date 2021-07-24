@@ -45,23 +45,23 @@
     <div class="container mx-auto">
         <h2 class="font-bold text-gray-600 text-lg mb-6">اضف اعلانك <span class="text-blue-500 font-bold">المثالي</span></h2>
         <div class="grid lg:grid-cols-3 gap-4">
-            <div class="bg-blue-100 border-2 hover:border-blue-400 py-7 px-3 flex rounded-lg justify-center items-center gap-x-2">
+            <div class="bg-blue-100 border-2  hover:border-blue-400 py-7 px-3 flex rounded-lg justify-center items-center gap-x-2">
                 <div class="bg-white p-3  rounded-md">
                     <i class="fas fa-camera text-4xl text-blue-400"></i>
                 </div>
-                <p>الصور/الفيديو الواضحة تزيد الدعم لإعلانك</p>
+                <p class="flex-1"> الصور/الفيديو الواضحة تزيد الدعم لإعلانك</p>
             </div>
             <div class="bg-red-100 border-2 hover:border-red-400 py-7 px-3 flex rounded-lg justify-center items-center gap-x-2">
                 <div class="bg-white p-3 rounded-md">
                     <i class="far fa-sticky-note text-4xl text-blue-400"></i>
                 </div>
-                <p>تفاصيل أكثر تعني مشاهدات أكثر وظهور أسهل للإعلان</p>
+                <p class="flex-1">تفاصيل أكثر تعني مشاهدات أكثر وظهور أسهل للإعلان</p>
             </div>
             <div class="bg-green-100 border-2 hover:border-green-400 py-7 px-3 rounded-lg flex justify-center items-center gap-x-2">
                 <div class="bg-white p-3 rounded-md">
                     <i class="fas fa-rocket text-4xl text-blue-400"></i>
                 </div>
-                <p>إختيار أي من امتيازاتنا سوف تعطي إعلانك دعم أكثر لمشاهدته من قبل الملايين</p>
+                <p class="flex-1">إختيار أي من امتيازاتنا سوف تعطي إعلانك دعم أكثر لمشاهدته من قبل الملايين</p>
             </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
     <div class="grid lg:grid-cols-3">
         <div class="text-center h-40 mb-6">
             <i class="fas fa-suitcase text-5xl text-green-500"></i>
-            <h3 class="mt-3">نفّذ مشاريعك بسهولة</h3>
+            <h3 class="mt-3">اطلق اعلاناتك بسهولة</h3>
             <p class="mt-3 text-gray-500"> تنشيط وتعزيز وصول منشوراتك.</p>
         </div>
         <div class="text-center h-40 mb-6">

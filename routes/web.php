@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon;
@@ -32,7 +33,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+
 
     Route::resource('admin', 'AdminController');
 
@@ -59,10 +60,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/comment/store', 'CommentController@store')->name('comment.store');
     Route::post('/reply/store', 'ReplyController@store')->name('reply.store');
-    Route::get('/notifications','UserNotificationController@show');
-
+    Route::get('/notifications', 'UserNotificationController@show');
 });
 
-Route::get('explore','ExploreController@index')->name('explore.index');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('explore', 'ExploreController@index')->name('explore.index');
 Route::get('post/{post:slug}/show', 'PostController@show')->name('post.show');
 Route::get('category/{category:slug}/show', "CategoryController@show")->name('category.show');
+Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('login/google/callback', 'Auth\GoogleController@handleGoogleCallback');
+
+Route::resource('/finger', 'FingerController')->name('', 'finger.store');

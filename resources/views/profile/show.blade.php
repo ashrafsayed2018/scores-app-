@@ -59,9 +59,16 @@
             <div class="flex justify-center items-center">
                 @can('edit', $user)
                 <button class="profile-card__button button--blue focus:outline-none">
+                    @if (auth()->user()->profile)
                     <a href="{{ route('profile.edit',[current_user()->slug]) }}">
                         تحديث الملف الشخصي
                     </a>
+                    @else
+                    <a href="{{ route('profile.create') }}">
+                        عمل الملف الشخصي
+                    </a>
+                    @endif
+
                </button>
                 @endcan
             </div>

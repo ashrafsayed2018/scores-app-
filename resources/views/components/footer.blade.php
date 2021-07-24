@@ -17,14 +17,18 @@
                     <ul class="text-gray-500">
                         <li>
                           @auth
-                             <a href="{{ route('profile.show', auth()->user()->slug) }}">الملف الشخصي</a>
+                            @if (auth()->user()->profile)
+                            <a href="{{ route('profile.show', auth()->user()->slug) }}">الملف الشخصي</a>
+                            @endif
                           @else
                              <a href="{{ route('login') }}">الملف الشخصي</a>
                           @endauth
                         </li>
                         <li>
                           @auth
-                            <a href="{{ route('profile.show', auth()->user()->slug) }}">الملف الشخصي</a>
+                             @if (auth()->user()->profile)
+                            <a href="{{ route('profile.show', auth()->user()->slug) }}">معلومات حسابي</a>
+                            @endif
                           @else
                             <a href="{{ route('login') }}"> معلومات حسابي</a>
                           @endauth
