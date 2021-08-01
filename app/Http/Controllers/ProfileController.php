@@ -18,11 +18,6 @@ class ProfileController extends Controller
      */
     public function index()
     {
-
-    //    $profile = Profile::where('user_id', auth()->id())->first();
-
-    //    return view('profile.index',compact('profile'));
-
     }
 
     /**
@@ -33,6 +28,14 @@ class ProfileController extends Controller
     public function create()
     {
         $user = auth()->user();
+
+
+        // check if the user has a profile
+
+        if ($user->profile) {
+            $profile = $user->profile;
+            return redirect("profile/{$user->slug}/edit");
+        }
 
 
         return view('profile.create', compact('user'));
@@ -52,19 +55,18 @@ class ProfileController extends Controller
 
         $file = $request->image;
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
 
-            $image = rand(1, 1000000000).'.' .  $file->extension();
+            $image = rand(1, 1000000000) . '.' .  $file->extension();
 
-            $request->image->storeAs('users_images',$image,'public');
+            $request->image->storeAs('users_images', $image, 'public');
 
             $validtated['image'] = $image;
         }
 
-
+        $validtated['slug'] =  make_slug($validtated['name']);
         auth()->user()->profile()->create($validtated);
         auth()->user()->name = $validtated['name'];
-        $validtated['slug'] =  make_slug($validtated['name']);
         current_user()->slug =  $validtated['slug'];
         auth()->user()->save();
         return redirect('home');
@@ -76,13 +78,10 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Profile $profile)
     {
 
-        $profile = $user->profile();
-
-
-        return view('profile.show', compact(['profile', 'user']));
+        return view('profile.show', compact('profile'));
     }
 
     /**
@@ -91,9 +90,16 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Profile $profile)
     {
-        $profile = Profile::where('user_id', auth()->id())->first();
+
+        $user = auth()->user();
+        // check if the user not has  a profile
+
+        if (!$user->profile) {
+            $profile = $user->profile;
+            return redirect("profile/create");
+        }
 
         return view('profile.edit', compact(['profile']));
     }
@@ -108,24 +114,25 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request, Profile $profile)
     {
 
+
         $validtated = $request->validated();
 
         $file = $request->image;
 
 
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
 
 
             if (current_user()->profile->image) {
 
-                Storage::delete('public/users_images/'. current_user()->profile->image);
+                Storage::delete('public/users_images/' . current_user()->profile->image);
             }
 
-            $image = rand(1, 1000000000). '.'. $file->extension();
+            $image = rand(1, 1000000000) . '.' . $file->extension();
 
 
-            $request->image->storeAs('users_images',$image,'public');
+            $request->image->storeAs('users_images', $image, 'public');
 
             $validtated['image'] = $image;
         }
@@ -137,8 +144,7 @@ class ProfileController extends Controller
         current_user()->slug =  $validtated['slug'];
         current_user()->save();
 
-        return redirect("profile/show/". current_user()->slug);
-
+        return redirect("profile/show/" . current_user()->slug);
     }
 
     /**

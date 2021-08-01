@@ -3,7 +3,7 @@
 <x-utilities.navbar/>
 
 <div class="mx-auto w-4/5">
-    <div class="flex justify-between items-center mt-4 w-4/5">
+    <div class="flex justify-between items-center mt-4 w-full">
         <a href="{{ route('home') }}" class="text-xs text-gray-500">
             <i class="fa fa-arrow-right"></i>
             <span>الرجوع</span>
@@ -41,10 +41,7 @@
               </div>
           </div>
           {{-- posts grid --}}
-          <div class="lg:grid lg:grid-cols-12 lg:gap-5">
-
-
-
+          <div class="lg:grid lg:grid-cols-12 lg:gap-5 my-8">
               @foreach ($category->posts as $post)
                <livewire:post-card :post="$post"  wire:key="$post->id" />
               @endforeach

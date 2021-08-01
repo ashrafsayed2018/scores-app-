@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container mx-auto">
-    <h1 class="text-center mb-5 text-lg">صفحة عمل ملف شخصي جديد </h1>
+    <h1 class="text-center mb-5 text-lg my-8">انشاء الملف الشخصي </h1>
      <div class="lg:w-2/5 mx-auto">
         <form action="{{ route('profile.store', $user->slug) }}" method="POST" class="text-right bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 my-4" enctype="multipart/form-data">
             @csrf
@@ -58,6 +58,24 @@
                   @enderror
             </div>
             <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="phone">
+                    رقم التليفون
+                </label>
+                <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
+                id="phone"
+                type="text"
+
+                value="{{ old('phone') }}"
+                name="phone"
+                placeholder="رقم التليفون">
+                @error('phone')
+
+                <span class="text-red-500">{{ $message }}</span>
+
+                @enderror
+            </div>
+            <div class="mb-4">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="age">
                     العمر
                 </label>
@@ -105,6 +123,5 @@
             </div>
         </form>
      </div>
-    <a href="/home" class="button button-green">back</a>
 </div>
 @endsection

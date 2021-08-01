@@ -3,11 +3,25 @@
         <div class="right col-span-2 flex items-baseline justify-between mb-6 px-3">
             <div class="logo flex justify-around items-end flex-1">
                 @auth
-
-                    <img src="{{ asset(auth()->user()->imagePath()) }}"
-                    alt="{{ auth()->user()->name }}"
-                    class="block w-10 h-10 rounded-full">
-                    <a href="/notifications" class="relative">
+                    <div class="dropdown inline-block relative " style="z-index: 100000000">
+                        <button class="text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+                          <span class="mr-1">
+                            <img src="{{ asset(auth()->user()->imagePath()) }}"
+                                            alt="{{ auth()->user()->name }}"
+                                            class="block w-10 h-10 rounded-full">
+                          </span>
+                          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                          </svg>
+                        </button>
+                        <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+                        @if (current_user()->profile)
+                        <li class=""><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('profile.show', current_user()->profile->slug) }}">الملف</a></li>
+                        @endif
+                          <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('prefrences.show') }}">المفضله</a></li>
+                          <li class=""><a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('myposts') }}">اعلاناتي</a></li>
+                        </ul>
+                    </div>
+                    <a href="{{ route('notifications.show') }}" class="relative">
                         <span class="notification_count absolute -top-3 left-3 text-sm">{{ auth()->user()->unreadNotifications->count() }}</span>
                         <i class="fa fa-bell text-black"></i>
                     </a>

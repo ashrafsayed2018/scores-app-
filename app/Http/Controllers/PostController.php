@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use App\Category;
 use App\SubCategory;
 use App\ChildCategory;
@@ -69,5 +70,15 @@ class PostController extends Controller
 
         //  note from the helpers.php recommenedPosts method we get all recommended posts
         return view('post.show', compact(['post']));
+    }
+
+    public function view_user_posts()
+    {
+
+        $user_id = auth()->id();
+
+        $user_posts = Post::where('user_id', $user_id)->get();
+
+        return view('post.myposts', compact('user_posts'));
     }
 }

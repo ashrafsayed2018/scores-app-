@@ -48,19 +48,20 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('profile/create', 'ProfileController@create')->name('profile.create');
-    Route::get('profile/show/{user:slug}', 'ProfileController@show')->name('profile.show');
-    Route::get('profile/{user:slug}/edit', 'ProfileController@edit')->name('profile.edit')->middleware('can:edit,user');
-    Route::post('profile/{user:slug}/store', 'ProfileController@store')->name('profile.store');
-    Route::put('profile/{user:name}/update', 'ProfileController@update')->name('profile.update');
+    Route::get('profile/show/{profile:slug}', 'ProfileController@show')->name('profile.show');
+    Route::get('profile/{profile:slug}/edit', 'ProfileController@edit')->name('profile.edit');
+    Route::post('profile/{profile:slug}/store', 'ProfileController@store')->name('profile.store');
+    Route::PATCH('profile/{profile:name}/update', 'ProfileController@update')->name('profile.update');
 
     Route::get('post', 'PostController@index')->name('post.index');
     Route::get('post/create', 'PostController@create')->name('post.create');
     Route::post('post/store', 'PostController@store')->name('post.store');
+    Route::get('/myposts', 'PostController@view_user_posts')->name('myposts');
 
 
     Route::post('/comment/store', 'CommentController@store')->name('comment.store');
     Route::post('/reply/store', 'ReplyController@store')->name('reply.store');
-    Route::get('/notifications', 'UserNotificationController@show');
+    Route::get('/notifications', 'UserNotificationController@show')->name('notifications.show');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -71,3 +72,4 @@ Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
 Route::get('login/google/callback', 'Auth\GoogleController@handleGoogleCallback');
 
 Route::resource('/finger', 'FingerController')->name('', 'finger.store');
+Route::get('/preferences', 'PrefrencesController@show')->name('prefrences.show');

@@ -3,13 +3,12 @@
 @section('content')
 
 <div class="container mx-auto">
-    <h1 class="text-center mb-5 text-lg">صفحة تعديل الملف الشخصي </h1>
-
-     <div class="lg:w-2/3 mx-auto">
+    <h1 class="text-center mb-5 text-lg my-8">صفحة تعديل الملف الشخصي </h1>
+     <div class="lg:w-2/4 mx-auto">
 
         <form action="{{ route('profile.update', $profile->name) }}" method="POST" class="text-right bg-white shadow-lg rounded px-8 py-8 my-4" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+            @method('PATCH')
             <div class="mb-4">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="name">
                     اسم المستخدم
@@ -19,7 +18,7 @@
                   id="name"
                   type="text"
                   name="name"
-                  value="{{$profile->name}}"
+                  value="{{old('name') ?? $profile->name}}"
                   placeholder="الاسم">
                   @error('name')
 
@@ -36,7 +35,7 @@
                   id="about"
                   type="text"
                   name="about"
-                  placeholder="نبذه عني">{{$profile->about}}</textarea>
+                  placeholder="نبذه عني">{{old('about') ??  $profile->about}}</textarea>
                   @error('about')
 
                   <span class="text-red-500">{{ $message }}</span>
@@ -52,7 +51,7 @@
                   id="image"
                   type="file"
                   name="image"
-                  value="{{ old('image') }}"
+                  value="{{ old('image') ?? $profile->image }}"
                   placeholder="صورة الملف الشخصي">
                   @error('image')
 
@@ -109,6 +108,5 @@
             </div>
         </form>
      </div>
-    <a href="/home" class="button button-green">back</a>
 </div>
 @endsection

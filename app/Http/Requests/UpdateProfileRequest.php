@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,11 +22,15 @@ class UpdateProfileRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(User $user)
+    public function rules()
     {
+        $profile = $this->route('profile');
         return [
-            'username' => 'sometimes|required', Rule::unique('profiles')->ignore($user),
-            'about'    => 'sometimes|required|string|min:5|max:255',
+            'name'     => [
+                'sometimes',
+                'required',
+                Rule::unique('profiles', 'name')->ignore($profile)
+            ],            'about'    => 'sometimes|required|string|min:5|max:255',
             'image'    => 'sometimes|image|mimes:png,jpg,jpeg',
             'age'      => 'sometimes|numeric|min:18|max:65',
             'gender'   => 'sometimes|required',
@@ -42,8 +45,8 @@ class UpdateProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.unique' => 'اسم المستخدم موجود بالفعل',
-            'username.alpha_dash' => 'اسم المستخدم يجب ان يحتوي على حروف وارقام بدون مسافات',
+            'name.unique' => 'اسم المستخدم موجود بالفعل',
+            'name.alpha_dash' => 'اسم المستخدم يجب ان يحتوي على حروف وارقام بدون مسافات',
             'about.min'    => 'نبذه عني يجب ان تكون اكثر من 5 اخرف على الاقل',
             'about.max'    => 'نبذه عني يجب ان تكون اقل من 255 اخرف ',
             'age.numeric'      => 'حقل العمر يجب ان يحتوي على ارقام فقط ',

@@ -27,12 +27,13 @@ class StoreProfileRequest extends FormRequest
             'name' => 'required|unique:profiles',
             'about'    => 'required|max:255',
             'image'    => 'required',
+            'phone'   => 'required',
             'age'      => 'required|numeric|min:18|max:65',
             'gender'   => 'required',
         ];
     }
 
-     /**
+    /**
      * Get the error messages for the defined validation rules.
      *
      * @return array
@@ -43,6 +44,4 @@ class StoreProfileRequest extends FormRequest
             'name.required' => 'هذا الحقل مطلوب',
         ];
     }
-
-
 }

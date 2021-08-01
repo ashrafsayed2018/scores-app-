@@ -4,21 +4,19 @@ namespace App\Http\Livewire;
 
 use App\Post;
 use App\Category;
+use App\PostImage;
 use App\SubCategory;
 use App\ChildCategory;
-use App\PostImage;
 use Livewire\Component;
-use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic;
-use Intervention\Image\ImageManagerStatic as Image;
 
 class CreatePostForm extends Component
 {
 
     use WithFileUploads;
-
     public $currentPage = 1;
     public $categories;
     public $subcategories;
@@ -34,18 +32,16 @@ class CreatePostForm extends Component
 
     public $title;
     public $description;
-    public $images = [];
-    public $phone;
+    public $images;
     public $category_id;
     public $subcategory_id;
     public $childcategory_id;
 
-
-
-
     // success message
 
     public $success;
+    public $more4;
+
 
     public $pages = [
         1 => [
@@ -57,16 +53,12 @@ class CreatePostForm extends Component
             'subheading' => 'اكتب وصفا للمقال'
         ],
         3 => [
-            'heading' => 'اضف صور المقال',
-            'subheading' => 'اضف المزيد من الصور للمقال'
-        ],
-        4 => [
-            'heading' => 'رقم التليفون',
-            'subheading' => 'اكتب رقم التليفون للمقال'
-        ],
-        5 => [
             'heading' => 'اختر تصنيف',
             'subheading' => '  اختر تصنيف مناسب للمقال'
+        ],
+        4 => [
+            'heading' => 'اضف صور المقال',
+            'subheading' => 'اضف المزيد من الصور للمقال'
         ],
     ];
 
@@ -79,18 +71,21 @@ class CreatePostForm extends Component
             'description' => ['required', 'min:3', 'max:500'],
         ],
         3 => [
-            'images' =>  ['required'],
+            'selectedCategory' => ['required'],
+            "selectedSubCategory" => ['required']
         ],
         4 => [
-            'phone' =>  ['required'],
-        ],
-        5 => [
-            'selectedCategory' => ['required']
+            'images.*' => 'required|image|max:2'
         ]
     ];
 
-    // 'selectedSubCategory' => 'required',
-    // 'selectedChildCategory' => 'required',
+    protected $messages = [
+        'title.required' => 'عنوان الاعلان مطلوب',
+        'description.required' => 'وصف الاعلان مطلوب',
+        'selectedCategory.required' => 'الفئه الرئيسيه مطلوبه',
+        'selectedSubCategory.required' => 'الفئه الفرعيه مطلوبه',
+        'images.required' => 'صورة الاعلان مطلوبه',
+    ];
 
 
     public function updated($propertyName)
@@ -118,8 +113,6 @@ class CreatePostForm extends Component
 
         $this->subcategories = SubCategory::where('category_id', $category_id)->get();
 
-
-
         $this->updatedSelectedSubCategory($subcategory_id);
     }
 
@@ -145,22 +138,32 @@ class CreatePostForm extends Component
             return;
         }
 
-        foreach ($this->images as $image) {
+        if (count($this->images) <= 4) {
+            foreach ($this->images as $image) {
 
-            $imageName = time() . $image->getClientOriginalName();
-            $imageName = str_replace(' ', '-', $imageName);
-            $image->storeAs('public/post_images', $imageName);
-            $imageArray[] = $imageName;
+                $imageName = time() . $image->getClientOriginalName();
+                $imageName = str_replace(' ', '-', $imageName);
+
+                $destinationPath = public_path('storage/post_images/');
+
+                $image_resize =  Image::make($image->getRealPath());
+
+                $image_resize->resize(600, 600, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($destinationPath . $imageName);
+
+                $imageArray[] = $imageName;
+            }
+
+            return $imageArray;
         }
-        return $imageArray;
     }
 
     public function submit()
     {
 
-
         $user_id = auth()->id();
-        if (UserCanPost($user_id)) {
+        if (UserCanPost($user_id) && $this->storeImages()) {
 
             $images = $this->storeImages();
             $rules = collect($this->validationRules)->collapse()->toArray();
@@ -175,8 +178,7 @@ class CreatePostForm extends Component
                     'title'       => $this->title,
                     'slug'        => make_slug($this->title, '-'),
                     'description' => $this->description,
-                    // 'images'      => $images,
-                    'phone'       => $this->phone,
+                    'phone'       => auth()->user()->profile->phone,
                     'category_id'    => $this->selectedCategory,
                 ]);
             } elseif ($childcategories->count() == 0) {
@@ -186,8 +188,7 @@ class CreatePostForm extends Component
                     'title'       => $this->title,
                     'slug'        => make_slug($this->title, '-'),
                     'description' => $this->description,
-                    // 'images'      => $images,
-                    'phone'       => $this->phone,
+                    'phone'       => auth()->user()->profile->phone,
                     'category_id'    => $this->selectedCategory,
                     'sub_category_id' => $this->selectedSubCategory
                 ]);
@@ -197,13 +198,13 @@ class CreatePostForm extends Component
                     'title'       => $this->title,
                     'slug'        =>  make_slug($this->title, '-'),
                     'description' => $this->description,
-                    // 'images'      => $images,
-                    'phone'       => $this->phone,
+                    'phone'       => auth()->user()->profile->phone,
                     'category_id'    => $this->selectedCategory,
                     'sub_category_id' => $this->selectedSubCategory,
                     'child_category_id' => $this->selectedChildCategory
                 ]);
             }
+
 
             $post = Post::latest('id')->first();
             $post_id = $post->id;
@@ -217,13 +218,14 @@ class CreatePostForm extends Component
             $this->reset();
             $this->success = 'تمت اضافة المقال بنجاح !';
         } else {
+            $this->addError('more4', 'عدد الصور المسموح بها لا يزيد عن 4 صور ');
         }
     }
 
     public function hydrate()
     {
-        $this->resetErrorBag();
-        $this->resetValidation();
+        // $this->resetErrorBag();
+        // $this->resetValidation();
     }
 
     public function render()

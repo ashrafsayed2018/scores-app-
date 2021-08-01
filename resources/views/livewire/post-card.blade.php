@@ -1,5 +1,5 @@
-<div class="post-card col-span-6 lg:col-span-4 mx-auto">
-    <div class="card bg-white mb-5 lg:mb-0 w-full shadow-lg border border-gray-400" style="height: 410px">
+<div class="post-card col-span-6 lg:col-span-4 mb-10 lg:mb-0">
+    <div class="card bg-white  w-full shadow-lg border border-gray-400" style="height: 410px">
         <a href="{{ route('post.show',$post->slug) }}">
 
             <img src="{{ asset(firstPostImage($post)) }}" alt="{{ $post->title }}" style="width: 100%;height:220px">

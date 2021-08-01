@@ -3,10 +3,22 @@
 @section('content')
 
 <div class="xl:mx-8">
+    <div class="flex justify-between items-center mt-4 w-full">
+        <a href="{{ route('home') }}" class="text-xs text-gray-500">
+            <i class="fa fa-arrow-right"></i>
+            <span>الرجوع</span>
+        </a>
+        <div class="text-sm text-gray-500 felx justify-between items-center">
+            <a href="/home">الرئيسيه</a>
+            /
+            <a href="">الفئات</a>
+            /
+            <a href="">محركات</a>
+        </div>
+    </div>
     <div class="block post_detail py-6 font-bold text-centers 2xl:grid gap-8 grid-cols-5">
         <x-show-post-card :post="$post" />
         <x-post-info-card :post="$post" />
-
     </div>
     <div class="block all_comments lg:w-full lg:mt-10">
         <livewire:create-comment :post="$post"/>

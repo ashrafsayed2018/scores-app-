@@ -34,7 +34,11 @@
                           @endauth
                         </li>
                         <li>قائمتي</li>
-                        <li>مفضلتي</li>
+                        @auth
+                        <li>
+                            <a href="{{ route('prefrences.show') }}">مفضلتي</a>
+                        </li>
+                        @endauth
                         <li> المتابعون </li>
                     </ul>
                 </div>
