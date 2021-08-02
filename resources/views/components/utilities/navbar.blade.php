@@ -1,7 +1,7 @@
-<div class="sticky bg-white">
+<div class=" bg-white fixed top-0 left-0 w-full" style="z-index: 1000000000000">
     <div class="pt-2 lg:grid lg:grid-cols-8 shadow-lg">
         <div class="right col-span-2 flex items-baseline justify-between mb-6 px-3">
-            <div class="logo flex justify-around items-end flex-1">
+            <div class="logo flex justify-around items-center flex-1">
                 @auth
                     <div class="dropdown inline-block relative " style="z-index: 100000000">
                         <button class="text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">

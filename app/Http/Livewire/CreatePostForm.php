@@ -75,7 +75,7 @@ class CreatePostForm extends Component
             "selectedSubCategory" => ['required']
         ],
         4 => [
-            'images.*' => 'required|image|max:2'
+            'images.*' => ['required', 'image', 'max:2']
         ]
     ];
 
@@ -125,7 +125,7 @@ class CreatePostForm extends Component
 
             $this->validationRules = collect($this->validationRules)->collapse()->toArray();
 
-            $this->validationRules['selectedChildCategory'] = 'required';
+            $this->validationRules['selectedChildCategory'] = ['required'];
         }
     }
 

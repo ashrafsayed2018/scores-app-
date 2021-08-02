@@ -2,19 +2,19 @@
     <div class="stepwizard">
         <div class="stepwizard-row setup-panel">
             <div class="stepwizard-step">
-                <a href="#step-1" type="button" class="btn btn-circle {{ $currentPage != 1 ? 'btn-default' : 'button-green' }}">1</a>
+                <a href="#step-1" type="button" class="btn btn-circle {{ $currentPage != 1 ? 'btn-default' : 'button-green text-white' }}">1</a>
                 <p>عنوان الاعلان</p>
             </div>
             <div class="stepwizard-step">
-                <a href="#step-2" type="button" class="btn btn-circle {{ $currentPage != 2 ? 'btn-default' : 'button-green' }}">2</a>
+                <a href="#step-2" type="button" class="btn btn-circle {{ $currentPage != 2 ? 'btn-default' : 'button-green text-white' }}">2</a>
                 <p>وصف الاعلان</p>
             </div>
             <div class="stepwizard-step">
-                <a href="#step-3" type="button" class="btn btn-circle {{ $currentPage != 3 ? 'btn-default' : 'button-green' }}" disabled="disabled">3</a>
+                <a href="#step-3" type="button" class="btn btn-circle {{ $currentPage != 3 ? 'btn-default' : 'button-green text-white' }}" disabled="disabled">3</a>
                 <p> تصنيف الاعلان</p>
             </div>
             <div class="stepwizard-step">
-                <a href="#step-3" type="button" class="btn btn-circle {{ $currentPage != 4 ? 'btn-default' : 'button-green' }}" disabled="disabled">4</a>
+                <a href="#step-3" type="button" class="btn btn-circle {{ $currentPage != 4 ? 'btn-default' : 'button-green text-white' }}" disabled="disabled">4</a>
                 <p>صور الاعلان</p>
             </div>
         </div>
@@ -130,15 +130,14 @@
                         type="text"
                         required
                         wire:model="selectedChildCategory" >
-                        <option hidden disabled selected></option>
-                        <option value="">اختر التصنيف الفرعي الثاني</option>
+                        <option value="" hidden disabled selected>اختر التصنيف الفرعي الثاني</option>
                         @foreach ($childcategories as $childcategory)
                         <option value="{{ $childcategory->id }}" @if (old('childcategory_id') == $childcategory->id)
                             selected
                         @endif>{{ $childcategory->name }}</option>
                         @endforeach
                     </select>
-                    @error('childcategory')
+                    @error('selectedChildCategory')
 
                     <span class="text-red-500">{{ $message }}</span>
 

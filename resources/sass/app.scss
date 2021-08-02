@@ -38,3 +38,49 @@
     @apply bg-red-400;
 }
 
+
+.toggle::before {
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f0c9";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    font-size: 24px;
+    text-align: center;
+    color: #111
+}
+.navigation.active {
+    width: 60px;
+}
+.admin-main   {
+    width: calc(100% - 320px)
+}
+.navigation.active ~ .admin-main  {
+    width: calc(100% - 60px);
+    right:60px
+}
+
+@media (max-width: 992px) {
+    .navigation {
+        right: -320px
+    }
+    .navigation.active {
+        right: 0;
+    }
+    .admin-main  {
+        width: 100%;
+        right: 0
+    }
+    .admin-main.active  {
+        width: calc(100% - 300px);
+        right: 300px
+    }
+}
+
+@media (max-width: 680px) {
+     .details .recentUsers table {
+         width: 600px;
+         overflow: auto;
+     }
+}
+

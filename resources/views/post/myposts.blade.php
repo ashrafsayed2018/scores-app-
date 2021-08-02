@@ -1,15 +1,17 @@
+
 @extends('layouts.app')
+
 @section('content')
-   <div class="container w-4/5 mx-auto my-8">
-       <h1 class="text-center my-8">اعلاناتي</h1>
-       <ul class="lg:w-1/2">
-           @forelse ($user_posts as $post)
-               <li class="text-right bg-red-500 text-white text-lg py-2 pr-2 mb-4 rounded-lg shadow-lg">
-                   <a href="{{ route('post.show', $post->slug) }}">{{ $post->title }}</a>
-               </li>
-            @empty
-            <li class="text-right bg-red-500 text-white text-lg py-2 pr-2 mb-4 rounded-lg shadow-lg">لم ترفع اي اعلان </li>
-           @endforelse
-       </ul>
-   </div>
+<div class="container lg:w-4/5 mx-auto mt-36">
+    <h1 class="text-center mb-5 text-3xl">اعلاناتي </h1>
+    <div class="grid lg:grid-cols-12 lg:gap-5">
+    @forelse ($user_posts as $post)
+
+    <livewire:post-card :post="$post" :key="$post->id" />
+    @empty
+    <div class="bg-red-500 text-center text-white text-2xl p-5 col-span-12">لم تنشر اي اعلان حتى الان</div>
+    @endforelse
+    </div>
+</div>
+
 @endsection

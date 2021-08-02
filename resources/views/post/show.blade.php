@@ -31,6 +31,7 @@
 <script>
 
   $(document).ready(function () {
+
             $('.make_reply').on('click', function () {
                 // find the id of make reply button
                 var id = $(this).attr('id');
