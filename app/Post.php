@@ -15,28 +15,32 @@ class Post extends Model
 
     // relationship with user
 
-    public function user () {
+    public function user()
+    {
 
         return $this->belongsTo(User::class);
     }
 
     // relationship with category
 
-    public function category () {
+    public function category()
+    {
 
         return $this->belongsTo(Category::class);
     }
 
     // relationship with subcategory
 
-    public function subcategory () {
+    public function subcategory()
+    {
 
         return $this->belongsTo(SubCategory::class);
     }
 
     // relationship with child category
 
-    public function childcategory () {
+    public function childcategory()
+    {
 
         return $this->belongsTo(ChildCategory::class);
     }
@@ -45,9 +49,7 @@ class Post extends Model
 
     public function likes()
     {
-         return $this->morphMany('App\Like', 'likeable');
-
-
+        return $this->morphMany('App\Like', 'likeable');
     }
 
     // relationship with comment
@@ -57,22 +59,31 @@ class Post extends Model
         return $this->morphMany(Comment::class, 'commentable')->where('parent_id', 0);
     }
 
-      // relationship with replies
+    // relationship with replies
 
-      public function replies()
-      {
-          return $this->morphMany(Reply::class, 'commentable');
-      }
+    public function replies()
+    {
+        return $this->morphMany(Reply::class, 'commentable');
+    }
 
-      // relationship with images
-      public function images() {
-          return $this->hasMany(PostImage::class);
-      }
+    // relationship with images
+    public function images()
+    {
+        return $this->hasMany(PostImage::class);
+    }
 
-      public function firstPostImage()
-      {
-          return $this->hasOne(PostImage::class)->orderBy('id');
-      }
+    public function firstPostImage()
+    {
+        return $this->hasOne(PostImage::class)->orderBy('id');
+    }
 
+    // search for a post
 
+    public static function search($search)
+    {
+        return empty($search) ? static::query()
+            : static::query()->where('id', 'like', '%' . $search . '%')
+            ->orWhere('title', 'like', '%' . $search . '%')
+            ->orWhere('description', 'like', '%' . $search . '%');
+    }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto">
+<div class="container mx-auto mt-32">
     <div class="items-center mb-6">
 
     </div>

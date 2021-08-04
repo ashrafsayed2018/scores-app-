@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container mx-auto">
+<div class="container mx-auto mt-32">
     <h1 class="text-center mb-5 text-lg my-8">انشاء الملف الشخصي </h1>
      <div class="lg:w-2/5 mx-auto">
         <form action="{{ route('profile.store', $user->slug) }}" method="POST" class="text-right bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 my-4" enctype="multipart/form-data">

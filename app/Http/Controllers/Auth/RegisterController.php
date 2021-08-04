@@ -84,6 +84,8 @@ class RegisterController extends Controller
         $email = $data['email'];
         $user_id = $user->id;
         $this->activityService->enterActivity($user_activity, $email, $user_id);
+
+        $user->assignRole('user');
         return $user;
     }
 }

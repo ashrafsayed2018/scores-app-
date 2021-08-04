@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container lg:w-4/5 mx-auto">
+<div class="container lg:w-4/5 mx-auto mt-32">
     <div class="flex justify-between items-center mt-4 w-full">
         <a href="{{ route('home') }}" class="text-xs text-gray-500">
             <i class="fa fa-arrow-right"></i>

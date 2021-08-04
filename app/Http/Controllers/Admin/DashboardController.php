@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Post;
+use App\User;
+use App\Comment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class AdminController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +18,15 @@ class AdminController extends Controller
     public function index()
     {
 
-        return view('admin.index');
+        $users = User::all();
+        $posts = Post::all();
+        $comments = Comment::all();
+        $lastWeekUsers = User::whereDate('created_at', '>', \Carbon\Carbon::now()->subWeek())->get();
+        $lastWeekPosts = Post::whereDate('created_at', '>', \Carbon\Carbon::now()->subWeek())->get();
+        $totalViews = $posts->sum('view_count');
+        $totalComments = $comments->sum('id');
+
+        return view('admin.dashboard.index', compact(['users', 'lastWeekUsers', 'posts', 'lastWeekPosts', 'totalViews', 'totalComments']));
     }
 
     /**
@@ -81,5 +93,27 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * show all users
+     */
+
+    public function users()
+    {
+
+        return view('admin.users.index');
+    }
+
+    /**
+     * show all users
+     */
+
+    public function posts()
+    {
+
+        $posts = Post::all();
+
+        return view('admin.posts.index', compact('posts'));
     }
 }

@@ -8,7 +8,7 @@ class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
         // your policies...
-        Post::class => PostPolicy::class,
+        // Post::class => PostPolicy::class,
     ];
 
     public function boot()

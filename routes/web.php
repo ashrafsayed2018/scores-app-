@@ -32,10 +32,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::middleware(['auth'])->group(function () {
-
-
-    Route::resource('admin', 'AdminController');
 
     Route::get('category/create', "CategoryController@create")->name('category.create');
     Route::post('category/store', "CategoryController@store")->name('category.store');
@@ -73,3 +71,12 @@ Route::get('login/google/callback', 'Auth\GoogleController@handleGoogleCallback'
 
 Route::resource('/finger', 'FingerController')->name('', 'finger.store');
 Route::get('/preferences', 'PrefrencesController@show')->name('prefrences.show');
+
+
+Route::group(['middleware' => ['role:admin']], function () {
+
+    Route::get('admin/users', 'Admin\DashboardController@users')->name('admin.users');
+    Route::get('admin/posts', 'Admin\DashboardController@posts')->name('admin.posts');
+
+    Route::resource('admin/dashboard', 'Admin\DashboardController');
+});

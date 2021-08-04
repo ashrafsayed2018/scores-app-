@@ -3,7 +3,9 @@
 namespace App;
 
 use App\Score;
+use App\Comment;
 use App\Profile;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Stevebauman\Location\Facades\Location;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,7 +14,7 @@ use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 
 class User extends Authenticatable
 {
-    use Notifiable, Followable, Favoriteability;
+    use Notifiable, Followable, Favoriteability, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -107,6 +109,14 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+    // relationship with comments
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
     // relationship with scores
 
     public function scores()
@@ -130,5 +140,15 @@ class User extends Authenticatable
 
         return $this->profile ? '/storage/users_images/' .  $this->profile->image : $this->avatar;
         //'storage/images/avatar.jpg'
+    }
+
+    // search for a user
+
+    public static function search($search)
+    {
+        return empty($search) ? static::query()
+            : static::query()->where('id', 'like', '%' . $search . '%')
+            ->orWhere('name', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%');
     }
 }

@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->foreignId('user_id')
                 ->constrained()
-                ->onDelete('cascade');
+                ->onDelete('cascade')->onUpdate('cascade');
 
             $table->string('title');
             $table->string('slug');
@@ -25,13 +25,13 @@ class CreatePostsTable extends Migration
             $table->integer('phone');
             $table->foreignId('category_id')
                 ->constrained()
-                ->onDelete('cascade');
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('sub_category_id')->nullable()
                 ->constrained()
-                ->onDelete('cascade');
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('child_category_id')->nullable()
                 ->constrained()
-                ->onDelete('cascade');
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->integer('view_count')->unsigned()->default(0);
 
             $table->timestamps();

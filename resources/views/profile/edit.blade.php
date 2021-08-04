@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container mx-auto">
+<div class="container mx-auto mt-32">
     <h1 class="text-center mb-5 text-lg my-8">صفحة تعديل الملف الشخصي </h1>
      <div class="lg:w-2/4 mx-auto">
 

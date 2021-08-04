@@ -181,6 +181,11 @@ return [
 
         // socialite
         Laravel\Socialite\SocialiteServiceProvider::class,
+
+        // spatie permissions and roles
+
+        Spatie\Permission\PermissionServiceProvider::class,
+
     ],
 
     /*

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container lg:w-2/3 mx-auto">
+<div class="container lg:w-2/3 mx-auto mt-32">
     <h1 class="text-center mb-5 text-lg">مرحبا بكم في صفحة عمل التصنيفات الفرعيه </h1>
 
     <div>
@@ -74,6 +74,6 @@
             </div>
         </form>
      </div>
-    <a href="{{ route('admin.index') }}" class="button button-green">رجوع</a>
+    <a href="{{ route('dashboard.index') }}" class="button button-green">رجوع</a>
 </div>
 @endsection

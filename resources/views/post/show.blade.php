@@ -2,8 +2,8 @@
 
 @section('content')
 
-<div class="xl:mx-8">
-    <div class="flex justify-between items-center mt-4 w-full">
+<div class="xl:mx-8 mt-36">
+    <div class="flex justify-between items-center w-full">
         <a href="{{ route('home') }}" class="text-xs text-gray-500">
             <i class="fa fa-arrow-right"></i>
             <span>الرجوع</span>
