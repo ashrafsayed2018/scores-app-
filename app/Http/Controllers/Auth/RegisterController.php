@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\Services\ActivityService;
+use App\verifyUser;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -39,9 +42,9 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct(ActivityService $activityService)
+    public function __construct()
     {
-        $this->activityService = $activityService;
+
         $this->middleware('guest');
     }
 
@@ -78,12 +81,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        // create user activity in activitiy log table
-
-        $user_activity = 'user attempted to login';
-        $email = $data['email'];
-        $user_id = $user->id;
-        $this->activityService->enterActivity($user_activity, $email, $user_id);
+        // assign role to the user
 
         $user->assignRole('user');
         return $user;

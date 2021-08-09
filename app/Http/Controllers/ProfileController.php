@@ -136,10 +136,9 @@ class ProfileController extends Controller
 
             $validtated['image'] = $image;
         }
-
+        $validtated['slug'] =  make_slug($validtated['name']);
         current_user()->profile->update($validtated);
 
-        $validtated['slug'] =  make_slug($validtated['name']);
         current_user()->name = $validtated['name'];
         current_user()->slug =  $validtated['slug'];
         current_user()->save();

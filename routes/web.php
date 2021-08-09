@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
-
 use Carbon\Carbon;
+
+use Illuminate\Support\Facades\DB;
 
 // DB::listen(function($query) {
 //     var_dump($query->sql);
 // });
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +31,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
 Route::middleware(['auth'])->group(function () {
@@ -51,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('profile/{profile:slug}/store', 'ProfileController@store')->name('profile.store');
     Route::PATCH('profile/{profile:name}/update', 'ProfileController@update')->name('profile.update');
 
-    Route::get('post', 'PostController@index')->name('post.index');
+
     Route::get('post/create', 'PostController@create')->name('post.create');
     Route::post('post/store', 'PostController@store')->name('post.store');
     Route::get('/myposts', 'PostController@view_user_posts')->name('myposts');
@@ -61,6 +62,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reply/store', 'ReplyController@store')->name('reply.store');
     Route::get('/notifications', 'UserNotificationController@show')->name('notifications.show');
 });
+
+Route::get('post', 'PostController@index')->name('post.index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('explore', 'ExploreController@index')->name('explore.index');
@@ -76,7 +79,7 @@ Route::get('/terms', 'HomeController@terms')->name('terms');
 Route::get('/privacy', 'HomeController@privacy')->name('privacy');
 
 
-Route::group(['middleware' => ['role:admin']], function () {
+Route::group(['middleware' => ['role:Admin']], function () {
 
     Route::get('admin/users', 'Admin\DashboardController@users')->name('admin.users');
     Route::get('admin/posts', 'Admin\DashboardController@posts')->name('admin.posts');

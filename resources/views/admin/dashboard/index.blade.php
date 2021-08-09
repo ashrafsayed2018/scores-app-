@@ -165,7 +165,7 @@
             <div class="recentUsers">
                 <div class="cardHeader">
                     <h3 class="text-center my-16 text-3xl border-b-2 border-blue-500 w-60 mx-auto pb-2">احدث المستخدمين</h3>
-                    <a href="" class="button button-green my-8 inline-block">عرض الكل</a>
+                    <a href="{{ route('admin.users') }}" class="button button-green my-8 inline-block">عرض الكل</a>
                 </div>
                 <table class="sm:w-96 sm:overflow-auto lg:min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -248,7 +248,7 @@
             <div class="recentAds">
                 <div class="cardHeader">
                     <h3 class="text-center my-16 text-3xl border-b-2 border-blue-500 w-60 mx-auto pb-2">احدث الاعلانات</h3>
-                    <a href="" class="button button-green my-8 inline-block">عرض الكل</a>
+                    <a href="{{ route('admin.posts') }}" class="button button-green my-8 inline-block">عرض الكل</a>
                 </div>
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">

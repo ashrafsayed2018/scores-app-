@@ -3,7 +3,7 @@
     <div id="app">
         <x-utilities.navbar />
 
-        <main class="">
+        <main class="mt-36">
             @yield('content')
         </main>
     </div>

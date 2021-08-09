@@ -7,14 +7,14 @@ use App\Comment;
 use App\Profile;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
-use Stevebauman\Location\Facades\Location;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, Followable, Favoriteability, HasRoles;
+    use Notifiable, Followable, Favoriteability, HasRoles, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +22,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [];
+
+    protected static $logAttributes = ['*'];
+    protected static $logOnlyDirty = true;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -56,35 +59,6 @@ class User extends Authenticatable
                 "score_type" => "registration",
                 "scores"     => 5,
             ]);
-
-            $ipAddress = request()->ip();
-
-            if ($position = Location::get($ipAddress)) {
-
-                // Successfully retrieved position.
-
-                $position = Location::get($ipAddress);
-
-                // insert the location details
-                UserLocation::create([
-                    'user_id'     => $user->id,
-                    'ip_address'  => $ipAddress,
-                    'countryName' => $position->countryName,
-                    'countryCode' => $position->countryCode,
-                    'regionCode'  => $position->regionCode,
-                    'regionName'  => $position->regionName,
-                    'cityName'    => $position->cityName,
-                    'zipCode'     => $position->zipCode,
-                    'isoCode'     => $position->isoCode,
-                    'postalCode'  => $position->postalCode,
-                    'latitude'    => $position->latitude,
-                    'longitude'   => $position->longitude,
-                    'metroCode'   => $position->metroCode,
-                    'areaCode'    => $position->areaCode
-                ]);
-            } else {
-                // Failed retrieving position.
-            }
         });
     }
 
@@ -125,12 +99,19 @@ class User extends Authenticatable
         return $this->hasMany(Score::class);
     }
 
-    // relationship with location
+    // relation with finger
 
-    public function location()
+    public function finger()
+    {
+        return $this->hasOne(Finger::class);
+    }
+
+    // relationship with very user
+
+    public function verifyUser()
     {
 
-        return $this->hasOne(UserLocation::class);
+        return $this->hasOne(verifyUser::class);
     }
 
     // image path

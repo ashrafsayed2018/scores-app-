@@ -25,6 +25,7 @@ $(function () {
     // send ajax request to save the user browser
 
     var data = {uid : uid,browser : browser, flash: flash, canvas: canvas, connection: connection, cookie: cookie,display: display, fontsmoothing: fontsmoothing, fonts: fonts, formfields: formfields, java: java, language: language, silverlight: silverlight, os:os,timezone: timezone,touch: touch, plugins: plugins,useragent: useragent, truebrowser: truebrowser};
+
     $.ajaxSetup( {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

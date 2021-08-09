@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\User;
 use App\Category;
+use App\ActivityLog;
 use App\SubCategory;
 use App\ChildCategory;
 use Jenssegers\Agent\Agent;
@@ -18,6 +19,8 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
 
@@ -55,18 +58,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post, User $user)
     {
 
         $title = $post->title;
-
         $post = Post::where('title', $title)->withPostLikes()->with('firstPostImage')->first();
 
         // increament the view count
         DB::table('posts')
             ->where('id', $post->id)
             ->increment('view_count', 1);
-
 
         //  note from the helpers.php recommenedPosts method we get all recommended posts
         return view('post.show', compact(['post']));

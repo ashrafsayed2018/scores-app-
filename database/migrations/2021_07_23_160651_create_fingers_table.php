@@ -15,6 +15,7 @@ class CreateFingersTable extends Migration
     {
         Schema::create('fingers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->text('ipaddress')->nullable();
             $table->text('country')->nullable();
             $table->text('finger')->nullable();

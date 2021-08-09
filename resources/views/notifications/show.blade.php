@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+ <div class="container mt-32">
     <h1 class="text-center my-6 lg:text-3xl">صفحة الاشعارات الخاصه بك</h1>
     <div class="grid grid-cols-8">
         <div class="hidden lg:flex col-span-2 h-4 bg-teal-400">
@@ -69,5 +70,7 @@
         </div>
         <div class="hidden lg:flex col-span-2 h-4 bg-teal-400"></div>
     </div>
+ </div>
+
 
 @endsection

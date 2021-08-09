@@ -6,11 +6,14 @@ use App\Reply;
 use App\PostImage;
 use Illuminate\Database\Eloquent\Model;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Post extends Model
 {
 
-    use Likeable, Favoriteable;
+    use Likeable, Favoriteable, LogsActivity;
+    protected static $logAttributes = ['*'];
+    protected static $logOnlyDirty = true;
     protected $guarded = [];
 
     // relationship with user

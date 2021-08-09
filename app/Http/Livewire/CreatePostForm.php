@@ -40,7 +40,7 @@ class CreatePostForm extends Component
     // success message
 
     public $success;
-    public $more4;
+    public $image_error;
 
 
     public $pages = [
@@ -75,7 +75,7 @@ class CreatePostForm extends Component
             "selectedSubCategory" => ['required']
         ],
         4 => [
-            'images.*' => ['required', 'image', 'max:2']
+            'images' => ['required', 'image', 'max:2']
         ]
     ];
 
@@ -132,27 +132,33 @@ class CreatePostForm extends Component
     public function storeImages()
     {
 
-        $iamgeArray = [];
+
 
         if (!$this->images) {
             return;
         }
 
         if (count($this->images) <= 4) {
+            $iamgeArray = [];
+            $allowed_extensions = ['png', 'jpg', 'jpeg', 'gif'];
             foreach ($this->images as $image) {
 
-                $imageName = time() . $image->getClientOriginalName();
-                $imageName = str_replace(' ', '-', $imageName);
+                $image_extension = $image->getClientOriginalExtension();
+                if (in_array($image_extension, $allowed_extensions)) {
+                    $imageName = time() . $image->getClientOriginalName();
+                    $imageName = str_replace(' ', '-', $imageName);
+                    $destinationPath = public_path('storage/post_images/');
 
-                $destinationPath = public_path('storage/post_images/');
+                    $image_resize =  Image::make($image->getRealPath());
 
-                $image_resize =  Image::make($image->getRealPath());
+                    $image_resize->resize(600, 600, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save($destinationPath . $imageName);
 
-                $image_resize->resize(600, 600, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($destinationPath . $imageName);
-
-                $imageArray[] = $imageName;
+                    $imageArray[] = $imageName;
+                } else {
+                    return;
+                }
             }
 
             return $imageArray;
@@ -208,6 +214,7 @@ class CreatePostForm extends Component
 
             $post = Post::latest('id')->first();
             $post_id = $post->id;
+
             PostImage::create(
                 [
                     'post_id' => $post_id,
@@ -218,7 +225,7 @@ class CreatePostForm extends Component
             $this->reset();
             $this->success = 'تمت اضافة المقال بنجاح !';
         } else {
-            $this->addError('more4', 'عدد الصور المسموح بها لا يزيد عن 4 صور ');
+            $this->addError('image_error', '  حجم الصور المسموح بها 8mg عدد الصور المسموح بها لا يزيد عن 4 صور الصور jpg, png, jpeg,gif');
         }
     }
 

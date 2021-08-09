@@ -162,7 +162,7 @@
                 wire:model="images"
                 placeholder="صور الاعلان"  accept="image/*">
 
-                @error('more4')
+                @error('image_error')
 
                 <span class="text-red-500">{{ $message }}</span>
 

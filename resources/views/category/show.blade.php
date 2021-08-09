@@ -2,7 +2,7 @@
 
 <x-utilities.navbar/>
 
-<div class="mx-auto w-4/5">
+<div class="mx-auto w-4/5 mt-32">
     <div class="flex justify-between items-center mt-4 w-full">
         <a href="{{ route('home') }}" class="text-xs text-gray-500">
             <i class="fa fa-arrow-right"></i>
