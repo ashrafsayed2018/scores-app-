@@ -106,7 +106,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * show all users
+     * show all posts
      */
 
     public function posts()

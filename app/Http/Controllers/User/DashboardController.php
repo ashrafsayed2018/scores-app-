@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -81,5 +88,24 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * show the single user
+     */
+
+    public function user(User $user)
+    {
+
+        if (auth()->id() == $user->id) {
+            $posts = $user->posts()->get();
+            $totalViews = $user->posts->sum('view_count');
+            $totalComments = $user->comments->sum('id');
+            $totalReferal = $user->where('referrer_id', $user->id)->count();
+
+            return view('admin.users.user', compact(['user', 'posts', 'totalViews', 'totalComments', 'totalReferal']));
+        } else {
+            return redirect('home');
+        }
     }
 }

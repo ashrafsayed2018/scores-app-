@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('google_id')->nullable();
+            $table->unsignedBigInteger('referrer_id')->nullable();
+            $table->foreign('referrer_id')->references('id')->on('users');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

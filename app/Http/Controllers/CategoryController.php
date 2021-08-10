@@ -40,6 +40,7 @@ class CategoryController extends Controller
     {
         $attributes = $request->validate([
             'name' => 'required|unique:categories|min:3|string',
+            'description' => 'required|unique:categories|min:3|string',
             'image' => 'required'
         ]);
 
@@ -53,9 +54,6 @@ class CategoryController extends Controller
             $attributes['image'] = $image;
         }
         $attributes['slug'] = Str::slug($request->name);
-
-
-
 
         Category::create($attributes);
 

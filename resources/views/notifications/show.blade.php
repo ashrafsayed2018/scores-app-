@@ -9,15 +9,25 @@
         </div>
         <div class="lg:col-span-4 xs:col-span-8">
             @forelse ($notifications as $notification)
+            {{-- {{ dd($notification->type) }} --}}
                 @if ($notification->type === 'App\Notifications\NewLikeAdded' )
 
                         @if ($notification->data['user']['id']  != auth()->id() && $notification->data['likeable_type'] == "App\\Comment")
                         <div class="bg-green-100  border-2 hover:border-green-400 py-7 xs:text-sm px-3 mb-3 flex rounded-lg justify-center items-center gap-x-2">
                                  اعجب <a href="{{ route('profile.show', $notification->data['user']['slug']) }}">{{ $notification->data['user']['name'] }}</a> بتعليقك <a href="{{ route('post.show',$notification->data['post_slug']) }}">{{ $notification->data['likeable_body']}}</a>
                         </div>
-                        @elseif ($notification->data['user']['id']  != auth()->id() && $notification->data['likeable_type'] == "App\\Post")
+                        @elseif ($notification->data['user']['id']  == auth()->id() && $notification->data['likeable_type'] == "App\\Comment")
+                        <div class="bg-green-100  border-2 hover:border-green-400 py-7 xs:text-sm px-3 mb-3 flex rounded-lg justify-center items-center gap-x-2">
+                             <a href="{{ route('profile.show', $notification->data['user']['slug']) }}">اعجبت</a> بتعليقك <a href="{{ route('post.show',$notification->data['post_slug']) }}">{{ $notification->data['likeable_title']}}</a>
+                        </div>
+                        @endif
+                        @if ($notification->data['user']['id']  != auth()->id() && $notification->data['likeable_type'] == "App\\Post")
                             <div class="bg-green-100  border-2 hover:border-green-400 py-7  xs:text-sm px-3 mb-3 flex rounded-lg justify-center items-center gap-x-2">
                                  اعجب <a href="{{ route('profile.show', $notification->data['user']['slug']) }}">{{ $notification->data['user']['name'] }}</a> باعلانك <a href="{{ route('post.show',$notification->data['post_slug']) }}">{{ $notification->data['likeable_title']}}</a>
+                        </div>
+                        @elseif ($notification->data['user']['id']  == auth()->id() && $notification->data['likeable_type'] == "App\\Post")
+                        <div class="bg-green-100  border-2 hover:border-green-400 py-7 xs:text-sm px-3 mb-3 flex rounded-lg justify-center items-center gap-x-2">
+                             <a href="{{ route('profile.show', $notification->data['user']['slug']) }}">اعجبت</a> باعلانك <a href="{{ route('post.show',$notification->data['post_slug']) }}">{{ $notification->data['likeable_title']}}</a>
                         </div>
                         @endif
 
@@ -38,6 +48,10 @@
                         @if ($notification->data['user']['id']  != auth()->id())
                         <div class="bg-green-100  border-2 hover:border-green-400 py-7  xs:text-sm px-3 mb-3 flex rounded-lg justify-center items-center gap-x-2">
                          اضاف <a href="{{ route('profile.show', $notification->data['user']['slug']) }}">{{ $notification->data['user']['name'] }}</a>   اعلانك للمفضله <a href="{{ route('post.show',$notification->data['post_slug']) }}">{{ $notification->data['favouriteable_title']}}</a>
+                        </div>
+                        @else
+                        <div class="bg-green-100  border-2 hover:border-green-400 py-7  xs:text-sm px-3 mb-3 flex rounded-lg justify-center items-center gap-x-2">
+                             <a href="{{ route('profile.show', $notification->data['user']['slug']) }}">اضفت</a>   اعلانك للمفضله <a href="{{ route('post.show',$notification->data['post_slug']) }}">{{ $notification->data['favouriteable_title']}}</a>
                         </div>
                         @endif
 

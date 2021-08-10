@@ -23,6 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $guarded = [];
 
+    // the log attributes for activity_log table
+
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
 
@@ -112,6 +114,45 @@ class User extends Authenticatable implements MustVerifyEmail
     {
 
         return $this->hasOne(verifyUser::class);
+    }
+
+
+    /**
+     * A user has a referrer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referrer_id', 'id');
+    }
+
+    /**
+     * A user has many referrals.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referrer_id', 'id');
+    }
+
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['referral_link'];
+
+    /**
+     * Get the user's referral link.
+     *
+     * @return string
+     */
+    public function getReferralLinkAttribute()
+    {
+        return $this->referral_link = route('register', ['ref' => $this->name]);
     }
 
     // image path

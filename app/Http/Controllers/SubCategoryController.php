@@ -40,18 +40,19 @@ class SubCategoryController extends Controller
     {
 
         $attributes = $request->validate([
-            'name' => 'required|unique:sub_categories',
-            'image'=> 'required',
+            'name' => 'required|unique:sub_categories|min:3',
+            'description' => 'required|unique:sub_categories|min:3',
+            'image' => 'required',
             'category_id' => 'required'
         ]);
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
 
             $file = $request->image;
 
-            $image = rand(1, 1000000000). $file->extension();
+            $image = rand(1, 1000000000) . $file->extension();
 
-            $request->image->storeAs('sub_category_images',$image,'public');
+            $request->image->storeAs('sub_category_images', $image, 'public');
 
             $attributes['image'] = $image;
         }

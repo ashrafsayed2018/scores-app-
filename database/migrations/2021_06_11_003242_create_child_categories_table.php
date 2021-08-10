@@ -17,6 +17,7 @@ class CreateChildCategoriesTable extends Migration
             $table->id();
             $table->foreignId('subcategory_id');
             $table->string('name')->unique();
+            $table->string('description')->unique();
             $table->string('image');
             $table->timestamps();
 

@@ -15,7 +15,6 @@ class ChildCategoryController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -39,18 +38,19 @@ class ChildCategoryController extends Controller
     {
 
         $attributes = $request->validate([
-            'name' => 'required|string|unique:child_categories',
-            'image'=> 'required|image|mimes:png,jpg,jpeg',
+            'name' => 'required|string|unique:child_categories|min:3',
+            'description' => 'required|string|unique:child_categories|min:3',
+            'image' => 'required|image|mimes:png,jpg,jpeg',
             'subcategory_id' => 'required'
         ]);
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
 
             $file = $request->image;
 
-            $image = rand(1, 1000000000). $file->extension();
+            $image = rand(1, 1000000000) . $file->extension();
 
-            $request->image->storeAs('child_category_images',$image,'public');
+            $request->image->storeAs('child_category_images', $image, 'public');
         }
 
         $attributes['image'] = $image;

@@ -2,8 +2,7 @@
 
 @section('content')
 
-<div class="container mx-auto lg:w-full mt-8" style="height: 3000px">
-    <h1 class="text-center font-bold">لوحة تحكم الادمن </h1>
+<div class="container mx-auto lg:w-full " style="height: 3000px">
     {{-- navigation --}}
     <div class="navigation fixed w-80 h-full bg-gray-700 text-white top-24 -mt-2  transition-all delay-50 overflow-hidden ">
         <ul class="absolute top-0 left-0 w-full pt-10">
@@ -101,8 +100,10 @@
     </div>
 
     {{-- main  --}}
-    @role('admin')
-    <div class="admin-main absolute right-80 min-h-full mt-8 px-5  border-t-2 border-gray-200 transition-all delay-50">
+    @role('Admin')
+    <div class="admin-main absolute right-80  top-36 min-h-full px-5 transition-all delay-50">
+        <h1 class="text-center font-bold mb-4">لوحة تحكم الادمن </h1>
+
         {{-- topbar --}}
         <div class="topbar w-full bg-white h-12 flex justify-between items-center sticky ">
             <div class="toggle w-14 h-14 relative cursor-pointer" onclick="toggleMenu()">
@@ -221,21 +222,28 @@
                           <div class="text-sm text-gray-900">{{ $user->posts->count() }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                         نشط
-                          </span>
+                        @if ($user->email_verified_at != null)
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            مفعل
+                        </span>
+                        @else
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                            غير مفعل
+                        </span>
+                        @endif
+
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                         {{   $user->getRoleNames()->first()}}
+                            {{ $user->getRoleNames()->first() }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {{   $user->comments()->count()}}
+                            {{ $user->comments()->count() }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {{   $user->likes()->count()}}
+                            {{ $user->likes()->count() }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                          <a href="#" class="text-indigo-600 hover:text-indigo-900">تعديل</a>
                         </td>
                       </tr>
                     @empty
@@ -307,7 +315,7 @@
                               {{ $post->view_count }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                              <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                              <a href="#" class="text-indigo-600 hover:text-indigo-900">تعديل</a>
                             </td>
                           </tr>
                         @empty

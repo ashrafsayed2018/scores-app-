@@ -1,4 +1,6 @@
 <div>
+
+
     <div class="container lg:w-full mt-32 px-8" style="height: 3000px">
         <div class="allAds">
             <div class="cardHeader">
@@ -8,7 +10,7 @@
             {{-- filter div --}}
             <div class="w-full flex pb-10">
                 <div class="w-3/6 mx-1">
-                    <input wire:model.debounce.300ms="search" type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"placeholder="ابحث عن مستخدمين">
+                    <input wire:model.debounce.300ms="search" type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"placeholder="ابحث عن اعلان">
                 </div>
                 <div class="w-1/6 relative mx-1">
                     <select wire:model="orderBy" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
@@ -67,7 +69,8 @@
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 ">
-                    @forelse ($posts as $post)
+                    @forelse ( $posts as $post)
+
                     <tr class="hover:bg-gray-200">
                         <td class="px-6 py-4 whitespace-nowrap ">
                           <div class="flex items-center">
@@ -109,6 +112,7 @@
 
                 </tbody>
             </table>
+            {!! $posts->links() !!}
         </div>
     </div>
 </div>

@@ -5,8 +5,9 @@ namespace App\Http\Livewire;
 use App\Post;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
-class PostsTable extends Component
+class UserPostsTable extends Component
 {
 
     use WithPagination;
@@ -14,10 +15,17 @@ class PostsTable extends Component
     public $search = '';
     public $orderBy = 'id';
     public $orderAsc = true;
+
+
+
     public function render()
     {
-        return view('livewire.posts-table', [
-            'posts' => Post::search($this->search)->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')->simplePaginate($this->perPage),
+
+        $user = Auth::user();
+
+        return view('livewire.user-posts-table', [
+            'posts' => Post::where('user_id', $user->id)->get(),
+
         ]);
     }
 }

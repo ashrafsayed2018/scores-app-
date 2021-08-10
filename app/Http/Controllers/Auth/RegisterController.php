@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\verifyUser;
-use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -48,6 +44,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -71,6 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $referrer = User::whereName(session()->pull('referrer'))->first();
 
 
         $user =  User::create([
@@ -79,6 +77,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'avatar' => '/storage/images/avatar.jpg',
             'password' => Hash::make($data['password']),
+            'referrer_id' => $referrer ? $referrer->id : null,
         ]);
 
         // assign role to the user

@@ -1,4 +1,4 @@
-@role('admin')
+@role('Admin')
 @extends('layouts.app')
 
 @section('content')

@@ -24,7 +24,23 @@
 
                   @enderror
             </div>
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="name">
+                   وصف التصنيف
+                  </label>
+                  <input
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
+                  id="description"
+                  type="text"
+                  name="description"
+                  value="{{ old('description') }}"
+                  placeholder="  وصف التصنيف تحت الفرعي">
+                  @error('description')
 
+                  <span class="text-red-500 ">{{ $message }}</span>
+
+                  @enderror
+            </div>
             <div class="mb-4">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="image">
                   صورة التصنيف تحت الفرعي

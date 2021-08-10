@@ -36,5 +36,24 @@
                     });
 
             }
+
+            var referrer = document.getElementById('referrer');
+            var btnCopy = document.getElementById('btnCopy');
+
+            if(btnCopy != null) {
+
+                btnCopy.onclick = function () {
+
+                    // step 1 select the text
+
+                    referrer.select()
+
+                    // step 2 copy the text
+
+                    document.execCommand('Copy');
+
+                }
+            }
+
         </script>
 @include('includes._footer')

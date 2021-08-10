@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/comment/store', 'CommentController@store')->name('comment.store');
     Route::post('/reply/store', 'ReplyController@store')->name('reply.store');
     Route::get('/notifications', 'UserNotificationController@show')->name('notifications.show');
+    Route::get('user/dashboard/{user:slug}', 'User\DashboardController@user')->name('dashoboard.user');
 });
 
 Route::get('post', 'PostController@index')->name('post.index');
@@ -82,6 +83,7 @@ Route::get('/privacy', 'HomeController@privacy')->name('privacy');
 Route::group(['middleware' => ['role:Admin']], function () {
 
     Route::get('admin/users', 'Admin\DashboardController@users')->name('admin.users');
+
     Route::get('admin/posts', 'Admin\DashboardController@posts')->name('admin.posts');
 
     Route::resource('admin/dashboard', 'Admin\DashboardController');

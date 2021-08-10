@@ -51,6 +51,13 @@
                 @auth
                     @if(current_user()->id != $profile->user->id)
                     <button class="profile-card__button button--blue js-message-btn">دردشه</button>
+                    @else
+                    <label for="referrer" class="block w-full lg:w-2/4 text-sm mb-6"> انشر الموقع واحصل على 5 نقاط اضافيه لكل مستخدم جديد</label>
+                    <div class="flex mb-6">
+                        <input type="text" id="referrer" class="w-4/5 border-2 border-gray-500 outline-none p-2 rounded-xl" value="{{ Auth::user()->referral_link }}" id="referrer">
+                        <button id="btnCopy" class="button button-green">Copy</button>
+                    </div>
+
                     @endif
                 @endauth
                 <livewire:follow :profile="$profile" :user="$profile->user" />
