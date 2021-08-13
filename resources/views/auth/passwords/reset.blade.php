@@ -4,7 +4,7 @@
 <div class="container " style="margin-top: 150px">
 
     <div class="card bg-white lg:mx-auto lg:w-2/4 shadow-lg rounded-3xl pt-4">
-        <div class="card-header text-center text-2xl">{{ __('اعادة تعيين الرقم السري') }}</div>
+        <div class="card-header text-center text-2xl mb-5">{{ __('اعادة تعيين الرقم السري') }}</div>
 
         <div class="card-body w-full p-4">
             <form method="POST" action="{{ route('password.update') }}">

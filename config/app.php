@@ -186,6 +186,9 @@ return [
 
         Spatie\Permission\PermissionServiceProvider::class,
 
+        // social share
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
+
     ],
 
     /*
@@ -240,8 +243,10 @@ return [
 
         // intervention image
         'Image' => Intervention\Image\Facades\Image::class,
-        // socialite
+        // socialite login
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        // social share
+        'Share' => Jorenvh\Share\ShareFacade::class,
 
     ],
 

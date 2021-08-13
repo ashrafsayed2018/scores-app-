@@ -2,8 +2,6 @@
 
 @section('content')
 
-<h1>{{ $user->name }}</h1>
-
 <div class="container mx-auto lg:w-full mt-8" style="height: 3000px">
 
             {{-- card box --}}

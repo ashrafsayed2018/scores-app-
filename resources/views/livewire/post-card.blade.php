@@ -1,6 +1,6 @@
 <div class="post-card col-span-6 lg:col-span-4 mb-10 lg:mb-0">
     <div class="card bg-white  w-full shadow-lg border border-gray-400" style="height: 410px">
-        <a href="{{ route('post.show',$post->slug) }}">
+        <a href="{{ route('post.show',[$post->slug,$post->id]) }}">
 
             <img src="{{ asset(firstPostImage($post)) }}" alt="{{ $post->title }}" style="width: 100%;height:220px">
             <div class="post-details px-5" style="height: 120px">

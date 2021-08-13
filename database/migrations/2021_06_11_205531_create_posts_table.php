@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->text('description');
             $table->integer('phone');
+            $table->unsignedInteger('active')->default(0);
             $table->foreignId('category_id')
                 ->constrained()
                 ->onDelete('cascade')->onUpdate('cascade');

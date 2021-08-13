@@ -24,7 +24,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::all()->sortByDesc('created_at');
+        $posts = Post::where('active', 1)->orderBy('created_at', 'DESC')->get();
         return view('post.index', compact('posts'));
     }
 
@@ -62,15 +62,20 @@ class PostController extends Controller
     {
 
         $title = $post->title;
-        $post = Post::where('title', $title)->withPostLikes()->with('firstPostImage')->first();
+        $post = Post::where('title', $title)->where('active', 1)->withPostLikes()->with('firstPostImage')->first();
 
         // increament the view count
-        DB::table('posts')
-            ->where('id', $post->id)
-            ->increment('view_count', 1);
+        if ($post) {
 
-        //  note from the helpers.php recommenedPosts method we get all recommended posts
-        return view('post.show', compact(['post']));
+            DB::table('posts')
+                ->where('active', 1)
+                ->where('id', $post->id)
+                ->increment('view_count', 1);
+            //  note from the helpers.php recommenedPosts method we get all recommended posts
+            return view('post.show', compact(['post']));
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function view_user_posts()

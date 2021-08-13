@@ -1,6 +1,6 @@
 <div>
     <div class="container mx-auto lg:w-full mt-32 px-8" style="height: 3000px">
-        <div class="alltUsers">
+        <div class="alltUsers overflow-x-auto">
             <div class="cardHeader">
                 <h3 class="text-center my-10 text-3xl border-b-2 border-blue-500 w-60 mx-auto pb-2"> المستخدمين</h3>
                 <a href="{{ route('dashboard.index') }}" class="mb-5 inline-block button button-green">رجوع</a>
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <table class="sm:w-96 sm:overflow-auto lg:min-w-full divide-y divide-gray-200">
+            <table class="sm:w-96 sm:overflow-auto lg:min-w-full divide-y divide-gray-200  w-full p-2 m-1">
                 <thead class="bg-gray-50">
                   <tr>
                     <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -96,12 +96,20 @@
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="text-sm text-gray-900">{{ $user->posts->count() }}</div>
                     </td>
+                    @if ($user->email_verified_at != null)
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                     نشط
-                      </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                       مفعل
+                        </span>
+                      </td>
+                    @else
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                       غير مفغل
+                        </span>
+                      </td>
+                    @endif
+                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                      {{   $user->getRoleNames()->first()}}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -111,7 +119,7 @@
                         {{   $user->likes()->count()}}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                      <a href="#" class="text-indigo-600 hover:text-indigo-900">تعديل</a>
                     </td>
                   </tr>
                 @empty

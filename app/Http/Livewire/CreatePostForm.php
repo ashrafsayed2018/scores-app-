@@ -65,14 +65,15 @@ class CreatePostForm extends Component
     private $validationRules = [
 
         1 => [
-            'title' => ['required', 'string', 'min:3', 'max:100'],
+            'title' => ['required', 'unique:posts', 'string', 'min:3', 'max:100'],
         ],
         2 => [
             'description' => ['required', 'min:3', 'max:500'],
         ],
         3 => [
             'selectedCategory' => ['required'],
-            "selectedSubCategory" => ['required']
+            "selectedSubCategory" => ['required_with:selectedCategory'],
+            'selectedChildCategory' => ['required_with:selectedSubCategory'],
         ],
         4 => [
             'images' => ['required', 'image', 'max:2']
@@ -81,9 +82,11 @@ class CreatePostForm extends Component
 
     protected $messages = [
         'title.required' => 'عنوان الاعلان مطلوب',
+        'title.unique' => 'عنوان الاعلان موجود من قبل',
         'description.required' => 'وصف الاعلان مطلوب',
-        'selectedCategory.required' => 'الفئه الرئيسيه مطلوبه',
-        'selectedSubCategory.required' => 'الفئه الفرعيه مطلوبه',
+        'selectedCategory.required_with' => 'الفئه الرئيسيه مطلوبه',
+        'selectedSubCategory.required_with' => 'الفئه الفرعيه مطلوبه',
+        'selectedChildCategory.required_with' => 'الفئه تحت الفرعيه مطلوبه',
         'images.required' => 'صورة الاعلان مطلوبه',
     ];
 
@@ -145,14 +148,33 @@ class CreatePostForm extends Component
 
                 $image_extension = $image->getClientOriginalExtension();
                 if (in_array($image_extension, $allowed_extensions)) {
-                    $imageName = time() . $image->getClientOriginalName();
+
+
+
+                    //  create image name
+
+                    $imageName = time() . '.' . $image->getClientOriginalExtension();
                     $imageName = str_replace(' ', '-', $imageName);
+
+                    // the destionation to save the image
                     $destinationPath = public_path('storage/post_images/');
 
+                    // preparing image for resize
                     $image_resize =  Image::make($image->getRealPath());
 
-                    $image_resize->resize(600, 600, function ($constraint) {
+                    // image resize and save
+
+                    $resizedImage = $image_resize->resize(600, 600, function ($constraint) {
                         $constraint->aspectRatio();
+                    });
+
+                    // dd($resizedImage->filesize());
+                    // add the text watermark
+                    $resizedImage->text('ashraf', 450, 450, function ($font) {
+                        $font->size(200);
+                        $font->color('#0000ff');
+                        $font->align('right');
+                        $font->valign('bottom');
                     })->save($destinationPath . $imageName);
 
                     $imageArray[] = $imageName;

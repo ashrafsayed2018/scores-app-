@@ -48,8 +48,11 @@ function firstPostImage($post)
 // post all images
 function allPostImages($post)
 {
-    $allImages =  $post->firstPostImage->image;
-    return $allImages;
+    if ($post) {
+
+        $allImages =  $post->firstPostImage->image;
+        return $allImages;
+    }
 }
 
 // arbic date method

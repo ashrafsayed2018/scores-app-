@@ -5,6 +5,7 @@
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/fingerprint/finger.js') }}"></script>
     <script src="{{ asset('js/fingerprint/script.js') }}"></script>
+    <script src="{{ asset('js/share.js') }}"></script>
 
     <livewire:scripts/>
 

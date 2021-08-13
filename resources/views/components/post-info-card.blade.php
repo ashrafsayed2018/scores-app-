@@ -1,3 +1,5 @@
+@if ($post)
+
 <div class="post_info col-span-2 bg-white rounded-lg shadow-lg p-5">
     <div class="top_info mt-5">
          <h2 class="post_title mb-5 text-2xl">{{ $post->title }}</h2>
@@ -59,4 +61,5 @@
 
     </div>
 </div>
+@endif
 {{-- bg-gradient-to-r  flex justify-between from-yellow-800 to-yellow-600 rounded-2xl text-white sm:w-50 md:w-40 lg:w-60 px-2 md:px-2 lg:px-4 md:py-3 lg:py-4 lg:text-xl shadow-lg --}}

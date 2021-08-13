@@ -1,7 +1,7 @@
 <div class="favourites w-1/2 mr-3">
     <div class="heart bg-white w-9 h-9 rounded-lg flex justify-center flex-wrap content-center shadow-2xl">
        @auth
-            @if ($post->isFavorited())
+            @if ($post != null && $post->isFavorited())
                 <form wire:submit.prevent="destroy" wire:model="post">
                     @method('DELETE')
                     @csrf

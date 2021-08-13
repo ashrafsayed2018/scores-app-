@@ -10,22 +10,26 @@
         <div class="swiper h-4/6">
             <div class="swiper-container gallery-top mx-auto mb-5 w-full h-full">
                 <div class="swiper-wrapper">
-
-                     @foreach (allPostImages($post) as $postImage)
-                     <div class="swiper-slide w-full h-full">
-                         <img src="{{ asset('storage/post_images/'. $postImage) }}" class="w-full h-full" alt="">
-                     </div>
-                     @endforeach
+                    @if($post)
+                        @foreach (allPostImages($post) as $postImage)
+                        <div class="swiper-slide w-full h-full">
+                            {{-- {{ dd($postImage) }} --}}
+                            <img src="{{ asset('storage/post_images/'. $postImage) }}" class="w-full h-full" alt="">
+                        </div>
+                        @endforeach
+                     @endif
                 </div>
             </div>
 
             <div class="swiper-container gallery-thumbs h-2/6">
                     <div class="swiper-wrapper">
-                        @foreach (allPostImages($post) as $postImage)
-                        <div class="swiper-slide w-1/4 opacity-40 h-full">
-                            <img src="{{ asset('storage/post_images/'. $postImage) }}" class="w-full h-full" alt="">
-                        </div>
-                        @endforeach
+                        @if($post)
+                            @foreach (allPostImages($post) as $postImage)
+                            <div class="swiper-slide w-1/4 opacity-40 h-full">
+                                <img src="{{ asset('storage/post_images/'. $postImage) }}" class="w-full h-full" alt="">
+                            </div>
+                            @endforeach
+                        @endif
                     </div>
                     <!-- Add Arrows -->
                     <!-- <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-d7ea9d0b88b10aa73" aria-disabled="false"></div> -->
@@ -36,10 +40,14 @@
         <div class="post-actions absolute bottom-3 right-3 flex">
            <div class="comments mx-4 text-sm text-gray-500">
             <i class="far fa-comment ml-3 cursor-pointer show_all_comments"></i>
+            @if($post)
             <span class="comments_count text-sm">{{ $post->comments->count() }}</span>
+            @endif
            </div>
            <div class="likes text-sm text-gray-500">
+            @if($post)
             <livewire:post-likes :post="$post" :wire:key="$post->id">
+                @endif
            </div>
          </div>
     </div>

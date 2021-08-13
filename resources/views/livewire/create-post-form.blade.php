@@ -41,7 +41,7 @@
                 type="text"
                 value="{{ old('title') }}"
                 wire:model.lazy="title"
-                placeholder="وصف الاعلان">
+                placeholder="عنوان الاعلان">
 
                 @error('title')
                 <span class="text-red-500 ">{{ $message }}</span>
@@ -130,7 +130,7 @@
                         type="text"
                         required
                         wire:model="selectedChildCategory" >
-                        <option value="" hidden disabled selected>اختر التصنيف الفرعي الثاني</option>
+                        <option value="">اختر التصنيف الفرعي الثاني</option>
                         @foreach ($childcategories as $childcategory)
                         <option value="{{ $childcategory->id }}" @if (old('childcategory_id') == $childcategory->id)
                             selected

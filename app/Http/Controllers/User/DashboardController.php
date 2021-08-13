@@ -97,7 +97,7 @@ class DashboardController extends Controller
     public function user(User $user)
     {
 
-        if (auth()->id() == $user->id) {
+        if (auth()->id() == $user->id || auth()->user()->hasRole('Admin')) {
             $posts = $user->posts()->get();
             $totalViews = $user->posts->sum('view_count');
             $totalComments = $user->comments->sum('id');

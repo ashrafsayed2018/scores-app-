@@ -4,7 +4,7 @@
 
 <div class="container mx-auto lg:w-full " style="height: 3000px">
     {{-- navigation --}}
-    <div class="navigation fixed w-80 h-full bg-gray-700 text-white top-24 -mt-2  transition-all delay-50 overflow-hidden ">
+    <div class="navigation fixed w-80 h-full bg-gray-700 text-white top-24 -mt-2  transition-all delay-50 overflow-hidden" style="z-index: 1000000000000;">
         <ul class="absolute top-0 left-0 w-full pt-10">
             <li class="px-5 py- mb-6">
                 <a href="#" class="flex w-full no-underline">
@@ -307,9 +307,13 @@
                               <div class="text-sm text-gray-500">{{ $post->user->email }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                              {{-- <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                 عير مفعل
-                              </span>
+                              </span> --}}
+
+                              <livewire:toggle-button :model="$post" field="active" key="{{ $post->id }}" />
+
+
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               {{ $post->view_count }}

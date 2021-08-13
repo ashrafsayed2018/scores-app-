@@ -17,6 +17,11 @@ class HomeController extends Controller
         $this->middleware(['auth', 'verified']);
     }
 
+    public function info()
+    {
+        return view('info');
+    }
+
     /**
      * Show the application dashboard.
      *

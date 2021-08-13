@@ -130,7 +130,7 @@ return [
     */
 
     'custom' => [
-        'username' => [
+        'name' => [
             'required' => 'هذا الحقل مطلوب',
         ],
         'about' => [

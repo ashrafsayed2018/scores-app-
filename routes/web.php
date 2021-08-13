@@ -68,7 +68,7 @@ Route::get('post', 'PostController@index')->name('post.index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('explore', 'ExploreController@index')->name('explore.index');
-Route::get('post/{post:slug}/show', 'PostController@show')->name('post.show');
+Route::get('post/{post:slug}/{id}/show', 'PostController@show')->name('post.show');
 Route::get('category/{category:slug}/show', "CategoryController@show")->name('category.show');
 Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
 Route::get('login/google/callback', 'Auth\GoogleController@handleGoogleCallback');

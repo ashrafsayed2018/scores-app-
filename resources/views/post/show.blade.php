@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if ($post)
 
 <div class="xl:mx-8 mt-36">
     <div class="flex justify-between items-center w-full">
@@ -26,6 +27,7 @@
     </div>
     <x-recommended-posts :post="$post" />
 </div>
+@endif
 @endsection
 @section('scripts')
 <script>
@@ -99,4 +101,8 @@
   })
 
 </script>
+
+{{-- footer --}}
+<x-footer :categories="$categories"/>
+<x-bottom-nav />
 @endsection

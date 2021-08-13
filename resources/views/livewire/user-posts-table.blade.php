@@ -2,7 +2,7 @@
 
 
     <div class="container lg:w-full mt-32 px-8" style="height: 3000px">
-        <div class="allAds">
+        <div class="allAds overflow-x-auto">
             <div class="cardHeader">
                 <h3 class="text-center my-10 text-3xl border-b-2 border-blue-500 w-60 mx-auto pb-2"> الاعلانات</h3>
                 <a href="{{ route('dashboard.index') }}" class="mb-5 inline-block button button-green">رجوع</a>
