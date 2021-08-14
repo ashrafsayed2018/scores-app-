@@ -27,15 +27,17 @@
         <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
         @foreach ($categories as $category)
 
-            <div class="bg-white rounded-md overflow-hidden transition-all hover:shadow-lg">
+            <a href="{{ route('category.show', $category->slug) }}" class="bg-white rounded-md overflow-hidden transition-all hover:shadow-lg">
                 <img class="w-full lazy h-40" src="{{ asset("storage/category_images/$category->image") }}" alt="Mountain">
-                <div class="py-4">
-                   {{ $category->name }}
+                <div class="mx-4">
+                    <div class="py-4">
+                        {{ $category->name }}
+                     </div>
+                     <div class="pb-4 text-gray-600">
+                        {{ $category->posts->count() }} اعلان
+                     </div>
                 </div>
-                <div class="pb-4 text-gray-600">
-                   1166 اعلان
-                </div>
-            </div>
+            </a>
         @endforeach
         </div>
     </div>

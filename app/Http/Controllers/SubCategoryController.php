@@ -42,7 +42,7 @@ class SubCategoryController extends Controller
         $attributes = $request->validate([
             'name' => 'required|unique:sub_categories|min:3',
             'description' => 'required|unique:sub_categories|min:3',
-            'image' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg',
             'category_id' => 'required'
         ]);
 
@@ -57,6 +57,7 @@ class SubCategoryController extends Controller
             $attributes['image'] = $image;
         }
 
+        $attributes['slug'] = make_slug($request->name);
 
 
         SubCategory::create($attributes);
@@ -69,10 +70,14 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+
+        $subcategory = SubCategory::where('slug', $slug)->first();
+
+        return view('subcategory.show', compact('subcategory'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

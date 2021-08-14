@@ -4,11 +4,15 @@ namespace App;
 
 use App\Post;
 use Illuminate\Database\Eloquent\Model;
+use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 
 class Reply extends Model
 {
 
     use Likeable;
+    use CascadesDeletes;
+
+    protected $cascadeDeletes = ['likes'];
 
     protected $guarded = [];
 

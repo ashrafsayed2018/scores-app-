@@ -67,7 +67,7 @@
                     id="category"
                     type="text"
 
-                    name="subcategory_id">
+                    name="sub_category_id">
                     <option value="">اختر التصنيف الفرعي</option>
                     @foreach ($subcategories as $subcategory)
                     <option value="{{ $subcategory->id }}" {{ $subcategory->id ==  old('subcategory_id') ? "selected" : "" }}>

@@ -17,7 +17,7 @@
             <ul>
                 @foreach ($category->subcategories as $subcategory)
                     <li>
-                        <a href="">
+                        <a href="{{ route('subcategory.show', $subcategory->slug) }}">
                             {{ $subcategory->name }}
                         </a>
                     </li>

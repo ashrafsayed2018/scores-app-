@@ -22,18 +22,18 @@
         {{-- category info --}}
         <div class="flex-1 w-full lg:w-4/5 pt-5">
           <div class="flex justify-between items-center mx-5">
-              <p>{{ $category->name }}</p>
-              <span>إجمالي الإعلانات: {{ $category->posts->count() }}</span>
+              <p>{{ $subcategory->name }}</p>
+              <span>إجمالي الإعلانات: {{ $subcategory->posts->count() }}</span>
           </div>
           {{-- subcategories slider --}}
           <div class="flex mt-5 mx-auto w-4/5" >
               <div class="owl-carousel owl-theme w-40">
 
-                  @foreach ($category->subcategories as $subcategory)
+                  @foreach ($subcategory->childcategories as $childcategory)
                   <div class="item text-center pl-0 pr-0 bg-white shadow-lg rounded-sm" style="width: auto; margin-left: 10px;">
-                      <a href="{{ route('subcategory.show', $subcategory->slug) }}">
+                      <a href="{{ route('childcategory.show', $childcategory->slug) }}">
                           <h5>
-                              <span itemprop="name">{{ $subcategory->name }}</span>
+                              <span itemprop="name">{{ $childcategory->name }}</span>
                               <meta itemprop="description" content="سياحة، سياحه، سفر، حجز تذاكر، تذاكر طيران، تأشيرات سفر، استخراج فيز، دول شنغن، تأشيرات دول، حجز فنادق، خدمات العمرة، فيز العمره، اسعار مميزة، ">
                           </h5>
                       </a>
@@ -42,15 +42,13 @@
               </div>
           </div>
           {{-- posts grid --}}
-
-            @forelse ($category->posts as $post)
-            <div class="lg:grid lg:grid-cols-12 lg:gap-5 my-8">
-            <livewire:post-card :post="$post"  wire:key="$post->id" />
-            </div>
-            @empty
-                <p class="button button-red my-8">لا توجد اعلانات في هذا التصنيف</p>
-            @endforelse
-
+          @forelse ($subcategory->posts as $post)
+          <div class="lg:grid lg:grid-cols-12 lg:gap-5 my-8">
+          <livewire:post-card :post="$post"  wire:key="$post->id" />
+          </div>
+          @empty
+              <p class="button button-red my-8">لا توجد اعلانات في هذا التصنيف</p>
+          @endforelse
         </div>
     </div>
 </div>

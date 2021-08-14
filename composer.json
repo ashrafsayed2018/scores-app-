@@ -22,6 +22,7 @@
 		"livewire/livewire": "^2.4",
 		"rinvex/countries": "^7.3",
 		"sebastian/global-state": "^5.0",
+		"shiftonelabs/laravel-cascade-deletes": "^1.0",
 		"spatie/laravel-activitylog": "^3.17",
 		"spatie/laravel-permission": "^4.2",
 		"stevebauman/location": "^6.1"

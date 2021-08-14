@@ -122,7 +122,7 @@ class CreatePostForm extends Component
     public function updatedSelectedSubCategory($subcategory_id)
     {
 
-        $this->childcategories = ChildCategory::where('subcategory_id', $subcategory_id)->get();
+        $this->childcategories = ChildCategory::where('sub_category_id', $subcategory_id)->get();
 
         if ($this->childcategories->count() > 0) {
 
@@ -196,7 +196,7 @@ class CreatePostForm extends Component
             $images = $this->storeImages();
             $rules = collect($this->validationRules)->collapse()->toArray();
             $subcategories = SubCategory::where('category_id', $this->selectedCategory)->get();
-            $childcategories = ChildCategory::where('subcategory_id', $this->selectedSubCategory)->get();
+            $childcategories = ChildCategory::where('sub_category_id', $this->selectedSubCategory)->get();
             $post = new Post();
 
             if ($subcategories->count() == 0) {

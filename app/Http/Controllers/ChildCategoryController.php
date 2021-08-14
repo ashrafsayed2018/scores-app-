@@ -41,7 +41,7 @@ class ChildCategoryController extends Controller
             'name' => 'required|string|unique:child_categories|min:3',
             'description' => 'required|string|unique:child_categories|min:3',
             'image' => 'required|image|mimes:png,jpg,jpeg',
-            'subcategory_id' => 'required'
+            'sub_category_id' => 'required'
         ]);
 
         if ($request->hasFile('image')) {
@@ -54,6 +54,7 @@ class ChildCategoryController extends Controller
         }
 
         $attributes['image'] = $image;
+        $attributes['slug'] = make_slug($request->name);
 
         ChildCategory::create($attributes);
         return back();
@@ -65,11 +66,13 @@ class ChildCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
-    }
 
+        $childcategory = ChildCategory::where('slug', $slug)->first();
+
+        return view('childcategory.show', compact('childcategory'));
+    }
     /**
      * Show the form for editing the specified resource.
      *

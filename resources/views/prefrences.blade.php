@@ -7,7 +7,7 @@
         @forelse ($post_array as $post)
                 <li class="bg-green-100 border-2 hover:border-green-400 py-7 xs:text-sm px-3 mb-3 rounded-lg gap-x-2">
 
-                  اضفت اعلان <a href="{{ route('post.show', $post->slug) }}">{{  $post->title }}</a> للمفضله
+                  اضفت اعلان <a href="{{ route('post.show', [$post->slug,$post->id]) }}">{{  $post->title }}</a> للمفضله
                </li>
         @empty
         <div class="bg-red-500 text-center text-white text-2xl p-5 col-span-12">لم تضف اي اعلان الى المفضله حتى الان</div>

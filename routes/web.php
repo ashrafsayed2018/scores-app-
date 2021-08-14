@@ -38,12 +38,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('category/create', "CategoryController@create")->name('category.create');
     Route::post('category/store', "CategoryController@store")->name('category.store');
+    Route::get('category/show/{category:slug}', "CategoryController@show")->name('category.show');
+
 
     Route::get('subcategory/create', "SubCategoryController@create")->name('subcategory.create');
     Route::post('subcategory/store', "SubCategoryController@store")->name('subcategory.store');
+    Route::get('subcategory/show/{subcategory:slug}', "SubCategoryController@show")->name('subcategory.show');
+
 
     Route::get('childcategory/create', "ChildCategoryController@create")->name('childcategory.create');
     Route::post('childcategory/store', "ChildCategoryController@store")->name('childcategory.store');
+    Route::get('childcategory/show/{childcategory:slug}', "ChildCategoryController@show")->name('childcategory.show');
 
 
     Route::get('profile/create', 'ProfileController@create')->name('profile.create');
@@ -55,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('post/create', 'PostController@create')->name('post.create');
     Route::post('post/store', 'PostController@store')->name('post.store');
+    Route::delete('post/destroy/{id}', 'PostController@destroy')->name('post.destroy');
     Route::get('/myposts', 'PostController@view_user_posts')->name('myposts');
 
 

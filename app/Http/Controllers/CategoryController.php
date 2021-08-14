@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $attributes = $request->validate([
             'name' => 'required|unique:categories|min:3|string',
             'description' => 'required|unique:categories|min:3|string',
-            'image' => 'required'
+            'image' => 'required|image|mimes:png,jpg,jpeg'
         ]);
 
         if ($request->hasFile('image')) {
@@ -53,7 +53,7 @@ class CategoryController extends Controller
             $request->image->storeAs('category_images', $image, 'public');
             $attributes['image'] = $image;
         }
-        $attributes['slug'] = Str::slug($request->name);
+        $attributes['slug'] = make_slug($request->name);
 
         Category::create($attributes);
 

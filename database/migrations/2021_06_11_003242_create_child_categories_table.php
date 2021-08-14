@@ -15,13 +15,12 @@ class CreateChildCategoriesTable extends Migration
     {
         Schema::create('child_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subcategory_id');
+            $table->foreignId('sub_category_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('name')->unique();
+            $table->string('slug');
             $table->string('description')->unique();
             $table->string('image');
             $table->timestamps();
-
-            $table->foreign('subcategory_id')->references('id')->on('sub_categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

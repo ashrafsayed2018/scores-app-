@@ -4,7 +4,7 @@
     <form wire:submit.prevent="store()">
         @csrf
         <div class="form-group">
-            <textarea type="text" wire:model.lazy="body" class="w-full h-10 border border-gray-300 focus:outline-none pr-3 pt-2 mt-3 rounded-lg resize-none" placeholder="اضافة تعليق" autofocus></textarea>
+            <textarea type="text" wire:model.lazy="body" class="w-full h-10 border border-gray-300 focus:outline-none pr-3 pt-2 mt-3 rounded-lg resize-none" placeholder="اضافة تعليق"></textarea>
             <input type="hidden" wire:model="post_id"  />
         </div>
         <div class="form-group">

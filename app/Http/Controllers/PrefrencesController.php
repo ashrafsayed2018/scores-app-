@@ -56,7 +56,7 @@ class PrefrencesController extends Controller
 
         $user_id = auth()->id();
 
-        $faovorite_ids = DB::select('select favoriteable_id from favorites where user_id = ?', [$user_id]);
+        $faovorite_ids = DB::select('select DISTINCT favoriteable_id from favorites where user_id = ?', [$user_id]);
 
         $post_array = [];
 

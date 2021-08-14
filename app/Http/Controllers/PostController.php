@@ -78,6 +78,14 @@ class PostController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
+
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->back();
+    }
+
     public function view_user_posts()
     {
 

@@ -5,11 +5,16 @@ namespace App;
 use App\Reply;
 use App\PostImage;
 use Illuminate\Database\Eloquent\Model;
-use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 use Spatie\Activitylog\Traits\LogsActivity;
+use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
+use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 
 class Post extends Model
 {
+
+    use CascadesDeletes;
+
+    protected $cascadeDeletes = ['likes', 'comments', 'replies'];
 
     use Likeable, Favoriteable, LogsActivity;
     protected static $logAttributes = ['*'];
