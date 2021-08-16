@@ -48,7 +48,7 @@
                 <livewire:post-card :post="$post"  wire:key="$post->id" />
 
             @empty
-                <p class="button button-red my-8">لا توجد اعلانات في هذا التصنيف</p>
+                <p class="button col-span-12 text-right button-red my-8">لا توجد اعلانات في هذا التصنيف</p>
             @endforelse
         </div>
         </div>
