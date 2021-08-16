@@ -28,5 +28,6 @@
     <link href="{{ asset('css/wizard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <livewire:styles/>
+
 </head>
 <body style="background: rgba(242,242,242,.5)">

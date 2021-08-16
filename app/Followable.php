@@ -52,6 +52,16 @@ trait Followable
                 ]
             );
 
+
+            // remove from notifications table
+
+            $post_follower_notifications = $user->notifications()
+                ->whereJsonContains("data->user->id", $this->id)->get();
+
+            foreach ($post_follower_notifications as $notification) {
+                $notification->delete();
+            }
+
             return $this->unfollow($user);
         } else {
 

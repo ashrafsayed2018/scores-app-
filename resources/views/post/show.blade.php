@@ -26,6 +26,8 @@
         <livewire:show-comments :post="$post" :key="time().$post->id"/>
     </div>
     <x-recommended-posts :post="$post" />
+
+
 </div>
 @endif
 @endsection

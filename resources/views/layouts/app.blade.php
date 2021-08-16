@@ -1,8 +1,8 @@
 @include('includes._header')
 
     <div id="app">
-        <x-utilities.navbar />
 
+        <x-utilities.navbar />
         <main class="mt-36">
             @yield('content')
         </main>

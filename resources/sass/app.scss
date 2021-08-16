@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 @import '~jquery-ui/themes/base/all.css';
 @import '~flag-icon-css/sass/flag-icon.scss';
-
+@import '~bootstrap/scss/bootstrap';
 
 // Font-Awesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
@@ -63,6 +63,46 @@
     right:60px
 }
 
+// messages modal
+
+.modal {
+    z-index: 1072;
+    margin-top: 200px;
+    @apply hidden fixed top-0 left-0 w-full h-full outline-none
+  }
+
+  .modal.show {
+    @apply block
+  }
+
+  .modal-backdrop {
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    @apply fixed bg-black top-0 left-0
+  }
+
+  .modal-backdrop.fade {
+    @apply opacity-0
+  }
+
+  .modal-backdrop.show {
+    @apply opacity-50
+  }
+
+  .modal.fade .modal-dialog {
+    transition: -webkit-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    transition: transform .3s ease-out,-webkit-transform .3s ease-out;
+    -webkit-transform: translate(0,-50px);
+    transform: translate(0,-50px);
+  }
+
+  .modal.show .modal-dialog {
+    -webkit-transform: none;
+    transform: none;
+  }
+
 
 
 @media (max-width: 992px) {
@@ -88,4 +128,3 @@
          overflow: auto;
      }
 }
-

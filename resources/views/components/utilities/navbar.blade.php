@@ -104,13 +104,13 @@
         </div>
         @endguest
         @auth
-        <div class="left hidden lg:col-span-2 lg:flex justify-end">
+        <div class="left  lg:col-span-2 lg:flex justify-end">
             <div class="ad-button flex items-center">
                 <a href="{{ route('post.create') }}" class="button button-blue ml-5">
                     <i class="fas fa-plus text-xs  text-white"></i>
                     ارفع اعلان
                 </a>
-                @auth
+
                 <a class="block text-3xl text-gray-700 ml-5" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
@@ -119,7 +119,6 @@
                         @csrf
                     </form>
                 </a>
-                @endauth
             </div>
         </div>
         @endauth

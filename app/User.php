@@ -4,6 +4,7 @@ namespace App;
 
 use App\Score;
 use App\Comment;
+use App\Message;
 use App\Profile;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -137,6 +138,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(User::class, 'referrer_id', 'id');
     }
 
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'from_id', 'to_id'); // you migh
+    }
 
     /**
      * The accessors to append to the model's array form.

@@ -68,13 +68,19 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reply/store', 'ReplyController@store')->name('reply.store');
     Route::get('/notifications', 'UserNotificationController@show')->name('notifications.show');
     Route::get('user/dashboard/{user:slug}', 'User\DashboardController@user')->name('dashoboard.user');
+    // message
+    Route::get('/messages', "sendMessageController@index");
+    Route::post('/send/message', "sendMessageController@store")->name('messageStore');
+    Route::get('/message/users', "SendMessageController@chatWithThatUser");
+    Route::get('/message/user/{id}', 'SendMessageController@showMessages');
+    Route::post('/start-conversation', 'SendMessageController@startConversation');
 });
 
 Route::get('post', 'PostController@index')->name('post.index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('explore', 'ExploreController@index')->name('explore.index');
-Route::get('post/{post:slug}/{id}/show', 'PostController@show')->name('post.show');
+Route::get('post/{id}/{post:slug}/show', 'PostController@show')->name('post.show');
 Route::get('category/{category:slug}/show', "CategoryController@show")->name('category.show');
 Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
 Route::get('login/google/callback', 'Auth\GoogleController@handleGoogleCallback');

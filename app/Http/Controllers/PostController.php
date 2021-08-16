@@ -58,11 +58,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post, User $user)
+    public function show($id, $slug)
     {
 
-        $title = $post->title;
-        $post = Post::where('title', $title)->where('active', 1)->withPostLikes()->with('firstPostImage')->first();
+        $post = Post::where('slug', $slug)->where('active', 1)->withPostLikes()->with('firstPostImage')->first();
 
         // increament the view count
         if ($post) {

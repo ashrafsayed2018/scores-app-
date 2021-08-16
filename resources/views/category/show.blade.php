@@ -43,14 +43,14 @@
           </div>
           {{-- posts grid --}}
 
+          <div class="lg:grid lg:grid-cols-12 lg:gap-5 my-8">
             @forelse ($category->posts as $post)
-            <div class="lg:grid lg:grid-cols-12 lg:gap-5 my-8">
-            <livewire:post-card :post="$post"  wire:key="$post->id" />
-            </div>
+                <livewire:post-card :post="$post"  wire:key="$post->id" />
+
             @empty
                 <p class="button button-red my-8">لا توجد اعلانات في هذا التصنيف</p>
             @endforelse
-
+        </div>
         </div>
     </div>
 </div>

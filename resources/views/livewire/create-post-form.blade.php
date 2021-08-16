@@ -30,8 +30,8 @@
 
 
         @if ($currentPage === 1)
-        <div class="row setup-content {{ $currentPage != 1 ? 'displayNone' : '' }}" id="step-1">
-            <div class="mb-4">
+        <div class="setup-content {{ $currentPage != 1 ? 'displayNone' : '' }}" id="step-1">
+            <div class="mb-4 w-full">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
                     عنوان الاعلان
                 </label>
@@ -49,8 +49,8 @@
             </div>
         </div>
         @elseif ($currentPage === 2)
-        <div class="row setup-content {{ $currentPage != 2 ? 'displayNone' : '' }}" id="step-2">
-            <div class="mb-4">
+        <div class="setup-content {{ $currentPage != 2 ? 'displayNone' : '' }}" id="step-2">
+            <div class="mb-4 w-full">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="description">
                 وصف الاعلان
                 </label>
@@ -66,7 +66,7 @@
             </div>
         </div>
         @elseif ($currentPage === 3)
-        <div class="row setup-content {{ $currentPage != 3 ? 'displayNone' : '' }}" id="step-5">
+        <div class="setup-content {{ $currentPage != 3 ? 'displayNone' : '' }}" id="step-5">
             <div>
                 <div class="mb-4">
                     <label class="block text-grey-darker text-sm font-bold mb-2" for="category">

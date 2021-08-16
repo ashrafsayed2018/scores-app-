@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{{-- <x-utilities.navbar /> --}}
+<x-utilities.navbar />
 
 @section('content')
 

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-32">
+<div class="mt-32">
     <div class="bg-white mx-auto shadow-lg lg:w-1/3 p-5  rounded-lg">
-        <div class="col-md-8">
+        <div class="">
             <div class="card">
                 <div class="text-lg text-center">الدخول للموقع</div>
                 <a href="{{ url('auth/google') }}"  class="flex justify-between  items-center w-1/2 my-1 mx-auto py-2 px-4 text-white rounded-md mb-3 transition-all hover:shadow-md bg-red-600 text-center">
@@ -15,9 +15,9 @@
                         @csrf
 
                         <div class="w-full">
-                            <label for="email" class="block font-bold mb-2">البريد الالكتروني</label>
+                            <label for="email" class="block font-bold mb-2 text-right">البريد الالكتروني</label>
 
-                            <div class="col-md-6">
+                            <div class="">
                                 <input id="email" type="email"
                                 class="block w-full @error('email') is-invalid @enderror hover:outline-none focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded-md px-2 py-2"
                                 name="email"
@@ -32,9 +32,9 @@
                         </div>
 
                         <div class="w-full">
-                            <label for="password" class="block font-bold mb-2">الرقم السري</label>
+                            <label for="password" class="block font-bold mb-2 text-right">الرقم السري</label>
 
-                            <div class="col-md-6">
+                            <div class="">
                                 <input id="password" type="password"
                                 class="block w-full @error('password') is-invalid @enderror border border-full hover:outline-none focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded-md px-2 py-2"
                                 name="password"
@@ -49,12 +49,12 @@
                             </div>
                         </div>
 
-                        <div class="w-full">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="w-full text-right mt-3">
+                            <div class="">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="inline-block ml-2" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
+                                    <label class="text-right" for="remember">
                                        تذكرني
                                     </label>
                                 </div>

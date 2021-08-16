@@ -23,7 +23,7 @@ class NewLikeAdded extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($likeable,$user ,Post $post = null)
+    public function __construct($likeable, $user, Post $post = null)
     {
 
         $this->likeable = $likeable;
@@ -52,9 +52,9 @@ class NewLikeAdded extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
 
@@ -67,11 +67,12 @@ class NewLikeAdded extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
 
-        $post_slug = get_class($this->likeable) == 'App\Post' ? $this->likeable->slug : $this->post->slug ;
+        $post_slug = get_class($this->likeable) == 'App\Post' ? $this->likeable->slug : $this->post->slug;
         return [
             'likeable_type' => get_class($this->likeable),
             'likeable_id' => $this->likeable->id,
-            'post_slug' =>$post_slug,
+            'post_id'    => $this->post->id,
+            'post_slug' => $post_slug,
             'likeable_title' => $this->likeable->title,
             'likeable_body' => $this->likeable->body,
             'likeable_slug' => $this->likeable->slug,

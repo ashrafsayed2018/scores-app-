@@ -1,5 +1,9 @@
-let mix = require('laravel-mix');
-const tailwindcss = require('tailwindcss');
+const mix = require('laravel-mix');
+// for Tailwind: https://github.com/JeffreyWay/laravel-mix-tailwind
+require('laravel-mix-tailwind')
+
+// for PurgeCSS
+require('laravel-mix-purgecss')
 
 /*
  |--------------------------------------------------------------------------
@@ -12,13 +16,21 @@ const tailwindcss = require('tailwindcss');
  |
  */
 
- mix.js('resources/js/app.js', 'public/js')
- .sass('resources/sass/app.scss', 'public/css')
- .copy(
-    'node_modules/@fortawesome/fontawesome-free/webfonts',
-    'public/webfonts'
-    )
- .options({
-     processCssUrls: false,
-     postCss: [tailwindcss('./tailwind.config.js')],
- });
+// mix.js('resources/js/app.js', 'public/js').vue()
+//     .sass('resources/sass/app.scss', 'public/css')
+//     .options({
+//         processCssUrls: false,
+//         postCss: [ tailwindcss('./tailwind.config.js') ],
+//       });
+
+
+mix.js('resources/js/app.js', 'public/js').vue()
+  .sass('resources/sass/app.scss', 'public/css')
+  // .less('resources/less/app.less', 'public/css')
+  .tailwind()
+  .purgeCss({
+    enabled: mix.inProduction(),
+    folders: ['src', 'templates'],
+    extensions: ['twig', 'html', 'js', 'php', 'vue'],
+  })
+  .setPublicPath('public')
