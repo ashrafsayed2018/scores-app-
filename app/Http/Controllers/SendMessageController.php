@@ -36,7 +36,6 @@ class SendMessageController extends Controller
 
         $messages  = Message::where('from_id', auth()->id())->orWhere('to_id', auth()->id())->get();
 
-
         // get the unique receivers which the logged in user messages them
         $users = $messages->map(function ($message) {
 
@@ -50,9 +49,9 @@ class SendMessageController extends Controller
 
     public function showMessages(Request $request, $id)
     {
-        $message = Message::with(['user', 'ads'])->where('to_id', auth()->id())->where('from_id', $id)->orWhere('from_id', auth()->id())->where('to_id', $id)->get();
+        $messages = Message::where('to_id', auth()->id())->where('from_id', $id)->orWhere('from_id', auth()->id())->where('to_id', $id)->get();
 
-        return $message;
+        return $messages;
     }
 
     public function startConversation(Request $request)

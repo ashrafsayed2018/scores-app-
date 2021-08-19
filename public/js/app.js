@@ -2005,27 +2005,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({//     data: () => {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  //     data: () => {
   // // const el = document.getElementById('messages')
   // // 	el.scrollTop = el.scrollHeight
   //     }
+  data: function data() {
+    return {
+      users: [],
+      messages: [],
+      selectedUserId: ''
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/message/users').then(function (response) {
+      _this.users = response.data;
+    });
+  },
+  methods: {
+    showMessage: function showMessage(userId) {
+      var _this2 = this;
+
+      axios.get("/message/user/".concat(userId)).then(function (response) {
+        _this2.messages = response.data;
+        _this2.selectedUserId = userId;
+        console.log(_this2.messages);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -38377,7 +38386,32 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "w-full" }, [
     _c("div", { staticClass: "grid grid-cols-8 gap-4" }, [
-      _c("div", { staticClass: "user" }, [_vm._v(" this is user")]),
+      _c(
+        "div",
+        { staticClass: "user" },
+        _vm._l(_vm.users, function(user) {
+          return user !== null
+            ? _c("ul", { key: user.id }, [
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.showMessage(user.id)
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(user.name))]
+                  )
+                ])
+              ])
+            : _vm._e()
+        }),
+        0
+      ),
       _vm._v(" "),
       _c(
         "div",
@@ -38386,12 +38420,129 @@ var render = function() {
             "flex-1 col-span-6 p:2 sm:p-6 justify-between flex flex-col h-screen"
         },
         [
-          _c("div", {
-            staticClass:
-              "flex sm:items-center justify-between py-3 border-b-2 border-gray-200"
+          _vm._l(_vm.messages, function(message) {
+            return _c(
+              "div",
+              {
+                key: message.id,
+                staticClass:
+                  "flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch",
+                attrs: { id: "messages" }
+              },
+              _vm._l(_vm.users, function(user) {
+                return user !== null
+                  ? _c("div", { key: user.id }, [
+                      user.id == message.from_id
+                        ? _c("div", [
+                            _c("div", { staticClass: "chat-message sender" }, [
+                              _c("div", { staticClass: "flex items-end" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start"
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "flex items-center" },
+                                      [
+                                        _c("strong", [
+                                          _vm._v(_vm._s(message.from_id))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(message.body) +
+                                                "\n                                            "
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("img", {
+                                  staticClass: "w-6 h-6 rounded-full order-1",
+                                  attrs: {
+                                    src:
+                                      "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                                    alt: "My profile"
+                                  }
+                                })
+                              ])
+                            ])
+                          ])
+                        : _c("div", [
+                            _c(
+                              "div",
+                              { staticClass: "chat-message receiver" },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "flex items-end justify-end" },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          { staticClass: "flex items-center" },
+                                          [
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white "
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                    " +
+                                                    _vm._s(message.body) +
+                                                    "\n                                    "
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("strong", [
+                                              _vm._v(_vm._s(message.to_id))
+                                            ])
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("img", {
+                                      staticClass:
+                                        "w-6 h-6 rounded-full order-2",
+                                      attrs: {
+                                        src:
+                                          "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                                        alt: "My profile"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                    ])
+                  : _vm._e()
+              }),
+              0
+            )
           }),
-          _vm._v(" "),
-          _vm._m(0),
           _vm._v(" "),
           _c(
             "div",
@@ -38598,458 +38749,13 @@ var render = function() {
               ])
             ]
           )
-        ]
+        ],
+        2
       )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch",
-        attrs: { id: "messages" }
-      },
-      [
-        _c("div", { staticClass: "chat-message sender" }, [
-          _c("div", { staticClass: "flex items-end" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start"
-              },
-              [
-                _c("div", { staticClass: "flex items-center" }, [
-                  _c("strong", [_vm._v("Ashraf")]),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600"
-                    },
-                    [
-                      _vm._v(
-                        "Can be verified on any platform using docker\n                                    "
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "w-6 h-6 rounded-full order-1",
-              attrs: {
-                src:
-                  "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-                alt: "My profile"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "chat-message receiver" }, [
-          _c("div", { staticClass: "flex items-end justify-end" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end"
-              },
-              [
-                _c("div", { staticClass: "flex items-center" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white "
-                    },
-                    [
-                      _vm._v(
-                        "Your error message says permission denied, npm global installs must be given root privileges.\n                                    "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("strong", [_vm._v("hany")])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "w-6 h-6 rounded-full order-2",
-              attrs: {
-                src:
-                  "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-                alt: "My profile"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "chat-message" }, [
-          _c("div", { staticClass: "flex items-end" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start"
-              },
-              [
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600"
-                    },
-                    [
-                      _vm._v(
-                        "Command was run with root privileges. I'm sure about that."
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600"
-                    },
-                    [
-                      _vm._v(
-                        "I've update the description so it's more obviously now"
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600"
-                    },
-                    [_vm._v("FYI https://askubuntu.com/a/700266/510172")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600"
-                    },
-                    [
-                      _vm._v(
-                        "\n                                    Check the line above (it ends with a # so, I'm running it as root )\n                                    "
-                      ),
-                      _c("pre", [_vm._v("# npm install -g @vue/devtools")])
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "w-6 h-6 rounded-full order-1",
-              attrs: {
-                src:
-                  "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-                alt: "My profile"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "chat-message" }, [
-          _c("div", { staticClass: "flex items-end justify-end" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end"
-              },
-              [
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white "
-                    },
-                    [
-                      _vm._v(
-                        "Any updates on this issue? I'm getting the same error when trying to install devtools. Thanks"
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "w-6 h-6 rounded-full order-2",
-              attrs: {
-                src:
-                  "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-                alt: "My profile"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "chat-message" }, [
-          _c("div", { staticClass: "flex items-end" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start"
-              },
-              [
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600"
-                    },
-                    [
-                      _vm._v(
-                        "Thanks for your message David. I thought I'm alone with this issue. Please, 👍 the issue to support it :)"
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "w-6 h-6 rounded-full order-1",
-              attrs: {
-                src:
-                  "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-                alt: "My profile"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "chat-message" }, [
-          _c("div", { staticClass: "flex items-end justify-end" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end"
-              },
-              [
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block bg-blue-600 text-white "
-                    },
-                    [_vm._v("Are you using sudo?")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white "
-                    },
-                    [
-                      _vm._v(
-                        "Run this command sudo chown -R `whoami` /Users/your_user_profile/.npm-global/ then install the package globally without using sudo"
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "w-6 h-6 rounded-full order-2",
-              attrs: {
-                src:
-                  "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-                alt: "My profile"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "chat-message" }, [
-          _c("div", { staticClass: "flex items-end" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start"
-              },
-              [
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600"
-                    },
-                    [
-                      _vm._v(
-                        "It seems like you are from Mac OS world. There is no /Users/ folder on linux 😄"
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600"
-                    },
-                    [
-                      _vm._v(
-                        "I have no issue with any other packages installed with root permission globally."
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "w-6 h-6 rounded-full order-1",
-              attrs: {
-                src:
-                  "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-                alt: "My profile"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "chat-message" }, [
-          _c("div", { staticClass: "flex items-end justify-end" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end"
-              },
-              [
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white "
-                    },
-                    [
-                      _vm._v(
-                        "yes, I have a mac. I never had issues with root permission as well, but this helped me to solve the problem"
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "w-6 h-6 rounded-full order-2",
-              attrs: {
-                src:
-                  "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-                alt: "My profile"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "chat-message" }, [
-          _c("div", { staticClass: "flex items-end" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start"
-              },
-              [
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600"
-                    },
-                    [
-                      _vm._v(
-                        "I get the same error on Arch Linux (also with sudo)"
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600"
-                    },
-                    [
-                      _vm._v(
-                        "I also have this issue, Here is what I was doing until now: #1076"
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600"
-                    },
-                    [_vm._v("even i am facing")]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "w-6 h-6 rounded-full order-1",
-              attrs: {
-                src:
-                  "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-                alt: "My profile"
-              }
-            })
-          ])
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

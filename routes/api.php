@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/send/message', "sendMessageController@store")->name('messageStore');
+Route::get('users', "sendMessageController@chatWithThatUser");

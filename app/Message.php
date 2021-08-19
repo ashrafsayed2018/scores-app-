@@ -9,7 +9,13 @@ class Message extends Model
 {
     protected $guarded = [];
 
-    // sender method
+    public function user()
+    {
+
+        return $this->belongsTo(User::class);
+    }
+
+    // sender method relationship
 
     public function sender()
     {
@@ -17,7 +23,7 @@ class Message extends Model
         return $this->belongsTo(User::class, 'from_id');
     }
 
-    // receiver method
+    // receiver relationship
 
     public function receiver()
     {

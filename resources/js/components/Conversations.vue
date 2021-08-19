@@ -1,70 +1,53 @@
 <template>
 <div class="w-full">
   <div class="grid grid-cols-8 gap-4">
-       <div class="user"> this is user</div>
+       <div class="user">
+
+        <ul v-for="user in users"  v-if="user !== null" :key="user.id">
+            <li>
+                <a href="#" @click.prevent="showMessage(user.id)">{{user.name}}</a>
+            </li>
+        </ul>
+       </div>
         <div class="flex-1 col-span-6 p:2 sm:p-6 justify-between flex flex-col h-screen">
-                <div class="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
-                    <!-- <div class="flex items-center space-x-4">
-                    //      <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="" class="w-10 sm:w-16 h-10 sm:h-16 rounded-full">
-                    //      <div class="flex flex-col leading-tight">
-                    //         <div class="text-2xl mt-1 flex items-center">
-                    //            <span class="text-gray-700 mr-3">Anderson Vanhron</span>
-                    //            <span class="text-green-500">
-                    //               <svg width="10" height="10">
-                    //                  <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                    //               </svg>
-                    //            </span>
-                    //         </div>
-                    //         <span class="text-lg text-gray-600">Junior Developer</span>
-                    //      </div>
-                    //   </div> -->
-                    <!--<div class="flex items-center space-x-2">
-                        <button type="button" class="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                        </button>
-                        <button type="button" class="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
-                        </button>
-                        <button type="button" class="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                            </svg>
-                        </button>
-                    </div> -->
-                </div>
 
                 <!-- messages div -->
-                <div id="messages" class="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
-                    <div class="chat-message sender">
-                        <div class="flex items-end">
-                            <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                <div class="flex items-center">
-                                    <strong>Ashraf</strong>
-                                    <span class="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">Can be verified on any platform using docker
-                                    </span>
+                <div id="messages" v-for="message in messages" :key="message.id" class="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                    <div v-for="user in users"  v-if="user !== null" :key="user.id">
+                      <div v-if="user.id == message.from_id">
+                            <div class="chat-message sender">
+                                <div class="flex items-end">
+                                    <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+                                        <div class="flex items-center">
+                                            <strong>{{message.from_id}}</strong>
+                                            <span class="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">{{ message.body }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="w-6 h-6 rounded-full order-1">
                                 </div>
                             </div>
-                            <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="w-6 h-6 rounded-full order-1">
-                        </div>
-                    </div>
-                    <div class="chat-message receiver">
+                      </div>
+                      <div v-else>
+                          <div class="chat-message receiver">
                         <div class="flex items-end justify-end">
                             <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
                                 <div class="flex items-center">
 
-                                    <span class="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">Your error message says permission denied, npm global installs must be given root privileges.
+                                    <span class="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
+                                    {{ message.body }}
                                     </span>
-                                    <strong>hany</strong>
+                                    <strong>{{ message.to_id }}</strong>
                                 </div>
                             </div>
                             <img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="w-6 h-6 rounded-full order-2">
                         </div>
                     </div>
-                    <div class="chat-message">
+                      </div>
+                    </div>
+
+
+                    <!--<div class="chat-message">
                         <div class="flex items-end">
                             <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
                             <div><span class="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">Command was run with root privileges. I'm sure about that.</span></div>
@@ -131,7 +114,7 @@
                             </div>
                             <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="w-6 h-6 rounded-full order-1">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- buttons -->
                 <div class="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
@@ -182,6 +165,29 @@ export default {
 // // const el = document.getElementById('messages')
 // // 	el.scrollTop = el.scrollHeight
 //     }
+
+ data () {
+     return {
+         users : [],
+         messages : [],
+         selectedUserId: ''
+     }
+ },
+
+  mounted() {
+          axios.get('/message/users').then((response) => {
+              this.users = response.data
+          })
+     },
+     methods: {
+         showMessage (userId) {
+            axios.get(`/message/user/${userId}`).then((response) => {
+                this.messages = response.data;
+                this.selectedUserId = userId;
+                console.log(this.messages)
+            });
+         }
+     },
 
 
 }
