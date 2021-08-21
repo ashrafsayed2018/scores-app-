@@ -85,13 +85,11 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function view_user_posts()
+    public function view_user_posts($user_id)
     {
 
-        $user_id = auth()->id();
+        $my_posts = Post::where('user_id', $user_id)->get();
 
-        $user_posts = Post::where('user_id', $user_id)->get();
-
-        return view('post.myposts', compact('user_posts'));
+        return view('post.myposts', compact('my_posts'));
     }
 }

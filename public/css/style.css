@@ -314,6 +314,9 @@ body{
     font-family: "Quicksand", sans-serif;
     font-weight: 700;
     font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 15px 35px;
     padding: 15px 40px;
     min-width: 201px;
@@ -323,12 +326,15 @@ body{
     cursor: pointer;
     backface-visibility: hidden;
     transition: all 0.3s;
+
   }
   @media screen and (max-width: 768px) {
     .profile-card__button {
       min-width: 170px;
       font-size: .8em;
       margin: 15px 25px;
+      border-radius: 10px;
+      padding: 5px 10px;
     }
   }
   @media screen and (max-width: 576px) {
@@ -696,5 +702,31 @@ body{
     -webkit-transform: scale(1);
             transform: scale(1);
 }
+
+/* scroll bar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10vh;
+    background: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #4a7db4;
+    border-radius: 10vh;
+    border: 1px solid #d8d8d8;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #08428f;
+  }
 
 

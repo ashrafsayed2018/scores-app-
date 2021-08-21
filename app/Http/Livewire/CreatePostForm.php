@@ -206,6 +206,7 @@ class CreatePostForm extends Component
                     'title'       => $this->title,
                     'slug'        => make_slug($this->title, '-'),
                     'description' => $this->description,
+                    'feature_image' => $images[0],
                     'phone'       => auth()->user()->profile->phone,
                     'category_id'    => $this->selectedCategory,
                 ]);
@@ -216,6 +217,7 @@ class CreatePostForm extends Component
                     'title'       => $this->title,
                     'slug'        => make_slug($this->title, '-'),
                     'description' => $this->description,
+                    'feature_image' => $images[0],
                     'phone'       => auth()->user()->profile->phone,
                     'category_id'    => $this->selectedCategory,
                     'sub_category_id' => $this->selectedSubCategory
@@ -226,6 +228,7 @@ class CreatePostForm extends Component
                     'title'       => $this->title,
                     'slug'        =>  make_slug($this->title, '-'),
                     'description' => $this->description,
+                    'feature_image' => $images[0],
                     'phone'       => auth()->user()->profile->phone,
                     'category_id'    => $this->selectedCategory,
                     'sub_category_id' => $this->selectedSubCategory,

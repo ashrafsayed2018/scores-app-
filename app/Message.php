@@ -9,10 +9,20 @@ class Message extends Model
 {
     protected $guarded = [];
 
+    protected $appends = ['selfOwned'];
+
+    public function getSelfOwnedAttribute()
+    {
+
+        return $this->from_id == auth()->id();
+    }
+
+    // relationship with user
+
     public function user()
     {
 
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'from_id');
     }
 
     // sender method relationship
@@ -29,5 +39,13 @@ class Message extends Model
     {
 
         return $this->belongsTo(User::class, 'to_id');
+    }
+
+    // relationship with post
+
+    public function post()
+    {
+
+        return $this->belongsTo(Post::class, 'post_id', 'id');
     }
 }

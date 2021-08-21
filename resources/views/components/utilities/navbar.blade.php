@@ -19,12 +19,15 @@
                         @endif
                           <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('prefrences.show') }}">المفضله</a></li>
                           <li class="">
-                              <a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('myposts') }}">
+                              <a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('show_user_posts',auth()->user()->id) }}">
                                 اعلاناتي
                              </a>
                           </li>
                           <li>
                             <a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"  href="{{ route('dashoboard.user',auth()->user()) }}">لوحة التحكم</a>
+                          </li>
+                          <li>
+                              <a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('messages') }}">الرسائل</a>
                           </li>
 
                         </ul>

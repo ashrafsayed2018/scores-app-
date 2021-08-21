@@ -67,7 +67,8 @@ class ProfileController extends Controller
         $validtated['slug'] =  make_slug($validtated['name']);
         auth()->user()->profile()->create($validtated);
         auth()->user()->name = $validtated['name'];
-        current_user()->slug =  $validtated['slug'];
+        auth()->user()->avatar = 'storage/users_images/' . $validtated['image'];
+        auth()->user()->slug =  $validtated['slug'];
         auth()->user()->save();
         return redirect('home');
     }
@@ -140,6 +141,7 @@ class ProfileController extends Controller
         current_user()->profile->update($validtated);
 
         current_user()->name = $validtated['name'];
+        auth()->user()->avatar = 'storage/users_images/' . $validtated['image'];
         current_user()->slug =  $validtated['slug'];
         current_user()->save();
 

@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description');
+            $table->string('feature_image')->after('description')->nullable();
             $table->integer('phone');
             $table->unsignedInteger('active')->default(0);
             $table->foreignId('category_id')

@@ -2,12 +2,13 @@
   <div class="chat_button" id="chat">
 
   <!-- Button trigger modal -->
-<button type="button" class="profile-card__button button--blue js-message-btn cursor-pointer" data-toggle="modal" data-target="#exampleModalTwo">
-  <span> ارسل رساله  </span>
-<i class="fas fa-comment transform rotate-90 mr-5"></i>
-</button>
-
-
+    <a v-if="showViewConversationONSuccess" href="/messages">
+    <button class="profile-card__button button--green js-message-btn cursor-pointer">عرض الرسائل</button>
+    </a>
+    <button v-else type="button" class="profile-card__button button--blue js-message-btn cursor-pointer" data-toggle="modal" data-target="#exampleModalTwo">
+    <span> ارسل رساله  </span>
+    <i class="fas fa-comment transform rotate-90 mr-5"></i>
+    </button>
 
     <!-- Modal -->
 <div class="modal hidden fixed top-0 left-0 w-full h-full outline-none fade" id="exampleModalTwo" tabindex="-1" role="dialog">
@@ -27,15 +28,12 @@
             <!-- display errors if field has errors using FormError component     -->
 
             <div v-if="errors" class="text-red-500 py-2 px-4 pr-0 rounded font-bold mb-4 text-right">
-                <!--<div v-for="(v, k) in errors" :key="k">
-                    <p v-for="error in v" :key="error" class="text-sm">
-                    {{ error }}
-                    </p>
-                </div> -->
                 <div>{{ errors.message }}</div>
             </div>
 
-
+            <div v-if="success" class="text-green-500 py-2 px-4 pr-0 rounded font-bold mb-4 text-right">
+                     <div>{{ success }}</div>
+            </div>
 
         </div>
         <div class="flex items-center justify-between p-4 border-t border-gray-300">
@@ -62,19 +60,19 @@ export default {
                 fromId : '',
                 toId : '',
                 postId: '',
-                message: ''
+                message: '',
 
             },
               // array to hold form errors
        errors: null,
+       success : '',
+       showViewConversationONSuccess : false
         }
     },
 
   methods: {
        SaveMessage: function() {
-        // let hi = document.getElementById('exampleModalTwo').classList.toggle('hidden');
 
-// this.form.message != '' &&
        if(this.fromId != '' && this.toId !='' && this.postId != '') {
        axios.post('/api/send/message', {
           'fromId' : this.fromId,
@@ -83,6 +81,8 @@ export default {
           'message' :this.form.message
         }).then(res => {
 
+             this.success = "تم ارسال الرساله بنجاح";
+             this.showViewConversationONSuccess = true;
 
         }).catch(err => {
                  this.errors = err.response.data;

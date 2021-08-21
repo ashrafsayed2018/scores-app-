@@ -30,8 +30,8 @@
             <div class="user_img ml-2">
                 <img src="{{ asset('storage/users_images/'. $post->user->profile->image)}}" class="w-10 h-10 rounded-full" alt="">
             </div>
-            <div class="user_details_info">
-                <p>{{ $post->user->name }}</p>
+            <div class="user_details_info flex flex-col text-right">
+                <a href="{{ route('show_user_posts',$post->user->id) }}">{{ $post->user->name }}</a>
                 <span class="text-gray-500 ">
                     <small>عضو منذ {{ $post->user->created_at->diffForHumans(null, true) }}</small>
                 </span>
@@ -44,15 +44,13 @@
 
     </div>
     <div class="contact_info mt-5 flex justify-around lg:justify-between">
-        <div class="call_button">
-            <div class="profile-card__button button--green js-call-btn cursor-pointer">
-                <span>اتصل الان </span>
-                <i class="fa fa-phone transform rotate-90 mr-5"></i>
-            </div>
-        </div>
+
+        <show-phone-number :post-phone="{{ $post->phone }}"></show-phone-number>
 
         @auth
-        <message :author="'{{ $post->user->name }}'" :from-id="'{{ auth()->id() }}'" :to-id="'{{ $post->user->id }}'" :post-id="'{{ $post->id }}'"></message>
+            @if (auth()->id() != $post->user->id)
+            <message :author="'{{ $post->user->name }}'" :from-id="'{{ auth()->id() }}'" :to-id="'{{ $post->user->id }}'" :post-id="'{{ $post->id }}'"></message>
+            @endif
         @else
         <a href="{{ route('login') }}">
             <message :post-route="{{ route('messageStore') }}"></message>

@@ -1,10 +1,10 @@
 <div>
     <div class="card lg:w-full my-10">
-        <div class="comment-count m-3 show_comments cursor-pointer">{{ $count}} تعليق</div>
+        <div class="comment-count m-3 show_comments cursor-pointer text-right">{{ $count}} تعليق</div>
         <div class="hidden" id="show_all_comments">
             @foreach($comments as $comment)
             <div class="display-comment all_comments">
-                <div class="comment bg-white p-3 shadow-lg border border-b-2 border-gray-200">
+                <div class="comment bg-white p-3 shadow-lg border border-b-2 border-gray-200 text-right">
                     <div class="flex">
                         <div class="image ml-2">
                             <img src="{{ url($comment->user->imagePath()) }}" alt="" class="rounded-full w-8 h-8">
@@ -41,7 +41,7 @@
                     <div  class="pr-10 reply hidden" data-id="{{ $comment->id }}">
                             @foreach ($comment->replies as $reply)
 
-                            <div class="border border-b-2 border-gray-200 p-3">
+                            <div class="border border-b-2 border-gray-200 p-3 text-right">
                                 <div class="flex">
                                     <div class="image ml-2">
                                         <img src="{{ url($reply->user->imagePath()) }}" alt="" class="rounded-full w-8 h-8">

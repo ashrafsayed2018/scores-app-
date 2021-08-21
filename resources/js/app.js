@@ -10,8 +10,13 @@ require('./bootstrap');
 // var Turbolinks = require("turbolinks")
 // Turbolinks.start()
 import Vue from 'vue'
+import vueChatScroll from 'vue-chat-scroll';
 window.Vue = Vue;
+import VueChatScroll from 'vue-chat-scroll'
+Vue.use(VueChatScroll);
 window.axios = require('axios');
+window.moment = require('moment');
+
 require('bootstrap');
 
 /**
@@ -28,6 +33,7 @@ require('bootstrap');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('message',require('./components/Message.vue').default);
 Vue.component('conversation', require('./components/Conversations.vue').default);
+Vue.component('show-phone-number', require('./components/ShowPhoneNumber.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

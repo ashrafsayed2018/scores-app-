@@ -26,7 +26,7 @@ class StoreProfileRequest extends FormRequest
         return [
             'name' => 'required|unique:profiles',
             'about'    => 'required|max:255',
-            'image'    => 'required',
+            'image'    => 'required|image|mimes:png,jpg,jpeg,gif',
             'phone'   => 'required',
             'age'      => 'required|numeric|min:18|max:65',
             'gender'   => 'required',

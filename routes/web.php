@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('post/create', 'PostController@create')->name('post.create');
     Route::post('post/store', 'PostController@store')->name('post.store');
     Route::delete('post/destroy/{id}', 'PostController@destroy')->name('post.destroy');
-    Route::get('/myposts', 'PostController@view_user_posts')->name('myposts');
+    Route::get('/posts/{userId}/show', 'PostController@view_user_posts')->name('show_user_posts');
 
 
     Route::post('/comment/store', 'CommentController@store')->name('comment.store');
@@ -69,7 +69,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', 'UserNotificationController@show')->name('notifications.show');
     Route::get('user/dashboard/{user:slug}', 'User\DashboardController@user')->name('dashoboard.user');
     // message
-    Route::get('/messages', "sendMessageController@index");
+    Route::get('/messages', "sendMessageController@index")->name('messages');
+
     Route::post('/send/message', "sendMessageController@store")->name('messageStore');
     Route::get('/message/users', "SendMessageController@chatWithThatUser");
     Route::get('/message/user/{id}', 'SendMessageController@showMessages');
