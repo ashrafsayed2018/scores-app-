@@ -1953,6 +1953,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   //     data: () => {
   // // const el = document.getElementById('messages')
@@ -60043,15 +60047,11 @@ var render = function() {
               return user !== null
                 ? _c("div", { key: user.id, staticClass: "relative w-1/5" }, [
                     _c("div", [
-                      _c("img", {
-                        staticClass: "w-12 h-12 rounded-full",
-                        attrs: { src: "/" + user.avatar }
-                      }),
-                      _vm._v(" "),
                       _c(
                         "a",
                         {
-                          staticClass: "name text-xs text-gray-500 mt-2",
+                          staticClass:
+                            "name text-xs text-gray-500 mt-2 text-right",
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
@@ -60060,7 +60060,21 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v(_vm._s(user.name))]
+                        [
+                          _c("img", {
+                            staticClass: "w-12 h-12 rounded-full",
+                            attrs: { src: "/" + user.avatar }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "block w-full text-md font-bold mt-2 text-right"
+                            },
+                            [_vm._v(_vm._s(user.name))]
+                          )
+                        ]
                       ),
                       _vm._v(" "),
                       _c("div", {
@@ -60158,36 +60172,38 @@ var render = function() {
               "user-info w-full h-14 flex bg-white px-3 items-center shadow-md"
           },
           [
-            _c("div", { staticClass: "info flex flex-grow" }, [
-              _c("div", { staticClass: "relative" }, [
-                _c("img", {
-                  staticClass: "w-8 h-8 rounded-full",
-                  attrs: { src: "/" + _vm.selectedUser.avatar }
-                }),
-                _vm._v(" "),
-                _c("span", {
-                  staticClass:
-                    "active-status rounded-full bg-green-600 w-2 h-2 absolute bottom-1 left-2"
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "flex text-sm text-gray-400 flex-col mr-2 text-right"
-                },
-                [
-                  _c("div", { staticClass: "text-gray-900 font-bold" }, [
-                    _vm._v(" " + _vm._s(_vm.selectedUser.name) + " ")
+            _vm.selectedUser.id
+              ? _c("div", { staticClass: "info flex flex-grow" }, [
+                  _c("div", { staticClass: "relative" }, [
+                    _c("img", {
+                      staticClass: "w-8 h-8 rounded-full",
+                      attrs: { src: "/" + _vm.selectedUser.avatar }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass:
+                        "active-status rounded-full bg-green-600 w-2 h-2 absolute bottom-1 left-2"
+                    })
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "active-status rounded-ful" }, [
-                    _vm._v("نشط")
-                  ])
-                ]
-              )
-            ]),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "flex text-sm text-gray-400 flex-col mr-2 text-right"
+                    },
+                    [
+                      _c("div", { staticClass: "text-gray-900 font-bold" }, [
+                        _vm._v(" " + _vm._s(_vm.selectedUser.name) + " ")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "active-status rounded-ful" }, [
+                        _vm._v("نشط")
+                      ])
+                    ]
+                  )
+                ])
+              : _c("div", { staticClass: "info flex flex-grow" }),
             _vm._v(" "),
             _vm._m(1)
           ]
@@ -60419,7 +60435,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full relative mb-3" }, [
+    return _c("div", { staticClass: "w-full relative mb-3 text-right" }, [
       _c("input", {
         staticClass:
           "outline-none border-2 border-gray-200 w-full rounded-xl p-2 focus:border-blue-200",

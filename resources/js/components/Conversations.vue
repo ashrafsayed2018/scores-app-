@@ -5,7 +5,7 @@
      <div class="w-80 h-screen overflow-hidden bg-gray-200 px-3 py-4">
           <div class="text-xl text-right mb-3">دردش الان</div>
           <!-- search div -->
-          <div class="w-full relative mb-3">
+          <div class="w-full relative mb-3 text-right">
               <input type="text" class="outline-none border-2 border-gray-200 w-full rounded-xl p-2 focus:border-blue-200" placeholder="ابحث عن الرسائل ">
               <i class="fa fa-search absolute top-4 left-2 text-gray-300"></i>
           </div>
@@ -13,8 +13,10 @@
           <div class="flex  mx-1 overflow-x-scroll mb-3">
                 <div v-for="user in users"  v-if="user !== null" :key="user.id" class="relative w-1/5">
                     <div>
-                        <img :src="`/${user.avatar}`" class="w-12 h-12 rounded-full">
-                        <a href="#" class="name text-xs text-gray-500 mt-2" @click.prevent="showMessage(user)">{{user.name}}</a>
+                        <a href="#" class="name text-xs text-gray-500 mt-2 text-right" @click.prevent="showMessage(user)">
+                            <img :src="`/${user.avatar}`" class="w-12 h-12 rounded-full">
+                            <span class="block w-full text-md font-bold mt-2 text-right">{{user.name}}</span>
+                        </a>
                         <div class="active-status rounded-full bg-green-600 w-2 h-2 absolute top-1 right-1"></div>
                     </div>
                 </div>
@@ -44,7 +46,7 @@
      <!-- main chat room -->
      <div class="flex-grow h-screen mt-2 flex-col">
         <div class="user-info w-full h-14 flex bg-white px-3 items-center shadow-md">
-            <div class="info flex flex-grow">
+            <div class="info flex flex-grow"  v-if="selectedUser.id">
                 <div class="relative">
                     <img :src="`/${selectedUser.avatar}`" class="w-8 h-8 rounded-full">
                     <span class="active-status rounded-full bg-green-600 w-2 h-2 absolute bottom-1 left-2"></span>
@@ -53,6 +55,8 @@
                     <div class="text-gray-900 font-bold"> {{ selectedUser.name }} </div>
                     <div class="active-status rounded-ful">نشط</div>
                 </div>
+            </div>
+            <div class="info flex flex-grow" v-else>
             </div>
             <div class="search w-14 flex items-center justify-around">
                 <i class="fa fa-search text-xs text-gray-500"></i>
