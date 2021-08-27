@@ -136,12 +136,13 @@ class ProfileController extends Controller
             $request->image->storeAs('users_images', $image, 'public');
 
             $validtated['image'] = $image;
+            auth()->user()->avatar = 'storage/users_images/' . $validtated['image'];
         }
         $validtated['slug'] =  make_slug($validtated['name']);
         current_user()->profile->update($validtated);
 
         current_user()->name = $validtated['name'];
-        auth()->user()->avatar = 'storage/users_images/' . $validtated['image'];
+
         current_user()->slug =  $validtated['slug'];
         current_user()->save();
 

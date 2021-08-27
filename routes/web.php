@@ -22,13 +22,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function () {
-    $new = new Carbon('first day of feb');
-    dd($new);
-});
-
 Route::get('/', function () {
-    return view('index');
+    return view('home');
 });
 
 Auth::routes(['verify' => true]);
@@ -69,9 +64,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', 'UserNotificationController@show')->name('notifications.show');
     Route::get('user/dashboard/{user:slug}', 'User\DashboardController@user')->name('dashoboard.user');
     // message
-    Route::get('/messages', "sendMessageController@index")->name('messages');
+    Route::get('/messages', "SendMessageController@index")->name('messages');
 
-    Route::post('/send/message', "sendMessageController@store")->name('messageStore');
+    Route::post('/send/message', "SendMessageController@store");
     Route::get('/message/users', "SendMessageController@chatWithThatUser");
     Route::get('/message/user/{id}', 'SendMessageController@showMessages');
     Route::post('/start-conversation', 'SendMessageController@startConversation');

@@ -107,7 +107,7 @@
         </div>
         @endguest
         @auth
-        <div class="left  lg:col-span-2 lg:flex justify-end">
+        <div class="left xs:hidden  lg:col-span-2 lg:flex justify-end">
             <div class="ad-button flex items-center">
                 <a href="{{ route('post.create') }}" class="button button-blue ml-5">
                     <i class="fas fa-plus text-xs  text-white"></i>

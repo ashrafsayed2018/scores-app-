@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Notifications\newLikeAdded;
+use App\Notifications\NewLikeAdded;
 use Illuminate\Database\Eloquent\Builder;
 
 
