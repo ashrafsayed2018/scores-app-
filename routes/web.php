@@ -33,7 +33,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('category/create', "CategoryController@create")->name('category.create');
     Route::post('category/store', "CategoryController@store")->name('category.store');
-    Route::get('category/show/{category:slug}', "CategoryController@show")->name('category.show');
 
 
     Route::get('subcategory/create', "SubCategoryController@create")->name('subcategory.create');
@@ -65,7 +64,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('user/dashboard/{user:slug}', 'User\DashboardController@user')->name('dashoboard.user');
     // message
     Route::get('/messages', "SendMessageController@index")->name('messages');
-
     Route::post('/send/message', "SendMessageController@store");
     Route::get('/message/users', "SendMessageController@chatWithThatUser");
     Route::get('/message/user/{id}', 'SendMessageController@showMessages');
